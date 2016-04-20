@@ -1,0 +1,42 @@
+{
+	"id": 0,
+	"name": "First",
+	"nTries": 0,
+	"nSuccesses": 1,
+	"targetStack": [
+		{
+			"chipId": 0,
+			"up": true,
+			"orientationImportant": false
+		},
+		{
+			"chipId": 1,
+			"up": true,
+			"orientationImportant": false
+		},
+		{
+			"chipId": 0,
+			"up": true,
+			"orientationImportant": false
+		}
+	],
+	"stacks": [
+		[
+			{
+			"chipId": 0,
+			"up": true,
+			"orientationImportant": false
+		},
+		{
+			"chipId": 1,
+			"up": true,
+			"orientationImportant": false
+		},
+		{
+			"chipId": 0,
+			"up": true,
+			"orientationImportant": false
+		}
+		]
+	]
+}
