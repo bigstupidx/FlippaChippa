@@ -1,21 +1,19 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+using UnityEngine;
 
 public class Chip : MonoBehaviour {
 
-	public int id;
-	public bool up;
-	public bool orientationImportant;
-	public int stackPos;
-	public Stack stackOwner;
+	public ChipMeta chipMeta;
 
+	private GameObject chipGameObject;
+	private Transform initialTransform;
+
+	void Awake() {
+		chipGameObject = transform.FindChild ("chip").gameObject;
+	}
 
 	void Start() {
-		
-	}
-
-	void Update() {
-
+		initialTransform = transform;
 	}
 }
+

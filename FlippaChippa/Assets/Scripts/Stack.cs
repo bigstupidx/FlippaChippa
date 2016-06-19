@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class Stack : MonoBehaviour {
 
-	Chip[] chips;
+	ChipMeta[] chips;
 	public bool isTargetStack;
 
 	// Use this for initialization
 	void Start () {
-		chips = GetComponentsInChildren<Chip>();
+		chips = GetComponentsInChildren<ChipMeta>();
 	}
 	
 	// Update is called once per frame
