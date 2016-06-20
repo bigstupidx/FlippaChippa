@@ -31,7 +31,7 @@ public class PrefabsManager : MonoBehaviour {
 			Course prefab = prefabs[i];	
 			GameObject gameObject = Instantiate (prefab.gameObject);
 			Course course = gameObject.GetComponent<Course> ();
-			course.stacks = new List<Stack>();
+			course.stacks = new List<StackMeta>();
 			courses [i] = course;
 		}
 		return courses;

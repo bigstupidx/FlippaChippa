@@ -9,9 +9,9 @@ public class ChipMeta {
 	public ChipOrientation orientation;
 	public bool isOrientationImportant;
 	public int stackPos;	//Position from the bottom of stack. Pos 0 is the bottom chip
-	public Stack stack;	//the stack this chip belongs to
+	public StackMeta stack;	//the stack this chip belongs to
 
-	public ChipMeta(int prefabId, ChipOrientation orientation, bool isOrientationImportant, int stackPos, Stack stack) {
+	public ChipMeta(int prefabId, ChipOrientation orientation, bool isOrientationImportant, int stackPos, StackMeta stack) {
 		this.prefabId = prefabId;
 		this.orientation = orientation;
 		this.isOrientationImportant = isOrientationImportant;
@@ -25,5 +25,9 @@ public class ChipMeta {
 		} else {
 			orientation = ChipOrientation.UP;
 		}
+	}
+
+	public string ToStringShort() {
+		return "{prefabId: " + prefabId + ", chipOrientation: " + orientation.ToString() + ", stackPos: " + stackPos + "}";
 	}
 }

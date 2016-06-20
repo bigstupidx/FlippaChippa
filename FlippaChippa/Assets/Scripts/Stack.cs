@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class Stack : MonoBehaviour {
+public class Stack : MonoBehaviour
+{
 
-	ChipMeta[] chips;
-	public bool isTargetStack;
+	public StackMeta meta;
 
 	// Use this for initialization
-	void Start () {
-		chips = GetComponentsInChildren<ChipMeta>();
+	void Start ()
+	{
+	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	
 	}
 }
+

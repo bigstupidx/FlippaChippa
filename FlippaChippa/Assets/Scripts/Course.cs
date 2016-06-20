@@ -9,8 +9,8 @@ public class Course : MonoBehaviour {
 	public string name;
 	public int nTries;
 	public int nSuccesses;
-	public Stack targetStack;
-	public List<Stack> stacks;
+	public StackMeta targetStack;
+	public List<StackMeta> stacks;
 
 	void Start() {
 		targetStack.isTargetStack = true;
