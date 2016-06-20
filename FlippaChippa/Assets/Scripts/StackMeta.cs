@@ -16,11 +16,9 @@ public class StackMeta {
 	public void Add(ChipMeta chipMeta) {
 		chips.Add (chipMeta);
 		chipMeta.stackPos = chips.Count - 1;
-		chipMeta.stack = this;
 	}
 
 	public void Remove(int position) {
-		chips [position].stack = null;
 		chips.RemoveAt (position);
 
 		if (position != chips.Count) {

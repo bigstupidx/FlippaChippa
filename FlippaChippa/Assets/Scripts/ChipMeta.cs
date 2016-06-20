@@ -9,14 +9,12 @@ public class ChipMeta {
 	public ChipOrientation orientation;
 	public bool isOrientationImportant;
 	public int stackPos;	//Position from the bottom of stack. Pos 0 is the bottom chip
-	public StackMeta stack;	//the stack this chip belongs to
 
 	public ChipMeta(int prefabId, ChipOrientation orientation, bool isOrientationImportant, int stackPos, StackMeta stack) {
 		this.prefabId = prefabId;
 		this.orientation = orientation;
 		this.isOrientationImportant = isOrientationImportant;
 		this.stackPos = stackPos;
-		this.stack = stack;
 	}
 
 	public void Flip() {	//Doesn't actually flip the chip, only "flips" the meta chip

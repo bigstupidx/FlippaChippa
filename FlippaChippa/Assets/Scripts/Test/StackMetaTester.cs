@@ -26,7 +26,6 @@ public class StackMetaTester : MonoBehaviour
 		stack.Add(new ChipMeta(11, ChipOrientation.UP, false, 12, null));
 		TestManager.AssertEquals (stack.chips.Count, 1, "TestAddChip");
 		TestManager.AssertEquals (stack.chips [0].stackPos, 0, "TestAddChip");
-		TestManager.AssertEquals (stack.chips [0].stack, stack, "TestAddChip");
 		stack.Add(new ChipMeta(21, ChipOrientation.UP, false, 122, null));
 		TestManager.AssertEquals (stack.chips [1].stackPos, 1, "TestAddChip");
 	}
@@ -38,14 +37,12 @@ public class StackMetaTester : MonoBehaviour
 		ChipMeta chip = stack.chips [initalCount - 1];
 		stack.Remove (stack.chips.Count - 1);
 		TestManager.AssertEquals (stack.chips.Count, initalCount - 1, "TestRemoveChip");
-		TestManager.AssertTrue (chip.stack == null, "TestRemoveChip is not null");
 		chip = stack.chips [2];
 		stack.Remove (2);
 		for (int i = 0; i < stack.chips.Count; i++) {
 			ChipMeta chipI = stack.chips [i];
 			stack.Remove (i);
 			TestManager.AssertEquals (i, chipI.stackPos, "TestRemoveChip stack pos is not the same");
-			TestManager.AssertTrue (chipI.stack == null, "TestRemoveChip stack is not null");
 		}
 	}
 
