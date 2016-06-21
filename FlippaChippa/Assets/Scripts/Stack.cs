@@ -5,8 +5,12 @@ using System.Collections.Generic;
 public class Stack : MonoBehaviour
 {
 
-	public StackMeta meta;
+	private StackMeta meta;
 	public Flipper flipper;
+
+	void Awake() {
+		meta = new StackMeta ();
+	}
 
 	// Use this for initialization
 	void Start ()

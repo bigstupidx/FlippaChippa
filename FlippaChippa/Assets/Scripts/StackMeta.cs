@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [Serializable]
 public class StackMeta {
 
-	public List<ChipMeta> chips;
+	private List<ChipMeta> chips;
 	public bool isTargetStack;
 
 	public StackMeta() {
@@ -27,6 +27,14 @@ public class StackMeta {
 				chip.stackPos = i;
 			}
 		}
+	}
+
+	public ChipMeta GetCipMetaAt(int position) {
+		return chips [position];
+	}
+
+	public int ChipCount() {
+		return chips.Count;
 	}
 
 	public void FlipStackAt(int position) {	//Doesn't actually flip the UI stack, only flips the the chips meta
