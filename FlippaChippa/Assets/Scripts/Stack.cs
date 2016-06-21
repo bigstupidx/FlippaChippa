@@ -22,12 +22,34 @@ public class Stack : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetMouseButton (0)) {
-			List<GameObject> chipsToFlip = new List<GameObject> ();
-			for (int i = 2; i < transform.childCount; i++) {
-				chipsToFlip.Add (transform.GetChild (i).gameObject);
-			}
-			flipper.Flip (chipsToFlip, transform);
+			FlipAt (1);
 		}
+	}
+
+	public void FlipAt(GameObject gameObject) {
+		Chip chipSelected = gameObject.GetComponent<Chip> ();
+		if (chipSelected == null) {
+			Debug.Log ("The selected gameobject isn't a chip. Will therefore not flip anything it.");
+			return;
+		}
+
+		FlipAt (chipSelected.chipMeta.stackPos);
+	}
+
+	public void FlipAt(int position) {
+		if (flipper.IsFlipping) {	//Extra insurance that the meta stack won't be flipped when the flipper isn't finished
+			return;
+		}
+
+		List<GameObject> chipsToFlip = new List<GameObject> ();
+		for (int i = position; i < transform.childCount; i++) {
+			chipsToFlip.Add (transform.GetChild (i).gameObject);
+		}
+
+		meta.FlipStackAt (position);
+		flipper.Flip (chipsToFlip, transform);
+
+		Debug.Log (meta.ToStringShort ());
 	}
 
 }

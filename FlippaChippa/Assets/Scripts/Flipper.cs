@@ -11,6 +11,7 @@ public class Flipper : MonoBehaviour, FCEventListener
 	private Translator translator;
 	private int nFinished = 0;	//Number of finished transformations, ie Rotator and Translator
 	private bool isFlipping = false;
+	public bool IsFlipping { get {return isFlipping; } }
 
 	private FCObservable observable;
 	public Transform targetTransform;
@@ -34,7 +35,7 @@ public class Flipper : MonoBehaviour, FCEventListener
 	}
 
 	public void Flip(List<GameObject> chips, Transform stackTransform) {
-		if (isFlipping) {	//Can't flip during a flip
+		if (IsFlipping) {	//Can't start a new flip during a flip
 			return;
 		}
 
