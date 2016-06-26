@@ -26,7 +26,7 @@ public class Stack : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetMouseButton (0)) {
-			FlipAt (1);
+		//	FlipAt (1);
 		}
 	}
 
