@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class MainMenuController : MonoBehaviour {
 
 	public PrefabsManager manager;
 

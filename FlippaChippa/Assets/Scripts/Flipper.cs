@@ -17,11 +17,13 @@ public class Flipper : MonoBehaviour, FCEventListener
 	private FCObservable observable;
 	public Transform targetTransform;
 
+	void Awake() {
+		observable = new FCObservable ();
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
-		observable = new FCObservable ();
-
 		rotator = GetComponent<Rotator> ();
 		translator = GetComponent<Translator> ();
 		rotator.AddListener (this, FCEvent.END);
@@ -65,6 +67,10 @@ public class Flipper : MonoBehaviour, FCEventListener
 			chipTransform.parent = targetTransform;
 		}
 		transform.parent = null;
+	}
+
+	public void AddListener(FCEventListener listener, FCEvent fcEvent) {
+		observable.AddListener (listener, fcEvent);
 	}
 
 	#region FCEventListener implementation

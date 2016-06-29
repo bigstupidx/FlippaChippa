@@ -22,14 +22,6 @@ public class Stack : MonoBehaviour
 		}
 	}
 	
-	// Update is called once per frame
-	void Update ()
-	{
-		if (Input.GetMouseButton (0)) {
-		//	FlipAt (1);
-		}
-	}
-
 	public void FlipAt(GameObject gameObject) {
 		Chip chipSelected = gameObject.GetComponent<Chip> ();
 		if (chipSelected == null) {
@@ -54,6 +46,14 @@ public class Stack : MonoBehaviour
 		flipper.Flip (chipsToFlip, transform);
 
 		Debug.Log (meta.ToStringShort ());
+	}
+
+	public void AddListener(FCEventListener listener) {
+		flipper.AddListener (listener, FCEvent.END);
+	}
+
+	public bool Matches(Stack otherStack) {
+		return meta.Matches (otherStack.meta);
 	}
 
 }
