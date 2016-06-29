@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof (Rotator)), RequireComponent(typeof(Translator))]
 public class Flipper : MonoBehaviour, FCEventListener
 {
 	public float flipHeight = 0.75f;
