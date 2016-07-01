@@ -16,7 +16,7 @@ public class GameInputController : MonoBehaviour {
 	void Update () {
 
 		bool upPhase = false, downPhase = false, dragPhase = false;
-		Vector3 inputPosition;
+		Vector3 inputPosition = Vector3.zero;
 
 		#if UNITY_ANDROID
 		Debug.Log("Looking for android touch input");
