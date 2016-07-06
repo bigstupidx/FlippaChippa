@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 			stack.AddListener (this);
 			stacks.Add (stack);
 		}
+		Debug.Log ("stacks: " + stacks);
+		Debug.Log ("Target stack: " + targetStack);
 	}
 
 	#region FCEventListener implementation
@@ -29,6 +31,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 	public void OnEvent (FCEvent fcEvent, GameObject gameObject)
 	{
 		if (stacks.Count == 1) {	//Makes no sense to compare the target stack with multiple stacks
+			Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
+			Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
 			if (targetStack.Matches (stacks [0])) {
 				gameInputController.gameObject.SetActive (false);
 				gameOverCanvas.gameObject.SetActive (true);

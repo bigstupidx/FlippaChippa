@@ -6,6 +6,7 @@ public class Stack : MonoBehaviour
 {
 
 	private StackMeta meta;
+	public StackMeta Meta  { get { return meta; } }
 	public Flipper flipper;
 
 	void Awake() {
