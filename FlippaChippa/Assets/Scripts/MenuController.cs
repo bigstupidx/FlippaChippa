@@ -19,4 +19,8 @@ public class MenuController : MonoBehaviour {
 		//ApplicationModel.courseLoadedId = highlightedCourse.id;
 		SceneManager.LoadScene (1, LoadSceneMode.Single);
 	}
+
+	public void QuitGame() {
+		Application.Quit ();
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameInputController : MonoBehaviour {
 
@@ -7,19 +8,23 @@ public class GameInputController : MonoBehaviour {
 
 	private Chip downChip = null;
 
-	// Use this for initialization
+	private Canvas hudCanvas, pauseMenuCanvas;
+
 	void Start () {
 		mainCamera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera>();
+		hudCanvas = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<Canvas> ();
+		pauseMenuCanvas = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<Canvas> ();
+
+		hudCanvas.gameObject.SetActive (true);
+		pauseMenuCanvas.gameObject.SetActive (false);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 		bool upPhase = false, downPhase = false, dragPhase = false;
 		Vector3 inputPosition = Vector3.zero;
 
 		#if UNITY_ANDROID
-		Debug.Log("Looking for android touch input");
 		if (Input.touches.Length > 0) {
 			TouchPhase phase = Input.GetTouch(0).phase;
 			if (phase == TouchPhase.Began) {
@@ -35,7 +40,6 @@ public class GameInputController : MonoBehaviour {
 
 
 		#if UNITY_EDITOR
-		Debug.Log("Looking for mouse input");
 		if (Input.GetMouseButtonDown(0)) {
 			downPhase = true;
 		} else if (Input.GetMouseButtonUp(0)) {
@@ -87,5 +91,29 @@ public class GameInputController : MonoBehaviour {
 		Transform stack1Transform = chip1.transform.parent;
 		Transform stack2Transform = chip2.transform.parent;
 		return stack1Transform == stack2Transform;
+	}
+
+	public void PauseGame() {
+		Debug.Log ("Pausing game");
+		Time.timeScale = 0;
+		pauseMenuCanvas.gameObject.SetActive (true);
+		hudCanvas.gameObject.SetActive (false);
+	}
+
+	public void ResumeGame() {
+		Debug.Log ("Resuming game");
+		Time.timeScale = 1;
+		hudCanvas.gameObject.SetActive (true);
+		pauseMenuCanvas.gameObject.SetActive (false);
+	}
+
+	public void RestartGame() {
+		Time.timeScale = 1;
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
+	public void GoToMenu() {
+		Time.timeScale = 1;
+		SceneManager.LoadScene (0);
 	}
 }
