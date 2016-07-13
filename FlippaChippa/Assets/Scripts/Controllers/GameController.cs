@@ -86,7 +86,9 @@ public class GameController : MonoBehaviour, FCEventListener {
 				Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
 				Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
 				if (targetStack.Matches (stacks [0])) {
-					gameInputController.gameObject.SetActive (false);
+					gameInputController.enabled = false;
+					hud.gameObject.SetActive (false);
+					pauseMenu.gameObject.SetActive (false);
 					gameOverCanvas.gameObject.SetActive (true);
 				}
 			}
