@@ -59,6 +59,7 @@ public class Flipper : MonoBehaviour, FCEventListener
 
 		isFlipping = true;
 		targetTransform = stackTransform;
+		observable.NotifyListeners (FCEvent.BEGIN, gameObject);
 	}
 
 	private void ResetChipsParent() {

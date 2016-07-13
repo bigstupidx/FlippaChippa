@@ -8,6 +8,7 @@ public class Stack : MonoBehaviour
 	private StackMeta meta;
 	public StackMeta Meta  { get { return meta; } }
 	public Flipper flipper;
+	public bool IsTargetStack;
 
 	void Awake() {
 		meta = new StackMeta ();
@@ -51,6 +52,7 @@ public class Stack : MonoBehaviour
 
 	public void AddListener(FCEventListener listener) {
 		flipper.AddListener (listener, FCEvent.END);
+		flipper.AddListener (listener, FCEvent.BEGIN);
 	}
 
 	public bool Matches(Stack otherStack) {

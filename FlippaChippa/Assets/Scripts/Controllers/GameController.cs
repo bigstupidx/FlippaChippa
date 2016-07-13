@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,10 +11,26 @@ public class GameController : MonoBehaviour, FCEventListener {
 	public GameInputController gameInputController;
 	public Canvas gameOverCanvas;
 
+	private HUDController hud;
+	private PauseMenuController pauseMenu;
+
+	private SingleGameStatsMeta statsMeta;
+
+	void Awake() {
+		statsMeta = new SingleGameStatsMeta ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		targetStack = GameObject.FindGameObjectWithTag (Tags.STACK_TARGET).GetComponent<Stack>();
+		targetStack.AddListener (this);
 		gameOverCanvas.gameObject.SetActive (false);
+
+		hud = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<HUDController>();
+		hud.SetNFlips (0);
+
+		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<PauseMenuController> ();
+		hud.SetNFlips (0);
 
 		stacks = new List<Stack> ();
 		GameObject[] stackGameObjects = GameObject.FindGameObjectsWithTag (Tags.STACK);
@@ -30,12 +47,21 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 	public void OnEvent (FCEvent fcEvent, GameObject gameObject)
 	{
-		if (stacks.Count == 1) {	//Makes no sense to compare the target stack with multiple stacks
-			Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
-			Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
-			if (targetStack.Matches (stacks [0])) {
-				gameInputController.gameObject.SetActive (false);
-				gameOverCanvas.gameObject.SetActive (true);
+		if (fcEvent == FCEvent.BEGIN) 
+		{
+			statsMeta.NFlips++;
+			hud.SetNFlips (statsMeta.NFlips);
+			pauseMenu.SetNFlips (statsMeta.NFlips);
+		} 
+		else if (fcEvent == FCEvent.END) 
+		{
+			if (stacks.Count == 1) {	//Makes no sense to compare the target stack with multiple stacks
+				Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
+				Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
+				if (targetStack.Matches (stacks [0])) {
+					gameInputController.gameObject.SetActive (false);
+					gameOverCanvas.gameObject.SetActive (true);
+				}
 			}
 		}
 	}

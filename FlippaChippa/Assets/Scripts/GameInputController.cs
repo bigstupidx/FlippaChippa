@@ -74,7 +74,7 @@ public class GameInputController : MonoBehaviour {
 					Chip chip = clickedObject.GetComponent<Chip> ();
 					if (chip != null && chip.transform.parent != null && ArePartOfTheSameStack(chip, downChip)) {	//Check that we are dealing with a chip, and if so, that the chip has a parent
 						Stack stack = chip.transform.parent.gameObject.GetComponent<Stack> ();
-						if (stack != null) {	//Necessary because a chip can have a flipper as a parent during flips
+						if (stack != null && !stack.IsTargetStack) {	//Necessary because a chip can have a flipper as a parent during flips
 							stack.FlipAt (chip.chipMeta.stackPos);
 						}
 					}
