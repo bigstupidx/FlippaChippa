@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class GameInputController : MonoBehaviour {
 
@@ -91,29 +90,5 @@ public class GameInputController : MonoBehaviour {
 		Transform stack1Transform = chip1.transform.parent;
 		Transform stack2Transform = chip2.transform.parent;
 		return stack1Transform == stack2Transform;
-	}
-
-	public void PauseGame() {
-		Debug.Log ("Pausing game");
-		Time.timeScale = 0;
-		pauseMenuCanvas.gameObject.SetActive (true);
-		hudCanvas.gameObject.SetActive (false);
-	}
-
-	public void ResumeGame() {
-		Debug.Log ("Resuming game");
-		Time.timeScale = 1;
-		hudCanvas.gameObject.SetActive (true);
-		pauseMenuCanvas.gameObject.SetActive (false);
-	}
-
-	public void RestartGame() {
-		Time.timeScale = 1;
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
-	}
-
-	public void GoToMenu() {
-		Time.timeScale = 1;
-		SceneManager.LoadScene (0);
 	}
 }

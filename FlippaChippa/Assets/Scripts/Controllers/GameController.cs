@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,6 +42,32 @@ public class GameController : MonoBehaviour, FCEventListener {
 		}
 		Debug.Log ("stacks: " + stacks);
 		Debug.Log ("Target stack: " + targetStack);
+	}
+
+	public void PauseGame() {
+		Debug.Log ("Pausing game");
+		Time.timeScale = 0;
+		pauseMenu.gameObject.SetActive (true);
+		hud.gameObject.SetActive (false);
+		gameInputController.enabled = false;
+	}
+
+	public void ResumeGame() {
+		Debug.Log ("Resuming game");
+		Time.timeScale = 1;
+		hud.gameObject.SetActive (true);
+		pauseMenu.gameObject.SetActive (false);
+		gameInputController.enabled = true;
+	}
+
+	public void RestartGame() {
+		Time.timeScale = 1;
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
+	public void GoToMenu() {
+		Time.timeScale = 1;
+		SceneManager.LoadScene (0);
 	}
 
 	#region FCEventListener implementation

@@ -714,7 +714,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1356722032}
+      - m_Target: {fileID: 1356722031}
         m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1356722032}
+      - m_Target: {fileID: 1356722031}
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1356722032}
+      - m_Target: {fileID: 1356722031}
         m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
@@ -2055,6 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24663c3dbe341e049bd3553c9d92efd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AcceptInput: 1
 --- !u!114 &1356722033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2768,7 +2769,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1356722032}
+      - m_Target: {fileID: 1356722031}
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
