@@ -7,15 +7,9 @@ public class GameInputController : MonoBehaviour {
 
 	private Chip downChip = null;
 
-	private Canvas hudCanvas, pauseMenuCanvas;
 
 	void Start () {
 		mainCamera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera>();
-		hudCanvas = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<Canvas> ();
-		pauseMenuCanvas = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<Canvas> ();
-
-		hudCanvas.gameObject.SetActive (true);
-		pauseMenuCanvas.gameObject.SetActive (false);
 	}
 	
 	void Update () {

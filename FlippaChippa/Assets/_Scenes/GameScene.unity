@@ -339,7 +339,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 57794303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a580ae2bfe50b4236a8ca487c843854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d32d44b54da424ab69e02eabf4fde36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NFlipsText: {fileID: 2041123828}
@@ -355,9 +355,10 @@ GameObject:
   - 114: {fileID: 155166618}
   - 114: {fileID: 155166617}
   - 114: {fileID: 155166621}
+  - 114: {fileID: 155166622}
   m_Layer: 5
   m_Name: GameOver
-  m_TagString: Untagged
+  m_TagString: GameOverMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,6 +451,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449e8795d6b3cd34ea24286d9fcc3bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NFlipsText: {fileID: 8913066}
+--- !u!114 &155166622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155166616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32d44b54da424ab69e02eabf4fde36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NFlipsText: {fileID: 8913066}
 --- !u!1 &184029383
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +637,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 261189901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b67a2dc5b330646e0a93f2c14571acfc, type: 3}
+  m_Script: {fileID: 11500000, guid: d32d44b54da424ab69e02eabf4fde36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NFlipsText: {fileID: 311872567}
@@ -2085,7 +2099,6 @@ GameObject:
   - 4: {fileID: 1356722030}
   - 114: {fileID: 1356722032}
   - 114: {fileID: 1356722031}
-  - 114: {fileID: 1356722033}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -2118,7 +2131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInputController: {fileID: 1356722032}
-  gameOverCanvas: {fileID: 155166619}
 --- !u!114 &1356722032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2128,17 +2140,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24663c3dbe341e049bd3553c9d92efd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1356722033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1356722029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85b5ae5923de4918a7c8a94f0fbb412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1368528506
@@ -3173,7 +3174,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 155166621}
+      - m_Target: {fileID: 1356722031}
         m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:

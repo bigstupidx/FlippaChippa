@@ -10,10 +10,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 	private List<Stack> stacks;
 
 	public GameInputController gameInputController;
-	public Canvas gameOverCanvas;
 
-	private HUDController hud;
-	private PauseMenuController pauseMenu;
+	private StatisticsController hud, pauseMenu, gameOverMenu;
 
 	private SingleGameStatsMeta statsMeta;
 
@@ -25,13 +23,17 @@ public class GameController : MonoBehaviour, FCEventListener {
 	void Start () {
 		targetStack = GameObject.FindGameObjectWithTag (Tags.STACK_TARGET).GetComponent<Stack>();
 		targetStack.AddListener (this);
-		gameOverCanvas.gameObject.SetActive (false);
 
-		hud = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<HUDController>();
+		hud = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<StatisticsController>();
 		hud.SetNFlips (0);
 
-		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<PauseMenuController> ();
+		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<StatisticsController> ();
 		hud.SetNFlips (0);
+
+		gameOverMenu = GameObject.FindGameObjectWithTag (Tags.GAME_OVER_MENU).GetComponent<StatisticsController> ();
+		gameOverMenu.SetNFlips (0);
+		gameOverMenu.gameObject.SetActive (false);
+		ResumeGame ();
 
 		stacks = new List<Stack> ();
 		GameObject[] stackGameObjects = GameObject.FindGameObjectsWithTag (Tags.STACK);
@@ -89,7 +91,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 					gameInputController.enabled = false;
 					hud.gameObject.SetActive (false);
 					pauseMenu.gameObject.SetActive (false);
-					gameOverCanvas.gameObject.SetActive (true);
+					gameOverMenu.gameObject.SetActive (true);
+					gameOverMenu.SetNFlips (statsMeta.NFlips);
 				}
 			}
 		}

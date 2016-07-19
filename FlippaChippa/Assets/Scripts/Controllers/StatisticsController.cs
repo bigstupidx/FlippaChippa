@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class HUDController : MonoBehaviour
+public class StatisticsController : MonoBehaviour
 {
 
 	public Text NFlipsText;
@@ -10,7 +10,7 @@ public class HUDController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+
 	}
 
 	public void SetNFlips(int flips) {
