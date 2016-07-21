@@ -9,14 +9,19 @@ public class GameController : MonoBehaviour, FCEventListener {
 	private Stack targetStack;
 	private List<Stack> stacks;
 
+	private int indexOfVisibleStack = 0;
+
 	public GameInputController gameInputController;
 
 	private StatisticsController hud, pauseMenu, gameOverMenu;
+	private HUDController hudController;
 
 	private SingleGameStatsMeta statsMeta;
+	private CameraController cameraController;
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
+		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 	}
 
 	// Use this for initialization
@@ -26,6 +31,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 		hud = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<StatisticsController>();
 		hud.SetNFlips (0);
+		hudController = hud.GetComponent<HUDController> ();
 
 		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<StatisticsController> ();
 		hud.SetNFlips (0);
@@ -99,4 +105,43 @@ public class GameController : MonoBehaviour, FCEventListener {
 	}
 
 	#endregion
+
+	private int TotalNumberOfStacks() {
+		return stacks.Count + 1;
+	}
+
+	public void ShowNextStack() {
+		int intendedNextStack = indexOfVisibleStack + 1;
+
+		if (-1 < intendedNextStack && intendedNextStack < TotalNumberOfStacks ()) {
+			indexOfVisibleStack = intendedNextStack;
+			cameraController.MoveRight ();
+			SetSwipeButtonsEnable ();
+		}
+
+	}
+
+	public void ShowPreviousStack() {
+		int intendedNextStack = indexOfVisibleStack - 1;
+
+		if (-1 < intendedNextStack && intendedNextStack < TotalNumberOfStacks ()) {
+			indexOfVisibleStack = intendedNextStack;
+			cameraController.MoveLeft ();
+			SetSwipeButtonsEnable ();
+		}
+	}
+
+	private void SetSwipeButtonsEnable() {
+		if (indexOfVisibleStack - 1 < 0) {
+			hudController.DisableLeftButton ();
+		} else {
+			hudController.EnableLeftButton ();
+		}
+
+		if (indexOfVisibleStack + 1 >= TotalNumberOfStacks ()) {
+			hudController.DisableRightButton ();
+		} else {
+			hudController.EnableRightButton ();
+		}
+	}
 }
