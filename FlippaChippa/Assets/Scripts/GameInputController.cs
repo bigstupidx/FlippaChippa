@@ -6,6 +6,7 @@ public class GameInputController : MonoBehaviour {
 	private Camera mainCamera;
 
 	private Chip downChip = null;
+	private float highlightDuration = 0.5f, unhighlightDuraion = 0.15f;
 
 
 	void Start () {
@@ -52,11 +53,11 @@ public class GameInputController : MonoBehaviour {
 				GameObject clickedObject = raycastHit.collider.transform.gameObject;
 				Chip chip = clickedObject.GetComponent<Chip> ();
 				if (chip != null) {
+					chip.Highlight (highlightDuration);
 					downChip = chip;
 				}
 			}
-		} 
-		else if (upPhase) {
+		} else if (upPhase) {
 			if (downChip != null) {
 				RaycastHit raycastHit = new RaycastHit ();
 				Ray ray = mainCamera.ScreenPointToRay (inputPosition);
@@ -65,16 +66,33 @@ public class GameInputController : MonoBehaviour {
 				if (raycastHit.collider != null) {	//Happens if the player clicks in an empty space
 					GameObject clickedObject = raycastHit.collider.transform.gameObject;
 					Chip chip = clickedObject.GetComponent<Chip> ();
-					if (chip != null && chip.transform.parent != null && ArePartOfTheSameStack(chip, downChip)) {	//Check that we are dealing with a chip, and if so, that the chip has a parent
+					if (chip != null && chip.transform.parent != null && ArePartOfTheSameStack (chip, downChip)) {	//Check that we are dealing with a chip, and if so, that the chip has a parent
 						Stack stack = chip.transform.parent.gameObject.GetComponent<Stack> ();
 						if (stack != null && !stack.IsTargetStack) {	//Necessary because a chip can have a flipper as a parent during flips
 							stack.FlipAt (chip.chipMeta.stackPos);
 						}
 					}
 				}
+				downChip.UnHighlight (unhighlightDuraion);
 				downChip = null;
 			} else {
 				
+			}
+		} else if (dragPhase) {
+			RaycastHit raycastHit = new RaycastHit ();
+			Ray ray = mainCamera.ScreenPointToRay (inputPosition);
+			Physics.Raycast (ray, out raycastHit, 20f);
+
+			if (raycastHit.collider != null) {
+				GameObject clickedObject = raycastHit.collider.transform.gameObject;
+				Chip chip = clickedObject.GetComponent<Chip> ();
+				if (chip != null) {
+					if (chip != downChip) {
+						downChip.UnHighlight (unhighlightDuraion);
+						chip.Highlight (highlightDuration);
+					}
+					downChip = chip;
+				}
 			}
 		}
 	

@@ -742,6 +742,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &293073425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1100,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &513001953
 Prefab:
   m_ObjectHideFlags: 0
@@ -1184,6 +1188,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &517465605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,6 +1373,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &722710459
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1453,6 +1461,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &785288792
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2426,6 +2436,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &1420236565
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2600,6 +2612,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 1
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1610238002
 Prefab:
   m_ObjectHideFlags: 0
@@ -2686,6 +2700,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1702596780
 Prefab:
   m_ObjectHideFlags: 0
@@ -2760,6 +2776,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &1702596784
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2967,6 +2985,8 @@ MonoBehaviour:
     orientation: 0
     isOrientationImportant: 1
     stackPos: 0
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  standardColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &1900615586
 MeshCollider:
   m_ObjectHideFlags: 0
