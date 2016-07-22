@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 		hudController = hud.GetComponent<HUDController> ();
 
 		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<StatisticsController> ();
-		hud.SetNFlips (0);
+		pauseMenu.SetNFlips (0);
 
 		gameOverMenu = GameObject.FindGameObjectWithTag (Tags.GAME_OVER_MENU).GetComponent<StatisticsController> ();
 		gameOverMenu.SetNFlips (0);
