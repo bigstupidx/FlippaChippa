@@ -34,6 +34,7 @@ public class Chip : MonoBehaviour {
 					StartNextFade ();
 				} else {
 					doFade = false;
+					material.SetColor ("_EmissionColor", toColor);
 				}
 			} else {
 				float lerpProgress = Mathf.Clamp01(elapsedTime / duration);
