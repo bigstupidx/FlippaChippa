@@ -83,7 +83,7 @@ public class GameInputController : MonoBehaviour {
 			Ray ray = mainCamera.ScreenPointToRay (inputPosition);
 			Physics.Raycast (ray, out raycastHit, 20f);
 
-			if (raycastHit.collider != null) {
+			if (raycastHit.collider != null && downChip != null) {
 				GameObject clickedObject = raycastHit.collider.transform.gameObject;
 				Chip chip = clickedObject.GetComponent<Chip> ();
 				if (chip != null) {
@@ -93,6 +93,9 @@ public class GameInputController : MonoBehaviour {
 					}
 					downChip = chip;
 				}
+			} else if (downChip != null) {
+				downChip.UnHighlight (unhighlightDuraion);
+				downChip = null;
 			}
 		}
 	
