@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 	void Start () {
 		stackGenerator.SetPrefabsManager (prefabsManager);
 		int stackSize = Random.Range (3, 10);
-		int flips = Random.Range (4, 15);
+		int flips = Random.Range (stackSize, stackSize * 2);
 		GameStacks gamestacks = stackGenerator.GenerateStacks (stackSize, flips);
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);

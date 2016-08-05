@@ -91,7 +91,7 @@ MonoBehaviour:
   chipMeta:
     prefabId: 4
     orientation: 0
-    isOrientationImportant: 1
+    isOrientationImportant: 0
     stackPos: 0
     Height: 0.2
   highlightColor: {r: 1, g: 1, b: 1, a: 0}

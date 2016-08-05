@@ -54,7 +54,7 @@ public class StackGenerator
 	StackMeta PermuteStackMeta (StackMeta stackMeta, int totalFlipCount)
 	{
 		for (int i = 0; i < totalFlipCount; i++) {
-			int chipToFlip = Random.Range (0, stackMeta.ChipCount() - 1);
+			int chipToFlip = Random.Range (0, stackMeta.ChipCount());
 			stackMeta.FlipStackAt (chipToFlip);
 		}
 		return stackMeta;

@@ -35,7 +35,7 @@ public class PrefabsManager : MonoBehaviour {
 	}
 
 	public int GetRandomChipId() {
-		return Random.Range (0, chipPrefabs.Length - 1);
+		return Random.Range (0, chipPrefabs.Length);
 	}
 
 	public Stack CreateStack() {
