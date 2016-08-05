@@ -18,15 +18,23 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 	private SingleGameStatsMeta statsMeta;
 	private CameraController cameraController;
+	private StackGenerator stackGenerator;
+	private PrefabsManager prefabsManager;
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
+		stackGenerator = new StackGenerator ();
+		prefabsManager = GetComponent<PrefabsManager> ();
 	}
 
 	// Use this for initialization
 	void Start () {
-		targetStack = GameObject.FindGameObjectWithTag (Tags.STACK_TARGET).GetComponent<Stack>();
+		stackGenerator.SetPrefabsManager (prefabsManager);
+		int stackSize = Random.Range (3, 10);
+		int flips = Random.Range (4, 15);
+		GameStacks gamestacks = stackGenerator.GenerateStacks (stackSize, flips);
+		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
 
 		hud = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<StatisticsController>();
@@ -42,14 +50,16 @@ public class GameController : MonoBehaviour, FCEventListener {
 		ResumeGame ();
 
 		stacks = new List<Stack> ();
-		GameObject[] stackGameObjects = GameObject.FindGameObjectsWithTag (Tags.STACK);
-		foreach (GameObject stackGameObject in stackGameObjects) {
-			Stack stack = stackGameObject.GetComponent<Stack> ();
+		stacks.Add (gamestacks.Player);
+		foreach (Stack stack in stacks) {
 			stack.AddListener (this);
-			stacks.Add (stack);
 		}
 		Debug.Log ("stacks: " + stacks);
 		Debug.Log ("Target stack: " + targetStack);
+	}
+
+	void Update() {
+
 	}
 
 	public void PauseGame() {

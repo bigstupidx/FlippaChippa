@@ -23,24 +23,24 @@ public class StackMetaTester : MonoBehaviour
 	public void TestAddChip() {
 		StackMeta stack = new StackMeta ();
 		TestManager.AssertEquals (stack.ChipCount (), 0, "TestAddChip");
-		stack.Add(new ChipMeta(11, ChipOrientation.UP, false, 12, null));
+		stack.Add(new ChipMeta(11, ChipOrientation.UP, false, 12, 0.2f));
 		TestManager.AssertEquals (stack.ChipCount (), 1, "TestAddChip");
-		TestManager.AssertEquals (stack.GetCipMetaAt (0).stackPos, 0, "TestAddChip");
-		stack.Add(new ChipMeta(21, ChipOrientation.UP, false, 122, null));
-		TestManager.AssertEquals (stack.GetCipMetaAt (1).stackPos, 1, "TestAddChip");
+		TestManager.AssertEquals (stack.GetChipMetaAt (0).stackPos, 0, "TestAddChip");
+		stack.Add(new ChipMeta(21, ChipOrientation.UP, false, 122, 0.2f));
+		TestManager.AssertEquals (stack.GetChipMetaAt (1).stackPos, 1, "TestAddChip");
 	}
 
 	public void TestRemoveChip() {
 		StackMeta stack = GetStackMetaOf5 ();
 		Debug.Log ("stack: " + stack.ToStringShort ());
 		int initalCount = 5;
-		ChipMeta chip = stack.GetCipMetaAt (initalCount - 1);
+		ChipMeta chip = stack.GetChipMetaAt (initalCount - 1);
 		stack.Remove (stack.ChipCount () - 1);
 		TestManager.AssertEquals (stack.ChipCount(), initalCount - 1, "TestRemoveChip");
-		chip = stack.GetCipMetaAt(2);
+		chip = stack.GetChipMetaAt(2);
 		stack.Remove (2);
 		for (int i = 0; i < stack.ChipCount(); i++) {
-			ChipMeta chipI = stack.GetCipMetaAt(i);
+			ChipMeta chipI = stack.GetChipMetaAt(i);
 			stack.Remove (i);
 			TestManager.AssertEquals (i, chipI.stackPos, "TestRemoveChip stack pos is not the same");
 		}
@@ -52,23 +52,23 @@ public class StackMetaTester : MonoBehaviour
 		Debug.Log ("Before flip at 0: " + stack.ToStringShort ());
 		stack.FlipStackAt (0);
 		Debug.Log ("After flip at 0: " + stack.ToStringShort ());
-		TestManager.AssertEquals (stack.GetCipMetaAt (0).prefabId, 15, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (1).prefabId, 14, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (2).prefabId, 13, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (3).prefabId, 12, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (4).prefabId, 11, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (0).prefabId, 15, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (1).prefabId, 14, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (2).prefabId, 13, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (3).prefabId, 12, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (4).prefabId, 11, "");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).orientation == ChipOrientation.DOWN, "");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).orientation == ChipOrientation.DOWN, "");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).orientation == ChipOrientation.DOWN, "");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).orientation == ChipOrientation.DOWN, "");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).orientation == ChipOrientation.DOWN, "");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).orientation == ChipOrientation.DOWN, "");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).orientation == ChipOrientation.DOWN, "");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).orientation == ChipOrientation.DOWN, "");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).orientation == ChipOrientation.DOWN, "");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).orientation == ChipOrientation.DOWN, "");
 
-		TestManager.AssertEquals (stack.GetCipMetaAt (0).stackPos, 0, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (1).stackPos, 1, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (2).stackPos, 2, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (3).stackPos, 3, "");
-		TestManager.AssertEquals (stack.GetCipMetaAt (4).stackPos, 4, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (0).stackPos, 0, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (1).stackPos, 1, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (2).stackPos, 2, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (3).stackPos, 3, "");
+		TestManager.AssertEquals (stack.GetChipMetaAt (4).stackPos, 4, "");
 	}
 
 	public void TestFlipStackJustTop() {
@@ -77,14 +77,14 @@ public class StackMetaTester : MonoBehaviour
 		Debug.Log ("Before flip at top: " + stack.ToStringShort ());
 		stack.FlipStackAt (stack.ChipCount () - 1);
 		Debug.Log ("After flip at top: " + stack.ToStringShort ());
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation for chip");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).orientation == ChipOrientation.UP, "Wrong orientation for chip");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).orientation == ChipOrientation.UP, "Wrong orientation for chip");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).orientation == ChipOrientation.UP, "Wrong orientation for chip");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation for chip");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).orientation == ChipOrientation.UP, "Wrong orientation for chip");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).orientation == ChipOrientation.UP, "Wrong orientation for chip");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).orientation == ChipOrientation.UP, "Wrong orientation for chip");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).orientation == ChipOrientation.DOWN, "Wrong orientation for chip");
-		TestManager.AssertEquals (stack.GetCipMetaAt (4).stackPos, 4, "Wrong stackpos for chip");
-		TestManager.AssertEquals (stack.GetCipMetaAt (4).prefabId, 15, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).orientation == ChipOrientation.DOWN, "Wrong orientation for chip");
+		TestManager.AssertEquals (stack.GetChipMetaAt (4).stackPos, 4, "Wrong stackpos for chip");
+		TestManager.AssertEquals (stack.GetChipMetaAt (4).prefabId, 15, "Wrong prefabid");
 	}
 
 	public void TestFlipMiddle() {
@@ -95,30 +95,30 @@ public class StackMetaTester : MonoBehaviour
 		stack.FlipStackAt (1);
 		Debug.Log ("After flip at top: " + stack.ToStringShort ());
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).prefabId == 11, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).stackPos == 0, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).prefabId == 11, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).stackPos == 0, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).prefabId == 15, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).orientation == ChipOrientation.DOWN, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).stackPos == 1, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).prefabId == 15, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).orientation == ChipOrientation.DOWN, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).stackPos == 1, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).prefabId == 14, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).orientation == ChipOrientation.DOWN, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).stackPos == 2, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).prefabId == 14, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).orientation == ChipOrientation.DOWN, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).stackPos == 2, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).prefabId == 13, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).orientation == ChipOrientation.DOWN, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).stackPos == 3, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).prefabId == 13, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).orientation == ChipOrientation.DOWN, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).stackPos == 3, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).prefabId == 12, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).orientation == ChipOrientation.DOWN, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).stackPos == 4, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).prefabId == 12, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).orientation == ChipOrientation.DOWN, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).stackPos == 4, "Wrong stackpos");
 
 	}
 
@@ -130,79 +130,79 @@ public class StackMetaTester : MonoBehaviour
 		stack.FlipStackAt (3);
 		Debug.Log ("After flip at top: " + stack.ToStringShort ());
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).prefabId == 11, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).stackPos == 0, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).prefabId == 11, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).stackPos == 0, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).prefabId == 12, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).stackPos == 1, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).prefabId == 12, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).stackPos == 1, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).prefabId == 13, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).stackPos == 2, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).prefabId == 13, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).stackPos == 2, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).prefabId == 15, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).orientation == ChipOrientation.DOWN, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).stackPos == 3, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).prefabId == 15, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).orientation == ChipOrientation.DOWN, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).stackPos == 3, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).prefabId == 14, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).orientation == ChipOrientation.DOWN, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).stackPos == 4, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).prefabId == 14, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).orientation == ChipOrientation.DOWN, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).stackPos == 4, "Wrong stackpos");
 
 	}
 
 	private StackMeta GetStackMetaOf5() {
 		StackMeta stack = new StackMeta ();
-		stack.Add (new ChipMeta (11, ChipOrientation.UP, false, 11, null));
-		stack.Add (new ChipMeta (12, ChipOrientation.UP, false, 11, null));
-		stack.Add (new ChipMeta (13, ChipOrientation.UP, false, 11, null));
-		stack.Add (new ChipMeta (14, ChipOrientation.UP, false, 11, null));
-		stack.Add (new ChipMeta (15, ChipOrientation.UP, false, 11, null));
+		stack.Add (new ChipMeta (11, ChipOrientation.UP, false, 11, 0.2f));
+		stack.Add (new ChipMeta (12, ChipOrientation.UP, false, 11, 0.2f));
+		stack.Add (new ChipMeta (13, ChipOrientation.UP, false, 11, 0.2f));
+		stack.Add (new ChipMeta (14, ChipOrientation.UP, false, 11, 0.2f));
+		stack.Add (new ChipMeta (15, ChipOrientation.UP, false, 11, 0.2f));
 		return stack;
 	}
 
 	private StackMeta GetStackMetaOf5WithOrientation() {
 		StackMeta stack = new StackMeta ();
-		stack.Add (new ChipMeta (11, ChipOrientation.UP, true, 11, null));
-		stack.Add (new ChipMeta (12, ChipOrientation.UP, true, 11, null));
-		stack.Add (new ChipMeta (13, ChipOrientation.UP, true, 11, null));
-		stack.Add (new ChipMeta (14, ChipOrientation.UP, true, 11, null));
-		stack.Add (new ChipMeta (15, ChipOrientation.UP, true, 11, null));
+		stack.Add (new ChipMeta (11, ChipOrientation.UP, true, 11, 0.2f));
+		stack.Add (new ChipMeta (12, ChipOrientation.UP, true, 11, 0.2f));
+		stack.Add (new ChipMeta (13, ChipOrientation.UP, true, 11, 0.2f));
+		stack.Add (new ChipMeta (14, ChipOrientation.UP, true, 11, 0.2f));
+		stack.Add (new ChipMeta (15, ChipOrientation.UP, true, 11, 0.2f));
 		return stack;
 	}
 
 	public void TestDemoStack() {
 		StackMeta stack = GetStackMetaOf5 ();
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).prefabId == 11, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (0).stackPos == 0, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).prefabId == 11, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (0).stackPos == 0, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).prefabId == 12, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (1).stackPos == 1, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).prefabId == 12, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (1).stackPos == 1, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).prefabId == 13, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (2).stackPos == 2, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).prefabId == 13, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (2).stackPos == 2, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).prefabId == 14, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (3).stackPos == 3, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).prefabId == 14, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (3).stackPos == 3, "Wrong stackpos");
 
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).prefabId == 15, "Wrong prefabid");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).orientation == ChipOrientation.UP, "Wrong orientation");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).isOrientationImportant == false, "Orientation shouldn't be important");
-		TestManager.AssertTrue (stack.GetCipMetaAt (4).stackPos == 4, "Wrong stackpos");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).prefabId == 15, "Wrong prefabid");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).orientation == ChipOrientation.UP, "Wrong orientation");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).isOrientationImportant == false, "Orientation shouldn't be important");
+		TestManager.AssertTrue (stack.GetChipMetaAt (4).stackPos == 4, "Wrong stackpos");
 	}
 
 	public void TestMatchesOrientationNotImportant() {
@@ -230,7 +230,7 @@ public class StackMetaTester : MonoBehaviour
 		TestManager.AssertTrue (stack2.Matches (stack1), "Should match");
 		TestManager.AssertTrue (stack1.Matches (stack1), "Should match");
 
-		stack2.GetCipMetaAt (0).Flip ();
+		stack2.GetChipMetaAt (0).Flip ();
 		TestManager.AssertFalse (stack1.Matches (stack2), "Shouldn't match");
 		TestManager.AssertFalse (stack2.Matches (stack1), "Shouldn't match");
 	}

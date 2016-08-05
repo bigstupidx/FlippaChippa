@@ -17,11 +17,12 @@ public class Stack : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		/*
 		for (int i = 0; i < transform.childCount; i++) {
 			GameObject child = transform.GetChild (i).gameObject;
 			Chip chip = child.GetComponent<Chip> ();
 			meta.Add (chip.chipMeta);
-		}
+		}*/
 	}
 	
 	public void FlipAt(GameObject gameObject) {
@@ -47,6 +48,7 @@ public class Stack : MonoBehaviour
 		meta.FlipStackAt (position);
 		flipper.Flip (chipsToFlip, transform);
 
+		Debug.Log ("Flipping at: " + position);
 		Debug.Log (meta.ToStringShort ());
 	}
 
@@ -57,6 +59,24 @@ public class Stack : MonoBehaviour
 
 	public bool Matches(Stack otherStack) {
 		return meta.Matches (otherStack.meta);
+	}
+
+	public void Add(Chip chip) {
+		Meta.Add (chip.chipMeta);
+		chip.transform.SetParent (transform);
+		float yPos = GetCurrentMaxHeight () + chip.chipMeta.Height / 2f;
+		chip.transform.localPosition = new Vector3 (0f, yPos, 0f);
+		Debug.Log ("currentMaxHeight: " + GetCurrentMaxHeight());
+		Debug.Log ("chip.ChipMeta.Height / 2: " + chip.chipMeta.Height / 2f);
+		Debug.Log ("Meta.count: " + Meta.ChipCount ());	
+	}
+
+	private float GetCurrentMaxHeight() {
+		float sum = 0f;
+		for (int i = 0; i < Meta.ChipCount (); i++) {
+			sum += Meta.GetChipMetaAt (i).Height;
+		}
+		return sum;
 	}
 
 }

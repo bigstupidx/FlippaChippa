@@ -29,7 +29,7 @@ public class StackMeta {
 		}
 	}
 
-	public ChipMeta GetCipMetaAt(int position) {
+	public ChipMeta GetChipMetaAt(int position) {
 		return chips [position];
 	}
 
@@ -94,6 +94,16 @@ public class StackMeta {
 		}
 		output += "]";
 		return output;
+	}
+
+	//Create a deep copy
+	public StackMeta Copy() {
+		StackMeta copy = new StackMeta ();
+		copy.isTargetStack = isTargetStack;
+		foreach (ChipMeta chipmeta in chips) {
+			copy.chips.Add (chipmeta.Copy ());
+		}
+		return copy;
 	}
 	
 }
