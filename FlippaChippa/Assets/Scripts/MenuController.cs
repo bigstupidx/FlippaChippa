@@ -43,4 +43,8 @@ public class MenuController : MonoBehaviour {
 	public void Statistics() {
 		SceneManager.LoadScene (2, LoadSceneMode.Single);
 	}
+
+	public void Help() {
+		SceneManager.LoadScene (3, LoadSceneMode.Single);
+	}
 }

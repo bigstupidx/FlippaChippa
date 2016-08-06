@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/TestScene.unity
   - enabled: 1
     path: Assets/_Scenes/StatisticsScene.unity
+  - enabled: 1
+    path: Assets/_Scenes/HelpScene.unity
