@@ -4,26 +4,22 @@ using System.Collections;
 public class StackGenerator
 {
 	public PrefabsManager prefabsManager;
-	public int randomSeed = 0;
-	private int defaultFlipCount = 1;
 
 	public void SetPrefabsManager (PrefabsManager manager) {
 		prefabsManager = manager;
 	}
 
-	public GameStacks GenerateStacks(int size, int flips) {
-		if (flips < defaultFlipCount) {
-			flips = defaultFlipCount;
-		}
+	public GameStacks GenerateStacks(int[] chipPrefabIds, int[] startFlips, int[] targetFlips) {
+		Chip[] allChips = GetChips (chipPrefabIds);
 
-		Chip[] allChips = GetChips (size);
-
-		StackMeta startStackMeta = PermuteStackMeta (CreateStackMeta(allChips), flips);
+		StackMeta startStackMeta = CreateStackMeta (allChips);
+		startStackMeta.Permute (startFlips);
 		Stack startStack = CreateStackFrom (startStackMeta);
 		startStack.gameObject.tag = Tags.STACK;
 		startStack.transform.position = Vector3.right * 2f;
 
-		StackMeta targetStackMeta = PermuteStackMeta (startStackMeta.Copy(), flips);
+		StackMeta targetStackMeta = startStackMeta.Copy ();
+		targetStackMeta.Permute (targetFlips);
 		Stack targetStack = CreateStackFrom (targetStackMeta);
 		targetStack.gameObject.tag = Tags.STACK_TARGET;
 		targetStack.IsTargetStack = true;
@@ -42,22 +38,13 @@ public class StackGenerator
 		return new GameStacks (targetStack, startStack);
 	}
 
-	private Chip[] GetChips(int size) {
-		Chip[] chips = new Chip[size];
+	private Chip[] GetChips(int[] prefabId) {
+		Chip[] chips = new Chip[prefabId.Length];
 		for (int i = 0; i < chips.Length; i++) {
-			Chip chip = prefabsManager.GetChip (prefabsManager.GetRandomChipId());
+			Chip chip = prefabsManager.GetChip (prefabId [i]);
 			chips [i] = chip;
 		}
 		return chips;
-	}
-
-	StackMeta PermuteStackMeta (StackMeta stackMeta, int totalFlipCount)
-	{
-		for (int i = 0; i < totalFlipCount; i++) {
-			int chipToFlip = Random.Range (0, stackMeta.ChipCount());
-			stackMeta.FlipStackAt (chipToFlip);
-		}
-		return stackMeta;
 	}
 
 	Stack CreateStackFrom(StackMeta stackMeta) {

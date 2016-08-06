@@ -105,5 +105,11 @@ public class StackMeta {
 		}
 		return copy;
 	}
-	
+
+	public void Permute(int[] flipPositions) {
+		for (int i = 0; i < flipPositions.Length; i++) {
+			FlipStackAt (flipPositions [i]);
+		}
+	}
+
 }

@@ -9,6 +9,7 @@ TagManager:
   - HUD
   - PauseMenu
   - GameOverMenu
+  - PrefabsManager
   layers:
   - Default
   - TransparentFX

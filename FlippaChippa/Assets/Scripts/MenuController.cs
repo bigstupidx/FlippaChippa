@@ -9,6 +9,10 @@ public class MenuController : MonoBehaviour {
 	Course[] courses;
 	Course highlightedCourse;
 
+	void Awake () {
+		manager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		//courses = manager.GetCourseSummaries ();
@@ -16,7 +20,9 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct
-		//ApplicationModel.courseLoadedId = highlightedCourse.id;
+		CourseMeta meta = CourseMetaGenerator.Generate (manager);
+		ApplicationModel.courseMeta = meta;
+
 		SceneManager.LoadScene (1, LoadSceneMode.Single);
 	}
 

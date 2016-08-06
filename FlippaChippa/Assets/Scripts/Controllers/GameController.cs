@@ -25,15 +25,16 @@ public class GameController : MonoBehaviour, FCEventListener {
 		statsMeta = new SingleGameStatsMeta ();
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 		stackGenerator = new StackGenerator ();
-		prefabsManager = GetComponent<PrefabsManager> ();
+		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
 	}
 
 	// Use this for initialization
 	void Start () {
 		stackGenerator.SetPrefabsManager (prefabsManager);
-		int stackSize = Random.Range (3, 10);
-		int flips = Random.Range (stackSize, stackSize * 2);
-		GameStacks gamestacks = stackGenerator.GenerateStacks (stackSize, flips);
+		int[] chipIds = ApplicationModel.courseMeta.ChipIDs;
+		int[] startFlips = ApplicationModel.courseMeta.StartFlips;
+		int[] targetFlips = ApplicationModel.courseMeta.TargetFlips;
+		GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, startFlips, targetFlips);
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
 

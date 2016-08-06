@@ -8,4 +8,5 @@ public class Tags
 	public const string HUD = "HUD";
 	public const string PAUSE_MENU = "PauseMenu";
 	public const string GAME_OVER_MENU = "GameOverMenu";
+	public const string PREFABS_MANAGER = "PrefabsManager";
 }
