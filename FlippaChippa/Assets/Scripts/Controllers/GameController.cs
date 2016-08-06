@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class GameController : MonoBehaviour, FCEventListener {
 
@@ -116,6 +117,11 @@ public class GameController : MonoBehaviour, FCEventListener {
 					pauseMenu.gameObject.SetActive (false);
 					gameOverMenu.gameObject.SetActive (true);
 					gameOverMenu.SetNFlips (statsMeta.NFlips);
+
+					ApplicationModel.statistics.AddFlips (statsMeta.NFlips);
+					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
+					string json = JsonUtility.ToJson (ApplicationModel.statistics);
+					File.WriteAllText (filePath, json);
 				}
 			}
 		}

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class MenuController : MonoBehaviour {
 
@@ -17,6 +18,15 @@ public class MenuController : MonoBehaviour {
 	void Start () {
 		//courses = manager.GetCourseSummaries ();
 		//highlightedCourse = courses [0];
+		string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
+		if (File.Exists (filePath)) {
+			StreamReader reader = File.OpenText (filePath);
+			string json = reader.ReadToEnd ();
+			ApplicationModel.statistics = JsonUtility.FromJson<Statistics> (json);
+			Debug.Log("statistics: " + ApplicationModel.statistics.ToString());
+		} else {
+			ApplicationModel.statistics = new Statistics ();
+		}
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct
@@ -28,5 +38,9 @@ public class MenuController : MonoBehaviour {
 
 	public void QuitGame() {
 		Application.Quit ();
+	}
+
+	public void Statistics() {
+		SceneManager.LoadScene (2, LoadSceneMode.Single);
 	}
 }
