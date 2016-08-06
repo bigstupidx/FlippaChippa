@@ -89,6 +89,12 @@ public class GameController : MonoBehaviour, FCEventListener {
 		SceneManager.LoadScene (0);
 	}
 
+	public void NextGame() {
+		Time.timeScale = 1;
+		ApplicationModel.courseMeta = CourseMetaGenerator.Generate (prefabsManager);
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
 	#region FCEventListener implementation
 
 	public void OnEvent (FCEvent fcEvent, GameObject gameObject)
