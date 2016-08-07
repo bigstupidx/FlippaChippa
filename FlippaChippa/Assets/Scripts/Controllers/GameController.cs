@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 		int[] chipIds = ApplicationModel.courseMeta.ChipIDs;
 		int[] startFlips = ApplicationModel.courseMeta.StartFlips;
 		int[] targetFlips = ApplicationModel.courseMeta.TargetFlips;
-		GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, startFlips, targetFlips);
+		GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, startFlips, targetFlips, true);
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class StackGenerator
 {
@@ -9,7 +10,7 @@ public class StackGenerator
 		prefabsManager = manager;
 	}
 
-	public GameStacks GenerateStacks(int[] chipPrefabIds, int[] startFlips, int[] targetFlips) {
+	public GameStacks GenerateStacks(int[] chipPrefabIds, int[] startFlips, int[] targetFlips, bool cantMatch) {
 		Chip[] allChips = GetChips (chipPrefabIds);
 
 		StackMeta startStackMeta = CreateStackMeta (allChips);
@@ -20,6 +21,9 @@ public class StackGenerator
 
 		StackMeta targetStackMeta = startStackMeta.Copy ();
 		targetStackMeta.Permute (targetFlips);
+		if (cantMatch) {
+			PermuteUntilDifferent (targetStackMeta, targetFlips, startStackMeta);
+		}
 		Stack targetStack = CreateStackFrom (targetStackMeta);
 		targetStack.gameObject.tag = Tags.STACK_TARGET;
 		targetStack.IsTargetStack = true;
@@ -67,6 +71,23 @@ public class StackGenerator
 			stackMeta.Add (chip.chipMeta);
 		}
 		return stackMeta;
+	}
+
+	private void PermuteUntilDifferent(StackMeta toPermute, int[] flips, StackMeta matching) {
+		if (toPermute.Matches (matching)) {
+			int posInFlips = 0;
+			
+			int[] copy = new int[flips.Length];
+			for (int i = 0; i < flips.Length; i++) {
+				copy [i] = flips [i];
+			}
+			
+			while (toPermute.Matches (matching)) {
+				copy [posInFlips] = (copy [posInFlips] + 1) % toPermute.ChipCount();
+				posInFlips = (posInFlips + 1) % copy.Length;
+				toPermute.Permute (copy);
+			}
+		}
 	}
 }
 
