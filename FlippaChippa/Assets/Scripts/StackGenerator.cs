@@ -32,7 +32,7 @@ public class StackGenerator
 
 		GameObject targetIndicator = prefabsManager.CreateTargetIndicator ();
 		targetIndicator.transform.SetParent (targetStack.transform);
-		targetIndicator.transform.localPosition = new Vector3 (0, -0.15f, 0);
+		targetIndicator.transform.localPosition = new Vector3 (0, 0.08f, 0);
 
 
 		foreach (Chip chip in allChips) {

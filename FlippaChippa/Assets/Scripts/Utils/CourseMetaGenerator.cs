@@ -3,7 +3,7 @@
 public class CourseMetaGenerator
 {
 	public static CourseMeta Generate(PrefabsManager manager) {
-		int size = Random.Range (4, 15);
+		int size = Random.Range (4, 14);
 		int flips = Random.Range (size, (int) (size * 1.5f));
 		int flips2 = Random.Range (size, (int) (size * 1.5f));
 		return Generate (size, flips, flips2, manager);
