@@ -5,12 +5,13 @@ public class Rotator : MonoBehaviour
 {
 
 	public float rotationTime = 1f;
-	private float rotSpeed;
 
-	private float totalRotation = 180f, halfRotation;
+	private float totalRotation = 180f;
+	private float elapsedTime = 0f;
 
 	private bool isRotating = false, hasNotifiedHalfWay = false;
 	FCObservable observable;
+	private Vector3 startEuler = Vector3.zero, endEuler;
 
 	void Awake() {
 		observable = new FCObservable ();
@@ -19,30 +20,27 @@ public class Rotator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		CalculateValues ();
+		endEuler = new Vector3 (totalRotation, 0f, 0f);
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
 		if (isRotating) {
-			float dRot = rotSpeed * Time.deltaTime;
-			transform.Rotate (Vector3.right, dRot);
-			if (!hasNotifiedHalfWay && (transform.rotation.eulerAngles.x > halfRotation || transform.rotation.eulerAngles.x < -halfRotation)) {
+			elapsedTime += Time.deltaTime;
+			float progress = elapsedTime / rotationTime;
+			Vector3 rotationProgress = Vector3.Lerp (startEuler, endEuler, progress);
+			Quaternion lerp = Quaternion.Euler (rotationProgress);
+			transform.rotation = lerp;
+			if (!hasNotifiedHalfWay && progress >= 0.5f) {
 				hasNotifiedHalfWay = true;
 				observable.NotifyListeners (FCEvent.MIDDLE, gameObject);
-			} else if (transform.rotation.eulerAngles.x > totalRotation || transform.rotation.eulerAngles.x < -totalRotation) {
-				//Ferdig med rotatsjon
+			} else if (progress >= 1f) {
 				isRotating = false;
-				transform.rotation = Quaternion.Euler (totalRotation, 0f, 0f);
+				transform.rotation = Quaternion.Euler (endEuler);
 				observable.NotifyListeners (FCEvent.END, gameObject);
 			}
 		}
-	}
-
-	public void CalculateValues() {
-		rotSpeed = totalRotation / rotationTime;
-		halfRotation = totalRotation / 2f;
 	}
 
 	public void AddListener(FCEventListener listener, FCEvent fcEvent) {
@@ -55,8 +53,9 @@ public class Rotator : MonoBehaviour
 
 	public void StartRotation() {
 		isRotating = true;
+		elapsedTime = 0f;
 		hasNotifiedHalfWay = false;
-		transform.rotation = Quaternion.Euler (Vector3.zero);
+		transform.rotation = Quaternion.Euler (startEuler);
 		observable.NotifyListeners (FCEvent.BEGIN, gameObject);
 	}
 }

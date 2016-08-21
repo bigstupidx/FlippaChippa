@@ -36,7 +36,6 @@ public class Flipper : MonoBehaviour, FCEventListener
 		translator.translateTime = flipTime;
 		translator.translateHeight = flipHeight;
 
-		rotator.CalculateValues ();
 		translator.CalculateValues ();
 	}
 
