@@ -10,10 +10,10 @@ public class Chip : MonoBehaviour {
 	private Color fromColor, toColor;
 	private float duration, elapsedTime;	//current fade duration and elapsed time
 
-	public Color highlightColor, standardColor;	//Input in editor
+	public Color highlightColor;	//Input in editor
+	private Color standardColor;
 
 	private Material material;
-
 
 	private Transform initialTransform;
 
@@ -23,7 +23,7 @@ public class Chip : MonoBehaviour {
 	void Start() {
 		initialTransform = transform;
 		material = GetComponent<Renderer> ().material;
-		material.EnableKeyword ("_EMISSION");
+		standardColor = material.color;
 	}
 
 	void Update() {
@@ -34,11 +34,11 @@ public class Chip : MonoBehaviour {
 					StartNextFade ();
 				} else {
 					doFade = false;
-					material.SetColor ("_EmissionColor", toColor);
+					material.color = toColor;
 				}
 			} else {
 				float lerpProgress = Mathf.Clamp01(elapsedTime / duration);
-				material.SetColor("_EmissionColor", Color.Lerp(fromColor, toColor, lerpProgress));
+				material.color = Color.Lerp (fromColor, toColor, lerpProgress);
 			}
 		}
 	}
@@ -72,7 +72,7 @@ public class Chip : MonoBehaviour {
 			duration = timeLeft;
 		}
 
-		fromColor = material.GetColor ("_EmissionColor");
+		fromColor = material.color;
 		toColor = standardColor;
 
 		continueFadeOnCompletion = false;
