@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -21,12 +22,15 @@ public class GameController : MonoBehaviour, FCEventListener {
 	private CameraController cameraController;
 	private StackGenerator stackGenerator;
 	private PrefabsManager prefabsManager;
+	private Blur blur;
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 		stackGenerator = new StackGenerator ();
 		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
+		blur = cameraController.GetComponent<Blur> ();
+		blur.enabled = false;
 	}
 
 	// Use this for initialization
@@ -70,6 +74,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 		pauseMenu.gameObject.SetActive (true);
 		hud.gameObject.SetActive (false);
 		gameInputController.enabled = false;
+		blur.enabled = true;
 	}
 
 	public void ResumeGame() {
@@ -78,6 +83,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 		hud.gameObject.SetActive (true);
 		pauseMenu.gameObject.SetActive (false);
 		gameInputController.enabled = true;
+		blur.enabled = false;
 	}
 
 	public void RestartGame() {
@@ -112,6 +118,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 				Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
 				Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
 				if (targetStack.Matches (stacks [0])) {
+					blur.enabled = true;
 					gameInputController.enabled = false;
 					hud.gameObject.SetActive (false);
 					pauseMenu.gameObject.SetActive (false);
