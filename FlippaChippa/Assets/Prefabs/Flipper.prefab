@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11462470}
   - 114: {fileID: 11422052}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11400594}
   m_Layer: 0
   m_Name: Flipper
   m_TagString: Untagged
@@ -45,6 +46,20 @@ MonoBehaviour:
   flipHeight: 0.75
   flipTime: 0.25
   targetTransform: {fileID: 0}
+--- !u!114 &11400594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4ee377887394e87b2db795c05ee2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleDiff: 0.2
+  scaleTime: 0.5
+  nTops: 2
 --- !u!114 &11422052
 MonoBehaviour:
   m_ObjectHideFlags: 1
