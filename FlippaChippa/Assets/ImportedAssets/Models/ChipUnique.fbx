@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2016
 		Month: 8
-		Day: 13
-		Hour: 10
-		Minute: 4
-		Second: 44
-		Millisecond: 778
+		Day: 22
+		Hour: 19
+		Minute: 48
+		Second: 17
+		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins version 2017.0.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,21 +30,21 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "D:\exports\ChipUnique.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "D:\exports\ChipUnique.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips/ChipUnique.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips/ChipUnique.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "Maya LT"
 			P: "Original|ApplicationVersion", "KString", "", "", "2017"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "13/08/2016 08:04:44.776"
-			P: "Original|FileName", "KString", "", "", "D:\exports\ChipUnique.fbx"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "22/08/2016 19:48:17.000"
+			P: "Original|FileName", "KString", "", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips/ChipUnique.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "Maya LT"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2017"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "13/08/2016 08:04:44.776"
-			P: "Original|ApplicationActiveProject", "KString", "", "", "D:\exports"
-			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\magnu\OneDrive\Documents\maya\projects\default\scenes\ChipSceneCubes.mlt"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "22/08/2016 19:48:17.000"
+			P: "Original|ApplicationActiveProject", "KString", "", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips"
+			P: "Original|ApplicationNativeFile", "KString", "", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/3D_Models/scenes/ChipSceneCubes.mlt"
 		}
 	}
 }
@@ -79,7 +79,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2536786795680, "", "Scene" {
+	Document: 140394012941456, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -268,7 +268,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2536634734480, "Geometry::", "Mesh" {
+	Geometry: 140394010545312, "Geometry::", "Mesh" {
 		Vertices: *24 {
 			a: -0.70710676908493,-0.100000001490116,0,0,-0.100000001490116,0.424264043569565,-0.70710676908493,0.100000001490116,0,0,0.100000001490116,0.424264043569565,0,0.100000001490116,-0.424264043569565,0.70710676908493,0.100000001490116,0,0,-0.100000001490116,-0.424264043569565,0.70710676908493,-0.100000001490116,0
 		} 
@@ -297,7 +297,7 @@ Objects:  {
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "IndexToDirect"
 			UV: *40 {
-				a: 0.900000035762787,0.210498228669167,0.899999976158142,0.310498207807541,0.5,0.0556493252515793,0.899999976158142,0.0556493252515793,0.900000035762787,0.155649304389954,0.5,0.155649304389954,0.0200929641723633,0.989312291145325,0.326412707567215,0.412055671215057,0.979907035827637,0.410687744617462,0.673587560653687,0.987944364547729,0.326412737369537,0.412055671215057,0.979907274246216,0.410687744617462,0.673587441444397,0.987944364547729,0.0200927257537842,0.989312291145325,0.100000001490116,0.210498228669167,0.5,0.210498228669167,0.5,0.310498207807541,0.100000001490116,0.310498267412186,0.100000001490116,0.155649304389954,0.0999999940395355,0.0556493252515793
+				a: 0.126889109611511,0.215173780918121,0.126889109611511,0.380470395088196,0.788075923919678,0.0134245902299881,0.126889109611511,0.0134245902299881,0.126889109611511,0.178721264004707,0.788075923919678,0.178721264004707,0.0200929641723633,0.989312291145325,0.326412707567215,0.412055671215057,0.979907035827637,0.410687744617462,0.673587560653687,0.987944364547729,0.326412737369537,0.412055671215057,0.979907274246216,0.410687744617462,0.673587441444397,0.987944364547729,0.0200927257537842,0.989312291145325,0.126889035105705,0.215173780918121,0.788075923919678,0.215173780918121,0.788075923919678,0.380470395088196,0.126889035105705,0.380470395088196,0.126889035105705,0.178721264004707,0.126889035105705,0.0134245902299881
 			} 
 			UVIndex: *24 {
 				a: 14,15,16,17,6,7,8,9,5,18,19,2,10,11,12,13,15,0,1,16,2,3,4,5
@@ -328,7 +328,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2536691365040, "Model::CubeUnique", "Mesh" {
+	Model: 140393956394496, "Model::CubeUnique", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -340,7 +340,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2536498539920, "Material::phong1", "" {
+	Material: 140394005645120, "Material::phong1", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -360,7 +360,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	CollectionExclusive: 2536690089840, "DisplayLayer::Unique", "DisplayLayer" {
+	CollectionExclusive: 140393989507984, "DisplayLayer::Unique", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",1,1,0.388000011444092
 		}
@@ -373,17 +373,17 @@ Objects:  {
 Connections:  {
 	
 	;Model::CubeUnique, Model::RootNode
-	C: "OO",2536691365040,0
+	C: "OO",140393956394496,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2536786961200,2536660370720
+	C: "OO",140394006780048,140394010469520
 	
 	;Geometry::, Model::CubeUnique
-	C: "OO",2536634734480,2536691365040
+	C: "OO",140394010545312,140393956394496
 	
 	;Material::phong1, Model::CubeUnique
-	C: "OO",2536498539920,2536691365040
+	C: "OO",140394005645120,140393956394496
 	
 	;Model::CubeUnique, DisplayLayer::Unique
-	C: "OO",2536691365040,2536690089840
+	C: "OO",140393956394496,140393989507984
 }

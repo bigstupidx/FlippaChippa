@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2016
 		Month: 8
-		Day: 13
-		Hour: 9
-		Minute: 54
-		Second: 39
-		Millisecond: 291
+		Day: 23
+		Hour: 21
+		Minute: 24
+		Second: 17
+		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins version 2017.0.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,21 +30,21 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "D:\exports\ChipUnidirectional.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "D:\exports\ChipUnidirectional.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips2/ChipUnidirectional.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips2/ChipUnidirectional.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "Maya LT"
 			P: "Original|ApplicationVersion", "KString", "", "", "2017"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "13/08/2016 07:54:39.275"
-			P: "Original|FileName", "KString", "", "", "D:\exports\ChipUnidirectional.fbx"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "23/08/2016 21:24:17.000"
+			P: "Original|FileName", "KString", "", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips2/ChipUnidirectional.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "Maya LT"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2017"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "13/08/2016 07:54:39.275"
-			P: "Original|ApplicationActiveProject", "KString", "", "", "D:\exports"
-			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\magnu\OneDrive\Documents\maya\projects\default\scenes\ChipSceneCubes.mlt"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "23/08/2016 21:24:17.000"
+			P: "Original|ApplicationActiveProject", "KString", "", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/Other/chips2"
+			P: "Original|ApplicationNativeFile", "KString", "", "", "/Users/Magnus/Dev/FlippaDaChippa/Resources/3D_Models/scenes/ChipSceneCubes.mlt"
 		}
 	}
 }
@@ -79,7 +79,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2536786872736, "", "Scene" {
+	Document: 140482712937984, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -99,7 +99,7 @@ References:  {
 
 Definitions:  {
 	Version: 100
-	Count: 7
+	Count: 6
 	ObjectType: "GlobalSettings" {
 		Count: 1
 	}
@@ -251,24 +251,13 @@ Definitions:  {
 			}
 		}
 	}
-	ObjectType: "CollectionExclusive" {
-		Count: 1
-		PropertyTemplate: "FbxDisplayLayer" {
-			Properties70:  {
-				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
-				P: "Show", "bool", "", "",1
-				P: "Freeze", "bool", "", "",0
-				P: "LODBox", "bool", "", "",0
-			}
-		}
-	}
 }
 
 ; Object properties
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2536634755472, "Geometry::", "Mesh" {
+	Geometry: 140482713570192, "Geometry::", "Mesh" {
 		Vertices: *24 {
 			a: -0.70710676908493,-0.100000001490116,0,0,-0.100000001490116,0.424264043569565,-0.70710676908493,0.100000001490116,0,0,0.100000001490116,0.424264043569565,0,0.100000001490116,-0.424264043569565,0.70710676908493,0.100000001490116,0,0,-0.100000001490116,-0.424264043569565,0.70710676908493,-0.100000001490116,0
 		} 
@@ -297,7 +286,7 @@ Objects:  {
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "IndexToDirect"
 			UV: *40 {
-				a: 0.900000035762787,0.199999988079071,0.899999976158142,0.299999982118607,0.5,0.300000011920929,0.0999999940395355,0.300000011920929,0.100000001490116,0.199999988079071,0.5,0.199999988079071,0.0200929641723633,0.989312291145325,0.326412707567215,0.412055671215057,0.979907035827637,0.410687744617462,0.673587560653687,0.987944364547729,0.326412737369537,0.412055671215057,0.979907274246216,0.410687744617462,0.673587441444397,0.987944364547729,0.0200927257537842,0.989312291145325,0.100000001490116,0.200000002980232,0.5,0.200000017881393,0.5,0.299999982118607,0.100000001490116,0.300000011920929,0.900000035762787,0.199999988079071,0.900000035762787,0.300000011920929
+				a: 0.811984300613403,0.122003957629204,0.811984241008759,0.277996063232422,0.188015699386597,0.122003942728043,0.811984300613403,0.122003942728043,0.811984300613403,0.277996093034744,0.188015699386597,0.277996093034744,0.0150644779205322,0.942343711853027,0.324593871831894,0.359038531780243,0.984935522079468,0.357656300067902,0.675406396389008,0.940961360931396,0.324593901634216,0.359038531780243,0.984935760498047,0.357656300067902,0.675406277179718,0.940961360931396,0.0150642395019531,0.942343711853027,0.811984300613403,0.122003957629204,0.188015699386597,0.122003957629204,0.188015699386597,0.277996063232422,0.811984300613403,0.277996063232422,0.811984300613403,0.277996093034744,0.811984300613403,0.122003942728043
 			} 
 			UVIndex: *24 {
 				a: 14,15,16,17,6,7,8,9,5,18,19,2,10,11,12,13,15,0,1,16,2,3,4,5
@@ -328,7 +317,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2536691365040, "Model::CubeUnidirectional", "Mesh" {
+	Model: 140482658998784, "Model::CubeUniDirectional", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -340,7 +329,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2536498539920, "Material::phong1", "" {
+	Material: 140482713683152, "Material::phong1", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -360,11 +349,6 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	CollectionExclusive: 2536690095600, "DisplayLayer::Unidirectional", "DisplayLayer" {
-		Properties70:  {
-			P: "Color", "ColorRGB", "Color", "",0.783999979496002,0,0.783999979496002
-		}
-	}
 }
 
 ; Object connections
@@ -372,18 +356,15 @@ Objects:  {
 
 Connections:  {
 	
-	;Model::CubeUnidirectional, Model::RootNode
-	C: "OO",2536691365040,0
+	;Model::CubeUniDirectional, Model::RootNode
+	C: "OO",140482658998784,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2536786960288,2536660362608
+	C: "OO",140482712228800,140482713838832
 	
-	;Geometry::, Model::CubeUnidirectional
-	C: "OO",2536634755472,2536691365040
+	;Geometry::, Model::CubeUniDirectional
+	C: "OO",140482713570192,140482658998784
 	
-	;Material::phong1, Model::CubeUnidirectional
-	C: "OO",2536498539920,2536691365040
-	
-	;Model::CubeUnidirectional, DisplayLayer::Unidirectional
-	C: "OO",2536691365040,2536690095600
+	;Material::phong1, Model::CubeUniDirectional
+	C: "OO",140482713683152,140482658998784
 }
