@@ -23,7 +23,8 @@ public class Chip : MonoBehaviour {
 	void Start() {
 		initialTransform = transform;
 		material = GetComponent<Renderer> ().material;
-		standardColor = material.color;
+		material.EnableKeyword ("_EMISSION");
+		standardColor = material.GetColor ("_EmissionColor");
 	}
 
 	void Update() {
@@ -34,11 +35,11 @@ public class Chip : MonoBehaviour {
 					StartNextFade ();
 				} else {
 					doFade = false;
-					material.color = toColor;
+					material.SetColor ("_EmissionColor", standardColor);
 				}
 			} else {
 				float lerpProgress = Mathf.Clamp01(elapsedTime / duration);
-				material.color = Color.Lerp (fromColor, toColor, lerpProgress);
+				material.SetColor ("_EmissionColor", Color.Lerp (fromColor, toColor, lerpProgress));
 			}
 		}
 	}
@@ -72,7 +73,7 @@ public class Chip : MonoBehaviour {
 			duration = timeLeft;
 		}
 
-		fromColor = material.color;
+		fromColor = material.GetColor ("_EmissionColor");
 		toColor = standardColor;
 
 		continueFadeOnCompletion = false;
