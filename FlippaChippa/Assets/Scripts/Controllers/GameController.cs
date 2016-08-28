@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
+		statsMeta.NTargetChecks = 1;
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 		stackGenerator = new StackGenerator ();
 		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
@@ -126,6 +127,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 					gameOverMenu.SetNFlips (statsMeta.NFlips);
 
 					ApplicationModel.statistics.AddFlips (statsMeta.NFlips);
+					ApplicationModel.statistics.AddTargetChecks (statsMeta.NTargetChecks);
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
 					string json = JsonUtility.ToJson (ApplicationModel.statistics);
 					File.WriteAllText (filePath, json);
@@ -162,8 +164,9 @@ public class GameController : MonoBehaviour, FCEventListener {
 	}
 
 	private void SetSwipeButtonsEnable() {
-		if (indexOfVisibleStack - 1 < 0) {
+		if (indexOfVisibleStack - 1 < 0) {	//Showing the target stack
 			hudController.DisableLeftButton ();
+			statsMeta.NTargetChecks++;
 		} else {
 			hudController.EnableLeftButton ();
 		}
