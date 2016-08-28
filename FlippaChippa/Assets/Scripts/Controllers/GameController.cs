@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 	}
 
 	void Update() {
-
+		statsMeta.Time += Time.deltaTime;
 	}
 
 	public void PauseGame() {
@@ -128,6 +128,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 					ApplicationModel.statistics.AddFlips (statsMeta.NFlips);
 					ApplicationModel.statistics.AddTargetChecks (statsMeta.NTargetChecks);
+					ApplicationModel.statistics.AddTime (statsMeta.Time);
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
 					string json = JsonUtility.ToJson (ApplicationModel.statistics);
 					File.WriteAllText (filePath, json);
