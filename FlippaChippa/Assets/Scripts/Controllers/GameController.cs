@@ -50,6 +50,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<StatisticsController> ();
 		pauseMenu.SetNFlips (0);
+		pauseMenu.SetNTargetChecks (1);
+		pauseMenu.SetTime (0f);
 
 		gameOverMenu = GameObject.FindGameObjectWithTag (Tags.GAME_OVER_MENU).GetComponent<StatisticsController> ();
 		gameOverMenu.SetNFlips (0);
@@ -72,6 +74,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 	public void PauseGame() {
 		Debug.Log ("Pausing game");
 		Time.timeScale = 0;
+		pauseMenu.SetNTargetChecks (statsMeta.NTargetChecks);
+		pauseMenu.SetTime (statsMeta.Time);
 		pauseMenu.gameObject.SetActive (true);
 		hud.gameObject.SetActive (false);
 		gameInputController.enabled = false;
@@ -125,6 +129,8 @@ public class GameController : MonoBehaviour, FCEventListener {
 					pauseMenu.gameObject.SetActive (false);
 					gameOverMenu.gameObject.SetActive (true);
 					gameOverMenu.SetNFlips (statsMeta.NFlips);
+					gameOverMenu.SetNTargetChecks (statsMeta.NTargetChecks);
+					gameOverMenu.SetTime (statsMeta.Time);
 
 					ApplicationModel.statistics.AddFlips (statsMeta.NFlips);
 					ApplicationModel.statistics.AddTargetChecks (statsMeta.NTargetChecks);
