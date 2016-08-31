@@ -29,6 +29,10 @@ public class Statistics
 		return ArrayUtils.Sum (targetChecks);
 	}
 
+	public int TargetChecksPerGame() {
+		return ArrayUtils.Sum (targetChecks) / ArrayUtils.TotalNonZeroValues (targetChecks);
+	}
+
 	public void AddFlips(int flips) {
 		flipsStats = ArrayUtils.Add (flips, flipsStats);
 	}
@@ -43,6 +47,10 @@ public class Statistics
 
 	public float TotalTime() {
 		return ArrayUtils.SumFloat (times);
+	}
+
+	public float TimePerGame() {
+		return ArrayUtils.SumFloat (times) / ArrayUtils.TotalNonZeroValuesFloat (times);
 	}
 
 	public int TotalFlips() {
