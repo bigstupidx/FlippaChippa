@@ -618,7 +618,7 @@ MonoBehaviour:
   timeContent: {fileID: 1518053187}
   allContent: {fileID: 368039387}
   canvasRect: {fileID: 293106638}
-  animationTime: 0.5
+  animationTime: 0.4
 --- !u!1 &328343912
 GameObject:
   m_ObjectHideFlags: 0

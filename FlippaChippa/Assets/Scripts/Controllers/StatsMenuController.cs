@@ -49,7 +49,8 @@ public class StatsMenuController : MonoBehaviour
 				allContent.anchoredPosition = new Vector2 (endPos, allContent.anchoredPosition.y);
 			} else {
 				float progress = elapsedTime / animationTime;
-				float newPos = startPos + (endPos - startPos) * progress;
+				float lerp = MJMath.LerpPyramid (progress);
+				float newPos = startPos + (endPos - startPos) * lerp;
 				allContent.anchoredPosition = new Vector2 (newPos, allContent.anchoredPosition.y);
 			}
 		}
