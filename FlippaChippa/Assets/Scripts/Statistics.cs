@@ -30,7 +30,11 @@ public class Statistics
 	}
 
 	public int TargetChecksPerGame() {
-		return ArrayUtils.Sum (targetChecks) / ArrayUtils.TotalNonZeroValues (targetChecks);
+		int totalNonZeroValues = ArrayUtils.TotalNonZeroValues (targetChecks);
+		if (totalNonZeroValues == 0) {
+			return 0;
+		}
+		return ArrayUtils.Sum (targetChecks) / totalNonZeroValues;
 	}
 
 	public void AddFlips(int flips) {
@@ -50,7 +54,11 @@ public class Statistics
 	}
 
 	public float TimePerGame() {
-		return ArrayUtils.SumFloat (times) / ArrayUtils.TotalNonZeroValuesFloat (times);
+		int totalNonZeroValues = ArrayUtils.TotalNonZeroValuesFloat (times);
+		if (totalNonZeroValues == 0) {
+			return 0;
+		}
+		return ArrayUtils.SumFloat (times) / totalNonZeroValues;
 	}
 
 	public int TotalFlips() {
@@ -58,8 +66,11 @@ public class Statistics
 	}
 
 	public float CalcAverageFlipsPerGame() {
-		int totalGames = TotalGamesPlayed ();
 		int totalFlips = TotalFlips ();
+		if (totalFlips == 0) {
+			return 0;
+		}
+		int totalGames = TotalGamesPlayed ();
 		return 1f * totalFlips / totalGames;
 	}
 }
