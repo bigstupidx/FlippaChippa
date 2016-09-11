@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using System.IO;
 
 public class MenuController : MonoBehaviour {
@@ -12,6 +16,9 @@ public class MenuController : MonoBehaviour {
 
 	void Awake () {
 		manager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
+		PlayGamesClientConfiguration configuration = new PlayGamesClientConfiguration.Builder ().Build ();
+		PlayGamesPlatform.InitializeInstance (configuration);
+		PlayGamesPlatform.Activate ();
 	}
 
 	// Use this for initialization
@@ -27,6 +34,9 @@ public class MenuController : MonoBehaviour {
 		} else {
 			ApplicationModel.statistics = new Statistics ();
 		}
+		Social.localUser.Authenticate((bool success) => {
+			Debug.Log("Authenticating user: " + success);
+		});
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct

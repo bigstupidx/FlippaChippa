@@ -5,6 +5,8 @@ using UnityStandardAssets.ImageEffects;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.SocialPlatforms;
+using GooglePlayGames;
 
 public class GameController : MonoBehaviour, FCEventListener {
 
@@ -138,6 +140,9 @@ public class GameController : MonoBehaviour, FCEventListener {
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
 					string json = JsonUtility.ToJson (ApplicationModel.statistics);
 					File.WriteAllText (filePath, json);
+
+					AchievementRules.HandleAchievements (statsMeta, targetStack.Meta);
+
 				}
 			}
 		}
