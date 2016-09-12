@@ -34,7 +34,13 @@ public class MenuController : MonoBehaviour {
 		} else {
 			ApplicationModel.statistics = new Statistics ();
 		}
+
 		Social.localUser.Authenticate((bool success) => {
+			if (success) {
+				PlayGamesPlatform.Instance.LoadAchievements((IAchievement[] achievements) => {
+					ApplicationModel.achievements = achievements;
+				});
+			}
 			Debug.Log("Authenticating user: " + success);
 		});
 	}
