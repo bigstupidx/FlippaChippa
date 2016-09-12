@@ -25,12 +25,12 @@ public class StatsMenuController : MonoBehaviour
 
 	void Start() {
 		totalFlips.text = "" + ApplicationModel.statistics.TotalFlips ();
-		flipsPerGame.text = "" + (int)(ApplicationModel.statistics.CalcAverageFlipsPerGame ());
-		totalChecks.text = "" + ApplicationModel.statistics.TotalTargetChecks ();
-		checksPerGame.text = "" + ApplicationModel.statistics.TargetChecksPerGame ();
+		flipsPerGame.text = "" + (int)(ApplicationModel.statistics.AverageFlips ());
+		totalChecks.text = "" + ApplicationModel.statistics.TotalChecks ();
+		checksPerGame.text = "" + ApplicationModel.statistics.AverageTargetChecks ();
 		totalTime.text = getTimeString (ApplicationModel.statistics.TotalTime ());
-		timePerGame.text = getTimeString (ApplicationModel.statistics.TimePerGame ());
-		string totalGamesPlayedString = "" + ApplicationModel.statistics.TotalGamesPlayed ();
+		timePerGame.text = getTimeString (ApplicationModel.statistics.AverageTime ());
+		string totalGamesPlayedString = "" + ApplicationModel.statistics.TotalGames ();
 		totalGamesPlayed.text = totalGamesPlayedString;
 		gamesPlayed1.text = totalGamesPlayedString;
 		gamesPlayed2.text = totalGamesPlayedString;

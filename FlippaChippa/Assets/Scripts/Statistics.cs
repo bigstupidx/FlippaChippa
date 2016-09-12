@@ -4,73 +4,53 @@ using UnityEngine;
 [Serializable]
 public class Statistics
 {
-	public int[] flipsStats;
-	public int[] targetChecks;
-	public float[] times;
+	public int totalGames;
+	public int totalFlips;
+	public int totalTargetChecks;
+	public float totalTime;
 
 	public Statistics ()
 	{
-		flipsStats = new int[20];
-		targetChecks = new int[20];
-		times = new float[20];
 	}
 		
 	public string ToString() {
-		return "flips: " + ArrayUtils.Stringify (flipsStats) + "\n"
-		+ "target checks: " + ArrayUtils.Stringify (targetChecks) + "\n"
-		+ "time: " + ArrayUtils.StringifyFloat (times);
+		return "Total games: " + totalGames + ", Total flips: " + totalFlips + ", Total Target Checks: " + totalTargetChecks + ", Total Time: " + totalTime;
 	}
 
-	public void AddTargetChecks(int checks) {
-		targetChecks = ArrayUtils.Add (checks, targetChecks);
+	public void RegisterCompletedGame(SingleGameStatsMeta stats) {
+		totalGames++;
+		totalFlips += stats.NFlips;
+		totalTargetChecks += stats.NTargetChecks;
+		totalTime += stats.Time;
 	}
 
-	public int TotalTargetChecks() {
-		return ArrayUtils.Sum (targetChecks);
-	}
+	public int TotalGames() { return totalGames; }
 
-	public int TargetChecksPerGame() {
-		int totalNonZeroValues = ArrayUtils.TotalNonZeroValues (targetChecks);
-		if (totalNonZeroValues == 0) {
+	public int TotalChecks() { return totalGames; }
+
+	public int TotalFlips() { return totalFlips; }
+
+	public float TotalTime() { return totalTime; }
+
+	public int AverageFlips() {
+		if (totalGames == 0) {
 			return 0;
 		}
-		return ArrayUtils.Sum (targetChecks) / totalNonZeroValues;
+		return totalFlips / totalGames;
 	}
 
-	public void AddFlips(int flips) {
-		flipsStats = ArrayUtils.Add (flips, flipsStats);
-	}
-
-	public int TotalGamesPlayed() {
-		return ArrayUtils.TotalNonZeroValues (flipsStats);
-	}
-
-	public void AddTime(float time) {
-		times = ArrayUtils.AddFloat (time, times);
-	}
-
-	public float TotalTime() {
-		return ArrayUtils.SumFloat (times);
-	}
-
-	public float TimePerGame() {
-		int totalNonZeroValues = ArrayUtils.TotalNonZeroValuesFloat (times);
-		if (totalNonZeroValues == 0) {
+	public int AverageTargetChecks() {
+		if (totalGames == 0) {
 			return 0;
 		}
-		return ArrayUtils.SumFloat (times) / totalNonZeroValues;
+		return totalTargetChecks / totalGames;
 	}
 
-	public int TotalFlips() {
-		return ArrayUtils.Sum (flipsStats);
-	}
-
-	public float CalcAverageFlipsPerGame() {
-		int totalFlips = TotalFlips ();
-		if (totalFlips == 0) {
+	public float AverageTime() {
+		if (totalGames == 0) {
 			return 0;
 		}
-		int totalGames = TotalGamesPlayed ();
-		return 1f * totalFlips / totalGames;
+		return totalTime / totalGames;
 	}
+		
 }

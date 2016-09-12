@@ -134,9 +134,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 					gameOverMenu.SetNTargetChecks (statsMeta.NTargetChecks);
 					gameOverMenu.SetTime (statsMeta.Time);
 
-					ApplicationModel.statistics.AddFlips (statsMeta.NFlips);
-					ApplicationModel.statistics.AddTargetChecks (statsMeta.NTargetChecks);
-					ApplicationModel.statistics.AddTime (statsMeta.Time);
+					ApplicationModel.statistics.RegisterCompletedGame (statsMeta);
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
 					string json = JsonUtility.ToJson (ApplicationModel.statistics);
 					File.WriteAllText (filePath, json);
