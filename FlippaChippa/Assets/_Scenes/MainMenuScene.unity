@@ -194,7 +194,7 @@ GameObject:
   - 114: {fileID: 429155925}
   - 114: {fileID: 429155924}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: Help
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2038877844}
-        m_MethodName: QuitGame
+        m_MethodName: Help
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -642,7 +642,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help
+  m_Text: Achievements
 --- !u!222 &1101663182
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -716,7 +716,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit
+  m_Text: Help
 --- !u!222 &1125951945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -871,7 +871,7 @@ GameObject:
   - 114: {fileID: 1185584261}
   - 114: {fileID: 1185584260}
   m_Layer: 5
-  m_Name: Help
+  m_Name: Achievements
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -936,7 +936,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2038877844}
-        m_MethodName: Help
+        m_MethodName: ShowAchievements
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
