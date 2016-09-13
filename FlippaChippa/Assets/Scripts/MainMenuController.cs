@@ -13,7 +13,7 @@ public class MainMenuController : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp (0)) {
 			ApplicationModel.completedCourse = true;
-			SceneManager.LoadScene (0);
+			SceneManager.LoadScene (Scenes.MAIN_MENU);
 		}
 	
 	}

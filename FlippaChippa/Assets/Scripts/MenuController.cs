@@ -4,9 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 using System.IO;
+using GooglePlayGames;
 
 public class MenuController : MonoBehaviour {
 
@@ -16,9 +15,6 @@ public class MenuController : MonoBehaviour {
 
 	void Awake () {
 		manager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
-		PlayGamesClientConfiguration configuration = new PlayGamesClientConfiguration.Builder ().Build ();
-		PlayGamesPlatform.InitializeInstance (configuration);
-		PlayGamesPlatform.Activate ();
 	}
 
 	// Use this for initialization
@@ -35,13 +31,8 @@ public class MenuController : MonoBehaviour {
 			ApplicationModel.statistics = new Statistics ();
 		}
 
-		Social.localUser.Authenticate((bool success) => {
-			if (success) {
-				PlayGamesPlatform.Instance.LoadAchievements((IAchievement[] achievements) => {
-					ApplicationModel.achievements = achievements;
-				});
-			}
-			Debug.Log("Authenticating user: " + success);
+		PlayGamesPlatform.Instance.LoadAchievements((IAchievement[] achievements) => {
+			ApplicationModel.achievements = achievements;
 		});
 	}
 
@@ -49,7 +40,7 @@ public class MenuController : MonoBehaviour {
 		CourseMeta meta = CourseMetaGenerator.Generate (manager);
 		ApplicationModel.courseMeta = meta;
 
-		SceneManager.LoadScene (1, LoadSceneMode.Single);
+		SceneManager.LoadScene (Scenes.GAME, LoadSceneMode.Single);
 	}
 
 	public void QuitGame() {
@@ -57,11 +48,11 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void Statistics() {
-		SceneManager.LoadScene (2, LoadSceneMode.Single);
+		SceneManager.LoadScene (Scenes.STATISTICS, LoadSceneMode.Single);
 	}
 
 	public void Help() {
-		SceneManager.LoadScene (3, LoadSceneMode.Single);
+		SceneManager.LoadScene (Scenes.HELP, LoadSceneMode.Single);
 	}
 
 	public void ShowAchievements() {

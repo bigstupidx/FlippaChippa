@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 	public void GoToMenu() {
 		Time.timeScale = 1;
-		SceneManager.LoadScene (0);
+		SceneManager.LoadScene (Scenes.MAIN_MENU);
 	}
 
 	public void NextGame() {

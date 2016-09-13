@@ -82,7 +82,7 @@ public class StatsMenuController : MonoBehaviour
 	}
 
 	public void Menu() {
-		SceneManager.LoadScene (0, LoadSceneMode.Single);
+		SceneManager.LoadScene (Scenes.MAIN_MENU, LoadSceneMode.Single);
 	}
 
 	private void SetSwipeButtonsEnable() {
