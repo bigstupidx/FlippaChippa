@@ -153,6 +153,9 @@ public class GameController : MonoBehaviour, FCEventListener {
 	}
 
 	public void ShowNextStack() {
+		if (IsFlippingStack ()) {
+			return;
+		}
 		int intendedNextStack = indexOfVisibleStack + 1;
 
 		if (-1 < intendedNextStack && intendedNextStack < TotalNumberOfStacks ()) {
@@ -164,6 +167,10 @@ public class GameController : MonoBehaviour, FCEventListener {
 	}
 
 	public void ShowPreviousStack() {
+		if (IsFlippingStack ()) {
+			return;
+		}
+
 		int intendedNextStack = indexOfVisibleStack - 1;
 
 		if (-1 < intendedNextStack && intendedNextStack < TotalNumberOfStacks ()) {
@@ -186,5 +193,14 @@ public class GameController : MonoBehaviour, FCEventListener {
 		} else {
 			hudController.EnableRightButton ();
 		}
+	}
+
+	private bool IsFlippingStack () {
+		foreach (Stack stack in stacks) {
+			if (stack.flipper.IsFlipping) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
