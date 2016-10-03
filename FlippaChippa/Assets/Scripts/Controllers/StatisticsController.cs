@@ -4,7 +4,7 @@ using System.Collections;
 
 public class StatisticsController : MonoBehaviour
 {
-
+	public Text Title;
 	public Text NFlipsText;
 	public Text NTargetChecks;
 	public Text Time;
@@ -38,6 +38,10 @@ public class StatisticsController : MonoBehaviour
 		string secondsString = seconds < 10 ? "0" + seconds : "" + seconds;
 		string minutesString = minutes < 10 ? "0" + minutes : "" + minutes;
 		Time.text = minutesString + ":" + secondsString;
+	}
+
+	public void SetTitle(string title) {
+		Title.text = title;
 	}
 }
 

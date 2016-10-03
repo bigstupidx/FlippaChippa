@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class StatsMenuController : MonoBehaviour
 {
 
-	public Text totalGamesPlayed, totalFlips, flipsPerGame;
+	public Text totalSuccesses, totalOhs;
+	public Text totalFlips, flipsPerGame;
 	public Text totalChecks, checksPerGame;
 	public Text totalTime, timePerGame;
-	public Text gamesPlayed1, gamesPlayed2;
 	public Button NextButton, PreviousButton;
-	public RectTransform flipsContent, targetContent, timeContent, allContent;
-	private int currentVisible = 0;	//0 == FlipsContent
+	public RectTransform gamesContent, flipsContent, targetContent, timeContent, allContent;
+	private int currentVisible = 0, lastVisible = 3;	//0 == FlipsContent
 	public RectTransform canvasRect;
 	private float startPos = 0f, endPos = 0f;
 	private float elapsedTime = 0f;
@@ -24,21 +24,21 @@ public class StatsMenuController : MonoBehaviour
 	}
 
 	void Start() {
+		totalSuccesses.text = "" + ApplicationModel.statistics.TotalSuccessfullGames ();
+		totalOhs.text = "" + ApplicationModel.statistics.TotalFailedGames ();
 		totalFlips.text = "" + ApplicationModel.statistics.TotalFlips ();
 		flipsPerGame.text = "" + (int)(ApplicationModel.statistics.AverageFlips ());
 		totalChecks.text = "" + ApplicationModel.statistics.TotalChecks ();
 		checksPerGame.text = "" + ApplicationModel.statistics.AverageTargetChecks ();
 		totalTime.text = getTimeString (ApplicationModel.statistics.TotalTime ());
 		timePerGame.text = getTimeString (ApplicationModel.statistics.AverageTime ());
-		string totalGamesPlayedString = "" + ApplicationModel.statistics.TotalGames ();
-		totalGamesPlayed.text = totalGamesPlayedString;
-		gamesPlayed1.text = totalGamesPlayedString;
-		gamesPlayed2.text = totalGamesPlayedString;
 
 		Debug.Log ("width: " + canvasRect.rect.width);
 
-		targetContent.anchoredPosition = new Vector2 (canvasRect.rect.width, targetContent.anchoredPosition.y);
-		timeContent.anchoredPosition = new Vector2 (canvasRect.rect.width * 2, timeContent.anchoredPosition.y);
+		gamesContent.anchoredPosition = new Vector2 (0, gamesContent.anchoredPosition.y);
+		flipsContent.anchoredPosition = new Vector2 (canvasRect.rect.width, flipsContent.anchoredPosition.y);
+		targetContent.anchoredPosition = new Vector2 (canvasRect.rect.width * 2, targetContent.anchoredPosition.y);
+		timeContent.anchoredPosition = new Vector2 (canvasRect.rect.width * 3, timeContent.anchoredPosition.y);
 	}
 
 	void Update() {
@@ -57,7 +57,7 @@ public class StatsMenuController : MonoBehaviour
 	}
 
 	public void NextScreen() {
-		if (currentVisible == 2) {	//Showing the last screen
+		if (currentVisible == lastVisible) {	//Showing the last screen
 			return;
 		}
 		startPos = -currentVisible * canvasRect.rect.width;
@@ -92,7 +92,7 @@ public class StatsMenuController : MonoBehaviour
 			EnableLeftButton ();
 		}
 
-		if (currentVisible == 2) {
+		if (currentVisible == lastVisible) {
 			DisableRightButton ();
 		} else {
 			EnableRightButton ();

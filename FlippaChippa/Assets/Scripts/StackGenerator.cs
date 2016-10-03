@@ -39,7 +39,7 @@ public class StackGenerator
 			GameObject.Destroy (chip.gameObject);
 		}
 
-		return new GameStacks (targetStack, startStack);
+		return new GameStacks (targetStack, startStack, startFlips.Length + targetFlips.Length);
 	}
 
 	private Chip[] GetChips(int[] prefabId) {

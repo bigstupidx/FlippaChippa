@@ -27,6 +27,7 @@ public class Flipper : MonoBehaviour, FCEventListener
 	{
 		rotator = GetComponent<Rotator> ();
 		translator = GetComponent<Translator> ();
+		rotator.AddListener (this, FCEvent.MIDDLE);
 		rotator.AddListener (this, FCEvent.END);
 		translator.AddListener (this, FCEvent.END);
 		scaler = GetComponent<Scaler> ();
@@ -82,6 +83,8 @@ public class Flipper : MonoBehaviour, FCEventListener
 	{
 		if (fcEvent == FCEvent.END) {
 			nFinished++;
+		} else if (fcEvent == FCEvent.MIDDLE) {
+			observable.NotifyListeners (FCEvent.MIDDLE, gameObject);
 		}
 
 		if (nFinished == 2) {	//Finished rotation and translationg, must now perform scaling

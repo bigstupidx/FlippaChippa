@@ -17,8 +17,8 @@ public class AchievementRules
 		return stackSize >= 13;
 	}
 
-	public static bool IsEideticMemoryAccomplished(int checks, int stackSize) {
-		return checks == 1 && stackSize >= 8;
+	public static bool IsEideticMemoryAccomplished(bool successfull, int checks, int stackSize) {
+		return successfull && checks == 1 && stackSize >= 8;
 	}
 
 	public static void HandleAchievements(SingleGameStatsMeta statsMeta, StackMeta stackMeta) {
@@ -94,7 +94,7 @@ public class AchievementRules
 		}
 
 		IAchievement eideticMemory = ApplicationModel.GetAchievement (GPGSIds.achievement_eidetic_memory);
-		if (!eideticMemory.completed && IsEideticMemoryAccomplished (statsMeta.NTargetChecks, stackMeta.ChipCount ())) {
+		if (!eideticMemory.completed && IsEideticMemoryAccomplished (statsMeta.SuccessfullGame, statsMeta.NTargetChecks, stackMeta.ChipCount ())) {
 			Social.ReportProgress (GPGSIds.achievement_eidetic_memory, 100.0f, (bool success) =>{
 				if (success) {
 					Debug.Log("Successfully sett the eidetic memory achievement"); 

@@ -55,6 +55,7 @@ public class Stack : MonoBehaviour
 	public void AddListener(FCEventListener listener) {
 		flipper.AddListener (listener, FCEvent.END);
 		flipper.AddListener (listener, FCEvent.BEGIN);
+		flipper.AddListener (listener, FCEvent.MIDDLE);
 	}
 
 	public bool Matches(Stack otherStack) {

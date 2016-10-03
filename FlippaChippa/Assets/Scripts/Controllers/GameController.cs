@@ -43,20 +43,21 @@ public class GameController : MonoBehaviour, FCEventListener {
 		int[] startFlips = ApplicationModel.courseMeta.StartFlips;
 		int[] targetFlips = ApplicationModel.courseMeta.TargetFlips;
 		GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, startFlips, targetFlips, true);
+		statsMeta.MaxFlips = gamestacks.MaxFlips;
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
 
 		hud = GameObject.FindGameObjectWithTag (Tags.HUD).GetComponent<StatisticsController>();
-		hud.SetNFlips (0);
+		hud.SetNFlips (statsMeta.MaxFlips);
 		hudController = hud.GetComponent<HUDController> ();
 
 		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<StatisticsController> ();
-		pauseMenu.SetNFlips (0);
+		pauseMenu.SetNFlips (statsMeta.MaxFlips);
 		pauseMenu.SetNTargetChecks (1);
 		pauseMenu.SetTime (0f);
 
 		gameOverMenu = GameObject.FindGameObjectWithTag (Tags.GAME_OVER_MENU).GetComponent<StatisticsController> ();
-		gameOverMenu.SetNFlips (0);
+		gameOverMenu.SetNFlips (statsMeta.MaxFlips);
 		gameOverMenu.gameObject.SetActive (false);
 		ResumeGame ();
 
@@ -113,34 +114,42 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 	public void OnEvent (FCEvent fcEvent, GameObject gameObject)
 	{
-		if (fcEvent == FCEvent.BEGIN) 
-		{
+		if (fcEvent == FCEvent.BEGIN) {
 			statsMeta.NFlips++;
-			hud.SetNFlips (statsMeta.NFlips);
-			pauseMenu.SetNFlips (statsMeta.NFlips);
-		} 
+		} else if (fcEvent == FCEvent.MIDDLE) {
+			hud.SetNFlips (statsMeta.MaxFlips - statsMeta.NFlips);
+			pauseMenu.SetNFlips (statsMeta.MaxFlips - statsMeta.NFlips);
+		}
 		else if (fcEvent == FCEvent.END) 
 		{
-			if (stacks.Count == 1) {	//Makes no sense to compare the target stack with multiple stacks
-				Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
-				Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
-				if (targetStack.Matches (stacks [0])) {
+			bool outOfFlips = statsMeta.NFlips == statsMeta.MaxFlips;
+			if (outOfFlips || stacks.Count == 1) {	//Makes no sense to compare the target stack with multiple stacks
+				bool stacksMatch = targetStack.Matches (stacks [0]);
+				bool gameIsOver = stacksMatch || outOfFlips;
+				if (gameIsOver) {
+					Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
+					Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
 					blur.enabled = true;
 					gameInputController.enabled = false;
 					hud.gameObject.SetActive (false);
 					pauseMenu.gameObject.SetActive (false);
 					gameOverMenu.gameObject.SetActive (true);
-					gameOverMenu.SetNFlips (statsMeta.NFlips);
 					gameOverMenu.SetNTargetChecks (statsMeta.NTargetChecks);
 					gameOverMenu.SetTime (statsMeta.Time);
-
+					gameOverMenu.SetNFlips (statsMeta.MaxFlips - statsMeta.NFlips);
+					if (targetStack.Matches (stacks [0])) {
+						gameOverMenu.SetTitle ("Success!");
+						statsMeta.SuccessfullGame = true;
+					} else {
+						gameOverMenu.SetTitle ("Oh...");
+						statsMeta.SuccessfullGame = false;
+					}
 					ApplicationModel.statistics.RegisterCompletedGame (statsMeta);
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
 					string json = JsonUtility.ToJson (ApplicationModel.statistics);
 					File.WriteAllText (filePath, json);
-
+					
 					AchievementRules.HandleAchievements (statsMeta, targetStack.Meta);
-
 				}
 			}
 		}
