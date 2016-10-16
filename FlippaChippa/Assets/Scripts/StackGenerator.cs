@@ -12,7 +12,7 @@ public class StackGenerator
 
 	public GameStacks GenerateStacks(int[] chipPrefabIds, int[] startFlips, int[] targetFlips, bool cantMatch) {
 		Chip[] allChips = GetChips (chipPrefabIds);
-
+	
 		StackMeta startStackMeta = CreateStackMeta (allChips);
 		startStackMeta.Permute (startFlips);
 		Stack startStack = CreateStackFrom (startStackMeta);
