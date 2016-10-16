@@ -52,12 +52,12 @@ public class GameController : MonoBehaviour, FCEventListener {
 		hudController = hud.GetComponent<HUDController> ();
 
 		pauseMenu = GameObject.FindGameObjectWithTag (Tags.PAUSE_MENU).GetComponent<StatisticsController> ();
-		pauseMenu.SetNFlips (statsMeta.MaxFlips);
+		pauseMenu.SetNFlipsLeft (statsMeta.MaxFlips);
 		pauseMenu.SetNTargetChecks (1);
 		pauseMenu.SetTime (0f);
 
 		gameOverMenu = GameObject.FindGameObjectWithTag (Tags.GAME_OVER_MENU).GetComponent<StatisticsController> ();
-		gameOverMenu.SetNFlips (statsMeta.MaxFlips);
+		gameOverMenu.SetNFlipsLeft (statsMeta.MaxFlips);
 		gameOverMenu.gameObject.SetActive (false);
 		ResumeGame ();
 
@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 			statsMeta.NFlips++;
 		} else if (fcEvent == FCEvent.MIDDLE) {
 			hud.SetNFlips (statsMeta.MaxFlips - statsMeta.NFlips);
-			pauseMenu.SetNFlips (statsMeta.MaxFlips - statsMeta.NFlips);
+			pauseMenu.SetNFlipsLeft (statsMeta.MaxFlips - statsMeta.NFlips);
 		}
 		else if (fcEvent == FCEvent.END) 
 		{
@@ -136,7 +136,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 					gameOverMenu.gameObject.SetActive (true);
 					gameOverMenu.SetNTargetChecks (statsMeta.NTargetChecks);
 					gameOverMenu.SetTime (statsMeta.Time);
-					gameOverMenu.SetNFlips (statsMeta.MaxFlips - statsMeta.NFlips);
+					gameOverMenu.SetNFlipsLeft (statsMeta.MaxFlips - statsMeta.NFlips);
 					if (targetStack.Matches (stacks [0])) {
 						gameOverMenu.SetTitle ("Success!");
 						statsMeta.SuccessfullGame = true;

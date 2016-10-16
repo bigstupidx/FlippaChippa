@@ -15,7 +15,19 @@ public class StatisticsController : MonoBehaviour
 
 	}
 
-	public void SetNFlips(int flips) {
+	public void SetNFlipsLeft(int value) {
+		if (value == 1) {
+			NFlipsText.text = "1 flip left";
+		} else {
+			NFlipsText.text = value + " flips left";
+		}
+	}
+
+	public void SetNFlips(int value) {
+		NFlipsText.text = "" + value;
+	}
+
+	public void SetNFlipsUsed(int flips) {
 		if (flips == 1) {
 			NFlipsText.text = "1 Flip";
 		} else {
