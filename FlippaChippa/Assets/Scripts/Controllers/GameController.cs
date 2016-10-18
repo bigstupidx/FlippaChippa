@@ -34,10 +34,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
 		blur = cameraController.GetComponent<Blur> ();
 		blur.enabled = false;
-	}
 
-	// Use this for initialization
-	void Start () {
 		stackGenerator.SetPrefabsManager (prefabsManager);
 		int[] chipIds = ApplicationModel.courseMeta.ChipIDs;
 		int[] startFlips = ApplicationModel.courseMeta.StartFlips;
@@ -68,6 +65,11 @@ public class GameController : MonoBehaviour, FCEventListener {
 		}
 		Debug.Log ("stacks: " + stacks);
 		Debug.Log ("Target stack: " + targetStack);
+	}
+
+	// Use this for initialization
+	void Start () {
+		
 	}
 
 	void Update() {
@@ -211,5 +213,11 @@ public class GameController : MonoBehaviour, FCEventListener {
 			}
 		}
 		return false;
+	}
+
+	public void AddLandingListener(FCEventListener listener, FCEvent fcEvent) {
+		foreach (Stack stack in stacks) {
+			stack.AddLandingListener (listener, fcEvent);
+		}
 	}
 }

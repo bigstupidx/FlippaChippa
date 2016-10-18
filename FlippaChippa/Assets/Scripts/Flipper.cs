@@ -15,11 +15,12 @@ public class Flipper : MonoBehaviour, FCEventListener
 	private bool isFlipping = false;
 	public bool IsFlipping { get {return isFlipping; } }
 
-	private FCObservable observable;
+	private FCObservable observable, landingObservable;
 	public Transform targetTransform;
 
 	void Awake() {
 		observable = new FCObservable ();
+		landingObservable = new FCObservable ();
 	}
 
 	// Use this for initialization
@@ -77,6 +78,10 @@ public class Flipper : MonoBehaviour, FCEventListener
 		observable.AddListener (listener, fcEvent);
 	}
 
+	public void AddLandingListener(FCEventListener listener, FCEvent fcEvent) {
+		landingObservable.AddListener (listener, fcEvent);
+	}
+
 	#region FCEventListener implementation
 
 	public void OnEvent (FCEvent fcEvent, GameObject gameObject)
@@ -88,6 +93,7 @@ public class Flipper : MonoBehaviour, FCEventListener
 		}
 
 		if (nFinished == 2) {	//Finished rotation and translationg, must now perform scaling
+			landingObservable.NotifyListeners (FCEvent.END, gameObject);
 			List<Transform> flipChildren = GetChildren();
 			ResetChipsParent();
 			Chip lowestChip = GetLowestChip (flipChildren);

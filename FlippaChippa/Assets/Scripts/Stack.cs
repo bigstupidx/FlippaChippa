@@ -58,6 +58,10 @@ public class Stack : MonoBehaviour
 		flipper.AddListener (listener, FCEvent.MIDDLE);
 	}
 
+	public void AddLandingListener(FCEventListener listener, FCEvent fcEvent) {
+		flipper.AddLandingListener (listener, fcEvent);
+	}
+
 	public bool Matches(Stack otherStack) {
 		return meta.Matches (otherStack.meta);
 	}
