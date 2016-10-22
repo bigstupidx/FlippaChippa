@@ -2,21 +2,21 @@
 
 public struct CourseMeta
 {
-	private static CourseMeta courseMeta = new CourseMeta (new int[]{ 0, 0, 0 }, new int[]{ 0, 0, 0 }, new int[]{ 0, 0, 0 });
+	private static CourseMeta courseMeta = new CourseMeta (new int[]{ 0, 0, 0 }, new bool[]{ false, false, false }, new int[]{ 0, 0, 0 });
 
 	private int[] chipIDs;
 	public int[] ChipIDs { get { return chipIDs; } }
 
-	private int[] startFlips;
-	public int[] StartFlips { get { return startFlips; } }
+	private bool[] initFlips;
+	public bool[] InitFlips { get { return initFlips; }}
 
-	private int[] targetFlips;
-	public int[] TargetFlips { get { return targetFlips; } }
+	private int[] flips;
+	public int[] Flips { get { return flips; } }
 
-	public CourseMeta(int[] chipIDs, int[] startFlips, int[] targetFlips) {
+	public CourseMeta(int[] chipIDs, bool[] initFlips, int[] flips) {
 		this.chipIDs = chipIDs;
-		this.startFlips = startFlips;
-		this.targetFlips = targetFlips;
+		this.initFlips = initFlips;
+		this.flips = flips;
 	}
 
 	public static CourseMeta Default() {

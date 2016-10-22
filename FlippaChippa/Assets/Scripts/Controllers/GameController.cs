@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
+		statsMeta.DifficultyFactor = 0.4f;
 		statsMeta.NTargetChecks = 1;
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 		stackGenerator = new StackGenerator ();
@@ -37,10 +38,10 @@ public class GameController : MonoBehaviour, FCEventListener {
 
 		stackGenerator.SetPrefabsManager (prefabsManager);
 		int[] chipIds = ApplicationModel.courseMeta.ChipIDs;
-		int[] startFlips = ApplicationModel.courseMeta.StartFlips;
-		int[] targetFlips = ApplicationModel.courseMeta.TargetFlips;
-		GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, startFlips, targetFlips, true);
-		statsMeta.MaxFlips = gamestacks.MaxFlips;
+		bool[] initFlips = ApplicationModel.courseMeta.InitFlips;
+		int[] startFlips = ApplicationModel.courseMeta.Flips;
+		GameStacks gamestacks = stackGenerator.GenerateStacks(chipIds, initFlips, startFlips);
+		statsMeta.MaxFlips = gamestacks.MaxFlips + (int)(Mathf.Max(gamestacks.Target.Meta.ChipCount() * statsMeta.DifficultyFactor, 1));
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
 

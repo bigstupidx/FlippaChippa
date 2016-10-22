@@ -62,8 +62,7 @@ public class StackMeta {
 		}
 		return list;
 	}
-
-
+		
 	public bool Matches(StackMeta other) {
 		if (other.chips.Count != chips.Count) {
 			return false;

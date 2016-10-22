@@ -31,9 +31,9 @@ namespace AssemblyCSharp
 		void Start () {
 			stackGenerator.SetPrefabsManager (prefabsManager);
 			int[] chipIds = new int[]{0,1,5,3,4,5};
-			int[] startFlips = new int[]{0,0,0};
+			bool[] initFlips = new bool[]{ false, true, false, false, true };
 			int[] targetFlips = new int[]{1,0,0};
-			GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, startFlips, targetFlips, true);
+			GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, initFlips, targetFlips);
 			targetStack = gamestacks.Target;
 			targetStack.AddListener (this);
 			targetStack.gameObject.SetActive (false);

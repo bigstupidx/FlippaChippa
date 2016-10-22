@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class StackGenerator
@@ -10,36 +11,73 @@ public class StackGenerator
 		prefabsManager = manager;
 	}
 
-	public GameStacks GenerateStacks(int[] chipPrefabIds, int[] startFlips, int[] targetFlips, bool cantMatch) {
+	public GameStacks GenerateStacks(int[] chipPrefabIds, bool[] initFlips, int[] flips) {
 		Chip[] allChips = GetChips (chipPrefabIds);
-	
-		StackMeta startStackMeta = CreateStackMeta (allChips);
-		startStackMeta.Permute (startFlips);
-		Stack startStack = CreateStackFrom (startStackMeta);
-		startStack.gameObject.tag = Tags.STACK;
-		startStack.transform.position = Vector3.right * 2f;
+		FlipChips (allChips, initFlips);
 
-		StackMeta targetStackMeta = startStackMeta.Copy ();
-		targetStackMeta.Permute (targetFlips);
-		if (cantMatch) {
-			PermuteUntilDifferent (targetStackMeta, targetFlips, startStackMeta);
-		}
-		Stack targetStack = CreateStackFrom (targetStackMeta);
+		StackMeta allChipsStackMeta = CreateStackMeta(allChips);
+		Stack targetStack = CreateStackFrom(allChipsStackMeta);
 		targetStack.gameObject.tag = Tags.STACK_TARGET;
 		targetStack.IsTargetStack = true;
 		targetStack.Meta.isTargetStack = true;
 		targetStack.transform.position = Vector3.zero;
 
+		int nFlips = Permute (allChipsStackMeta, flips);
+		Stack startStack = CreateStackFrom (allChipsStackMeta);
+		startStack.gameObject.tag = Tags.STACK;
+		startStack.transform.position = Vector3.right * 2f;
+
 		GameObject targetIndicator = prefabsManager.CreateTargetIndicator ();
 		targetIndicator.transform.SetParent (targetStack.transform);
 		targetIndicator.transform.localPosition = new Vector3 (0, 0.08f, 0);
-
 
 		foreach (Chip chip in allChips) {
 			GameObject.Destroy (chip.gameObject);
 		}
 
-		return new GameStacks (targetStack, startStack, startFlips.Length + targetFlips.Length);
+		return new GameStacks (targetStack, startStack, nFlips);
+	}
+
+	private int Permute(StackMeta stackMeta, int[] flips) {
+		int nFlips = 0;
+		List<StackMeta> flipHistory = new List<StackMeta> ();
+		for (int i = 0; i < flips.Length; i++) {
+			stackMeta.FlipStackAt (flips [i]);
+			if (PermutationExists(stackMeta, flipHistory)) {
+				//Undo flip since we've been here before
+				stackMeta.FlipStackAt (flips [i]);
+			} else {
+				flipHistory.Add (stackMeta.Copy ());
+				nFlips++;
+			}
+		}
+
+		return nFlips;
+	}
+
+	private bool PermutationExists(StackMeta newPermutation, List<StackMeta> existingPermutations) {
+		foreach (StackMeta permutation in existingPermutations) {
+			if (newPermutation.Matches(permutation)) {
+				return true;
+			}
+		}
+		return false;
+	}
+		
+
+	private void FlipChips(Chip[] chips, bool[] flips) {
+		if (flips.Length != chips.Length) {
+			Debug.Log ("The flips-array has a different length than the chips-array");
+		}
+		int end = Math.Min (chips.Length, flips.Length);
+		for (int i = 0; i < end; i++) {
+			bool flip = flips [i];
+			if (flip) {
+				Chip chip = chips [i];
+				chip.chipMeta.Flip ();
+				chip.transform.localRotation = Quaternion.Euler (new Vector3 (180f, 0f, 0f));
+			}
+		}
 	}
 
 	private Chip[] GetChips(int[] prefabId) {
@@ -71,23 +109,6 @@ public class StackGenerator
 			stackMeta.Add (chip.chipMeta);
 		}
 		return stackMeta;
-	}
-
-	private void PermuteUntilDifferent(StackMeta toPermute, int[] flips, StackMeta matching) {
-		if (toPermute.Matches (matching)) {
-			int posInFlips = 0;
-			
-			int[] copy = new int[flips.Length];
-			for (int i = 0; i < flips.Length; i++) {
-				copy [i] = flips [i];
-			}
-			
-			while (toPermute.Matches (matching)) {
-				copy [posInFlips] = (copy [posInFlips] + 1) % toPermute.ChipCount();
-				posInFlips = (posInFlips + 1) % copy.Length;
-				toPermute.Permute (copy);
-			}
-		}
 	}
 }
 

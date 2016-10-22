@@ -9,17 +9,17 @@ public class CourseMetaGenerator
 		return Generate (size, flips, flips2, manager);
 	}
 
-	public static CourseMeta Generate(int size, int flips, int flips2, PrefabsManager manager) {
+	public static CourseMeta Generate(int size, int nInitFlips, int nFlips, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
-		int[] startFlips = new int[flips];
-		for (int i = 0; i < size; i++) {
-			startFlips [i] = Random.Range (0, size);
+		bool[] initFlips = new bool[nInitFlips];
+		for (int i = 0; i < initFlips.Length; i++) {
+			initFlips [i] = Random.value < 0.5f ? true : false;
 		}
-		int[] targetFlips = new int[flips2];
+		int[] flips = new int[nFlips];
 		for (int i = 0; i < size; i++) {
-			targetFlips [i] = Random.Range (0, size);
+			flips [i] = Random.Range (0, size);
 		}
-		CourseMeta meta = new CourseMeta (chipIds, startFlips, targetFlips);
+		CourseMeta meta = new CourseMeta (chipIds, initFlips, flips);
 		return meta;
 	}
 
