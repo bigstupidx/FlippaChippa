@@ -29,6 +29,7 @@ public class StackGenerator
 
 		GameObject targetIndicator = prefabsManager.CreateTargetIndicator ();
 		targetIndicator.transform.SetParent (targetStack.transform);
+		targetIndicator.transform.localRotation = Quaternion.Euler(new Vector3 (-134.1f, -90f, 90f));
 		targetIndicator.transform.localPosition = new Vector3 (0, 0.08f, 0);
 
 		foreach (Chip chip in allChips) {
