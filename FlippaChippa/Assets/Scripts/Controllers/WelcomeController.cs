@@ -21,17 +21,20 @@ public class WelcomeController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		StartCoroutine (Loading());
 		Social.localUser.Authenticate((bool success) => {
-			menuButton.gameObject.SetActive(true);
-			loadingText.enabled = false;
-
 			if (success) {
 				Debug.Log("User has been authenticated", this);
 			} else {
 				Debug.Log("Failed to authenticate user", this);
 			}
 		});
-	
+	}
+
+	IEnumerator Loading() {
+		yield return new WaitForSeconds (1f);
+		menuButton.gameObject.SetActive(true);
+		loadingText.enabled = false;
 	}
 
 	public void Play() {
