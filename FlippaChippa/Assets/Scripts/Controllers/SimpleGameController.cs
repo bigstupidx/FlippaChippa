@@ -10,7 +10,7 @@ using GooglePlayGames;
 
 namespace AssemblyCSharp
 {
-	public class SimpleGameController : MonoBehaviour, FCEventListener
+	public class SimpleGameController : MonoBehaviour, FCEventListener, LandingListener
 	{
 		private Stack targetStack;
 		private List<Stack> stacks;
@@ -18,6 +18,7 @@ namespace AssemblyCSharp
 		private int indexOfVisibleStack = 0;
 
 		public GameInputController gameInputController;
+		public LandingEmission landingEmission;
 
 		private StackGenerator stackGenerator;
 		private PrefabsManager prefabsManager;
@@ -25,10 +26,7 @@ namespace AssemblyCSharp
 		void Awake() {
 			stackGenerator = new StackGenerator ();
 			prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
-		}
 
-		// Use this for initialization
-		void Start () {
 			stackGenerator.SetPrefabsManager (prefabsManager);
 			int[] chipIds = new int[]{0,1,5,3,4,5};
 			bool[] initFlips = new bool[]{ false, true, false, false, true };
@@ -37,13 +35,17 @@ namespace AssemblyCSharp
 			targetStack = gamestacks.Target;
 			targetStack.AddListener (this);
 			targetStack.gameObject.SetActive (false);
-			ResumeGame ();
 
 			stacks = new List<Stack> ();
 			stacks.Add (gamestacks.Player);
 			foreach (Stack stack in stacks) {
 				stack.AddListener (this);
 			}
+		}
+
+		// Use this for initialization
+		void Start () {
+			ResumeGame ();
 			stacks [0].transform.position = new Vector3(0, 0.4f, 0);
 		}
 
@@ -75,6 +77,17 @@ namespace AssemblyCSharp
 			}
 			return false;
 		}
+
+		#region LandingListener implementation
+
+		public void AddLandingListener (FCEventListener listener, FCEvent fcEvent)
+		{
+			foreach (Stack stack in stacks) {
+				stack.AddLandingListener (listener, fcEvent);
+			}
+		}
+
+		#endregion
 	}
 }
 

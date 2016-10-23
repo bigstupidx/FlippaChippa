@@ -9,12 +9,16 @@ public class PrefabsManager : MonoBehaviour {
 	public GameObject targetStackIndicator;
 	public Flipper flipper;
 
-	// Use this for initialization
-	void Start () {
+	void Awake () {
 		// Give each chip an id based on its order in the chipprefab list
 		for (int i = 0; i < chipPrefabs.Length; i++) {
 			chipPrefabs [i].chipMeta.prefabId = i;
 		}
+	}
+
+	// Use this for initialization
+	void Start () {
+		
 	}
 
 	public Chip GetChip(int id) {

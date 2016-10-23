@@ -5,7 +5,7 @@ using System.Collections;
 public class LandingEmission : MonoBehaviour, FCEventListener {
 
 	ParticleSystem ps;
-	GameController controller;
+	LandingListener controller;
 	public int maxParticles = 200;
 	public int particlesPerChip = 15;
 	float maxSpeeed;
@@ -15,7 +15,7 @@ public class LandingEmission : MonoBehaviour, FCEventListener {
 	// Use this for initialization
 	void Start () {		
 		ps = gameObject.GetComponentInChildren<ParticleSystem> ();
-		controller = GameObject.FindGameObjectWithTag (Tags.GAME_CONTROLLER).GetComponent<GameController>();
+		controller = GameObject.FindGameObjectWithTag (Tags.GAME_CONTROLLER).GetComponent<LandingListener>();
 		controller.AddLandingListener (this, FCEvent.END);
 	}
 

@@ -8,7 +8,7 @@ using System.IO;
 using UnityEngine.SocialPlatforms;
 using GooglePlayGames;
 
-public class GameController : MonoBehaviour, FCEventListener {
+public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	private Stack targetStack;
 	private List<Stack> stacks;
