@@ -3149,6 +3149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 292217427}
+  achievementsButton: {fileID: 1185584260}
 --- !u!1 &2114454480
 GameObject:
   m_ObjectHideFlags: 0

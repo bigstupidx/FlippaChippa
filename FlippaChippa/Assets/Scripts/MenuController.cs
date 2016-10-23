@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using System.IO;
 using GooglePlayGames;
+using System;
 
 public class MenuController : MonoBehaviour {
 
 	public PrefabsManager manager;
 	Course[] courses;
 	Course highlightedCourse;
+	public Button achievementsButton;
+	private Image achievementIcon;
 
 	void Awake () {
 		manager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
@@ -31,9 +34,26 @@ public class MenuController : MonoBehaviour {
 			ApplicationModel.statistics = new Statistics ();
 		}
 
-		PlayGamesPlatform.Instance.LoadAchievements((IAchievement[] achievements) => {
-			ApplicationModel.achievements = achievements;
-		});
+		Transform childTransform = achievementsButton.transform.GetChild (0);
+		achievementIcon = childTransform.GetComponent<Image> ();
+
+		try {
+			PlayGamesPlatform.Instance.LoadAchievements((IAchievement[] achievements) => {
+				ApplicationModel.achievements = achievements;
+			});
+		} catch (NullReferenceException e) {
+			Debug.Log (e);
+		}
+	}
+
+	void Update() {
+		if (!Social.localUser.authenticated) {
+			achievementsButton.interactable = false;
+			achievementIcon.color = new Color (achievementIcon.color.r, achievementIcon.color.g, achievementIcon.color.b, 0.5f);
+		} else {
+			achievementsButton.interactable = true;
+			achievementIcon.color = new Color (achievementIcon.color.r, achievementIcon.color.g, achievementIcon.color.b, 1f);
+		}
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct
