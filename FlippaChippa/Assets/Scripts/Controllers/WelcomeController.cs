@@ -14,9 +14,14 @@ public class WelcomeController : MonoBehaviour {
 
 	void Awake() {
 		menuButton.gameObject.SetActive (false);
+
+		#if UNITY_ANDROID || UNITY_IOS
+
 		PlayGamesClientConfiguration configuration = new PlayGamesClientConfiguration.Builder ().Build ();
 		PlayGamesPlatform.InitializeInstance (configuration);
 		PlayGamesPlatform.Activate ();
+
+		#endif
 	}
 
 	// Use this for initialization

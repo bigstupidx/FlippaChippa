@@ -37,6 +37,7 @@ public class MenuController : MonoBehaviour {
 		Transform childTransform = achievementsButton.transform.GetChild (0);
 		achievementIcon = childTransform.GetComponent<Image> ();
 
+		#if UNITY_ANDROID || UNITY_IOS
 		try {
 			PlayGamesPlatform.Instance.LoadAchievements((IAchievement[] achievements) => {
 				ApplicationModel.achievements = achievements;
@@ -44,6 +45,9 @@ public class MenuController : MonoBehaviour {
 		} catch (NullReferenceException e) {
 			Debug.Log (e);
 		}
+		#else
+		ApplicationModel.achievements = new IAchievement[0];
+		#endif
 	}
 
 	void Update() {
@@ -76,6 +80,8 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void ShowAchievements() {
+		#if UNITY_ANDROID || UNITY_IOS
 		PlayGamesPlatform.Instance.ShowAchievementsUI ();
+		#endif
 	}
 }

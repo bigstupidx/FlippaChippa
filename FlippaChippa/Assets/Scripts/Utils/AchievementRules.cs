@@ -26,7 +26,7 @@ public class AchievementRules
 			Debug.Log ("The achievements hasn't been retrieved. This indicated that the player hasn't signed in using google play games services");
 			return;
 		}
-
+		#if UNITY_ANDROID || UNITY_IOS
 		IAchievement newbie = ApplicationModel.GetAchievement (GPGSIds.achievement_newbie);
 		if (!newbie.completed) {
 			PlayGamesPlatform.Instance.IncrementAchievement (GPGSIds.achievement_newbie, 1, (bool success) => {
@@ -103,6 +103,7 @@ public class AchievementRules
 				}
 			});
 		}
+		#endif
 	}
 }
 
