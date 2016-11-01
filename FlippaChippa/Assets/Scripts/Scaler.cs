@@ -3,8 +3,7 @@ using System.Collections;
 
 public class Scaler : MonoBehaviour
 {
-
-	public float scaleDiff = 0.2f;
+	public Vector3 scaleDiff = Vector3.zero;
 	public float scaleTime = 0.5f;
 	public int nTops = 2;
 
@@ -41,9 +40,9 @@ public class Scaler : MonoBehaviour
 			} else {
 				float timeAmount = (scaleTime - elapsedTime) / scaleTime;
 				float sinTime = timeAmount * maxtime;	//sin(ax), where a = nScalingPoints, x= timeAmount * maxTime
-				float scale = scaleDiff * timeAmount * Mathf.Sin(sinTime);
-				float finalScale = initalScale.y + scale;
-				transform.localScale = new Vector3 (initalScale.x, finalScale, initalScale.z);
+				Vector3 scale = scaleDiff * timeAmount * Mathf.Sin(sinTime);
+				Vector3 finalScale = initalScale + scale;
+				transform.localScale = finalScale;
 			}
 		}
 	}
