@@ -35,13 +35,13 @@ public class StackMetaTester : MonoBehaviour
 		Debug.Log ("stack: " + stack.ToStringShort ());
 		int initalCount = 5;
 		ChipMeta chip = stack.GetChipMetaAt (initalCount - 1);
-		stack.Remove (stack.ChipCount () - 1);
+		stack.RemoveAt (stack.ChipCount () - 1);
 		TestManager.AssertEquals (stack.ChipCount(), initalCount - 1, "TestRemoveChip");
 		chip = stack.GetChipMetaAt(2);
-		stack.Remove (2);
+		stack.RemoveAt (2);
 		for (int i = 0; i < stack.ChipCount(); i++) {
 			ChipMeta chipI = stack.GetChipMetaAt(i);
-			stack.Remove (i);
+			stack.RemoveAt (i);
 			TestManager.AssertEquals (i, chipI.stackPos, "TestRemoveChip stack pos is not the same");
 		}
 	}

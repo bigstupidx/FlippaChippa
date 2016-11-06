@@ -108,8 +108,8 @@ public class Flipper : MonoBehaviour, FCEventListener
 		} else if (nFinished == 3) {
 			nFinished = 0;
 			isFlipping = false;
-			observable.NotifyListeners (FCEvent.END, gameObject);
 			ResetChipsParent ();
+			observable.NotifyListeners (FCEvent.END, gameObject);
 		}
 	}
 

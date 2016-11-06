@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 
 public class MJMath
@@ -15,6 +16,10 @@ public class MJMath
 			float progress = lerpAmount - lerpAmount * lerpAmount;
 			return (firstHalf + progress) / 0.5f;
 		}
+	}
+
+	public static float LerpExp(float amount) {
+		return 1f - Mathf.Cos(amount * Mathf.PI * 0.5f);
 	}
 }
 

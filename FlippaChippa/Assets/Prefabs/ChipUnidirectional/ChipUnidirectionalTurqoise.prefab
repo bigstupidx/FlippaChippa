@@ -41,17 +41,20 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: ff15fe1780f004b15b454b5ce110c839, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -89,11 +92,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipMeta:
-    prefabId: 0
+    prefabId: 9
     orientation: 0
     isOrientationImportant: 0
     stackPos: 0
     Height: 0.2
+    CrushWeight: 2147483647
+    Weight: 1
   highlightColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1001 &100100000
 Prefab:

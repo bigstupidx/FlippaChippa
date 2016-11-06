@@ -16,16 +16,16 @@ public class StackGenerator
 		FlipChips (allChips, initFlips);
 
 		StackMeta allChipsStackMeta = CreateStackMeta(allChips);
-		Stack targetStack = CreateStackFrom(allChipsStackMeta);
+		Stack startStack = CreateStackFrom (allChipsStackMeta);
+		startStack.gameObject.tag = Tags.STACK;
+		startStack.transform.position = Vector3.right * 2f;
+
+		int nFlips = Permute (allChipsStackMeta, flips);
+		Stack targetStack = CreateStackFrom (allChipsStackMeta);
 		targetStack.gameObject.tag = Tags.STACK_TARGET;
 		targetStack.IsTargetStack = true;
 		targetStack.Meta.isTargetStack = true;
 		targetStack.transform.position = Vector3.zero;
-
-		int nFlips = Permute (allChipsStackMeta, flips);
-		Stack startStack = CreateStackFrom (allChipsStackMeta);
-		startStack.gameObject.tag = Tags.STACK;
-		startStack.transform.position = Vector3.right * 2f;
 
 		GameObject targetIndicator = prefabsManager.CreateTargetIndicator ();
 		targetIndicator.transform.SetParent (targetStack.transform);

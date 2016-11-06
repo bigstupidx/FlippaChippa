@@ -18,15 +18,17 @@ public class StackMeta {
 		chipMeta.stackPos = chips.Count - 1;
 	}
 
-	public void Remove(int position) {
-		chips.RemoveAt (position);
-
-		if (position != chips.Count) {
+	public ChipMeta RemoveAt(int position) {
+		if (0 <= position && position < chips.Count) {
+			ChipMeta toRemove = chips[position];
+			chips.RemoveAt (position);
 			for (int i = position; i < chips.Count; i++) {
 				ChipMeta chip = chips [i];
 				chip.stackPos = i;
 			}
+			return toRemove;
 		}
+		return null;
 	}
 
 	public ChipMeta GetChipMetaAt(int position) {
@@ -37,13 +39,29 @@ public class StackMeta {
 		return chips.Count;
 	}
 
-	public void FlipStackAt(int position) {	//Doesn't actually flip the UI stack, only flips the the chips meta
+	public CrushChipsMeta FlipStackAt(int position) {	//Doesn't actually flip the UI stack, only flips the the chips meta
 		ReverseOrderAt(position, chips);
 		for (int i = position; i < chips.Count; i++) {
 			ChipMeta chip = chips [i];
 			chip.Flip ();
 			chip.stackPos = i;
 		}
+
+		List<ChipMeta> crushing = new List<ChipMeta>();
+		List<ChipMeta> falling = new List<ChipMeta> ();
+		int stackPosOfCrushedChip = -1;
+		for (int i = position; i < chips.Count; i++) {	//No point in checking the chips that are below the flipped chip index
+			if (ShouldCrushChip (i)) {
+				crushing.Add (chips[i]);
+				stackPosOfCrushedChip = i;
+			} else if (stackPosOfCrushedChip != -1) {
+				falling.Add (chips [i]);
+			}
+		}
+		foreach (ChipMeta meta in crushing) {
+			RemoveAt (meta.stackPos);
+		}
+		return new CrushChipsMeta(crushing, falling);
 	}
 
 	public static List<ChipMeta> ReverseOrderAt(int position, List<ChipMeta> list) {
@@ -109,6 +127,19 @@ public class StackMeta {
 		for (int i = 0; i < flipPositions.Length; i++) {
 			FlipStackAt (flipPositions [i]);
 		}
+	}
+
+	private bool ShouldCrushChip(int position) {
+		if (position < 0 || chips.Count - 1 < position || chips[position].CrushWeight == int.MaxValue) {
+			return false;
+		}
+		
+		int sumWeightAbove = 0;
+		for (int i = chips.Count - 1; i > position; i--) {
+			sumWeightAbove += chips[i].Weight;
+		}
+
+		return sumWeightAbove >= chips[position].CrushWeight;
 	}
 
 }

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.49506247, g: 0.5975176, b: 0.49764502, a: 1}
+  m_IndirectSpecularColor: {r: 0.49509525, g: 0.5988634, b: 0.49791735, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2807,7 +2807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInputController: {fileID: 1227363052}
-  landingEmission: {fileID: 0}
+  landingEmission: {fileID: 1850158034}
 --- !u!114 &1227363052
 MonoBehaviour:
   m_ObjectHideFlags: 0
