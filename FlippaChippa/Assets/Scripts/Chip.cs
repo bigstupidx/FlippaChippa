@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Chip : MonoBehaviour {
 
@@ -16,15 +17,29 @@ public class Chip : MonoBehaviour {
 	private Material material;
 
 	private Transform initialTransform;
+	private GameObject crushIndicator;
 
 	void Awake() {
 	}
 
 	void Start() {
+		crushIndicator = transform.GetChild (0).gameObject;
+		SetCrushIndicatorVisibiltyAndValue ();
 		initialTransform = transform;
 		material = GetComponent<Renderer> ().material;
 		material.EnableKeyword ("_EMISSION");
 		standardColor = material.GetColor ("_EmissionColor");
+	}
+
+	void SetCrushIndicatorVisibiltyAndValue () {
+		if (chipMeta.IsCrushable) {
+			for (int i = 0; i < crushIndicator.transform.childCount; i++) {
+				Text crushText = crushIndicator.transform.GetChild (i).GetComponentInChildren<Text> ();
+				crushText.text = "" + chipMeta.CrushWeight;
+			}
+		} else {
+			crushIndicator.SetActive (false);
+		}
 	}
 
 	void Update() {

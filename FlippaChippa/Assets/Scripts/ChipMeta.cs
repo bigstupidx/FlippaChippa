@@ -38,6 +38,8 @@ public class ChipMeta {
 		return "{prefabId: " + prefabId + ", chipOrientation: " + orientation.ToString() + ", stackPos: " + stackPos + "}";
 	}
 
+	public bool IsCrushable { get { return CrushWeight != int.MaxValue; } }
+
 	//Creates a deep copy
 	public ChipMeta Copy ()
 	{
