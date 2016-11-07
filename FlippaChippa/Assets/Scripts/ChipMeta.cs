@@ -10,7 +10,7 @@ public class ChipMeta {
 	public bool isOrientationImportant;
 	public int stackPos;	//Position from the bottom of stack. Pos 0 is the bottom chip
 	public float Height;
-	public int CrushWeight = int.MaxValue;
+	public int CrushWeight = 0;
 	public int Weight = 1;	//Shouldn't be changeable now	
 
 	public ChipMeta(int prefabId, ChipOrientation orientation, bool isOrientationImportant, int stackPos, float height) : 
@@ -38,7 +38,7 @@ public class ChipMeta {
 		return "{prefabId: " + prefabId + ", chipOrientation: " + orientation.ToString() + ", stackPos: " + stackPos + "}";
 	}
 
-	public bool IsCrushable { get { return CrushWeight != int.MaxValue; } }
+	public bool IsCrushable { get { return 0 < CrushWeight; } }
 
 	//Creates a deep copy
 	public ChipMeta Copy ()

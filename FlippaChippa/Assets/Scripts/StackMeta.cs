@@ -130,7 +130,7 @@ public class StackMeta {
 	}
 
 	private bool ShouldCrushChip(int position) {
-		if (position < 0 || chips.Count - 1 < position || chips[position].CrushWeight == int.MaxValue) {
+		if (position < 0 || chips.Count - 1 < position || !chips[position].IsCrushable) {
 			return false;
 		}
 		

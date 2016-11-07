@@ -98,7 +98,7 @@ MonoBehaviour:
     isOrientationImportant: 0
     stackPos: 0
     Height: 0.2
-    CrushWeight: 2147483647
+    CrushWeight: 0
     Weight: 1
   highlightColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1001 &100100000
