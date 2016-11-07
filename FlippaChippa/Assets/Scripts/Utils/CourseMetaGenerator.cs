@@ -11,6 +11,10 @@ public class CourseMetaGenerator
 
 	public static CourseMeta Generate(int size, int nInitFlips, int nFlips, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
+		int[] crushWeights = new int[size];
+		for (int i = 0; i < size; i++) {
+			crushWeights [i] = GenerateCrushWeight (size, 0.8f);
+		}
 		bool[] initFlips = new bool[nInitFlips];
 		for (int i = 0; i < initFlips.Length; i++) {
 			initFlips [i] = Random.value < 0.5f ? true : false;
@@ -19,8 +23,7 @@ public class CourseMetaGenerator
 		for (int i = 0; i < size; i++) {
 			flips [i] = Random.Range (0, size);
 		}
-		CourseMeta meta = new CourseMeta (chipIds, initFlips, flips);
-		return meta;
+		return new CourseMeta (chipIds, crushWeights, initFlips, flips);
 	}
 
 	/**
@@ -62,5 +65,13 @@ public class CourseMetaGenerator
 			}
 		}
 		return true;
+	}
+
+	private static int GenerateCrushWeight(int stackSize, float crushWeightThreshold) {
+		float randomValue = Random.value;
+		if (randomValue > crushWeightThreshold) {
+			return Random.Range (0, stackSize);
+		}
+		return 0;
 	}
 }
