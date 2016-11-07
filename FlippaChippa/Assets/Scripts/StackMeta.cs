@@ -80,6 +80,36 @@ public class StackMeta {
 		}
 		return list;
 	}
+
+	public bool CanMatch(StackMeta other) {
+		if (isTargetStack && ChipCount () > other.ChipCount () ||
+		    other.isTargetStack && other.ChipCount () > ChipCount ()) {
+			return false;
+		}
+
+		Dictionary<int, int> target = isTargetStack ? GetPrefabIdCount () : other.GetPrefabIdCount ();
+		Dictionary<int, int> flippable = isTargetStack ? other.GetPrefabIdCount () : GetPrefabIdCount ();
+
+		foreach (KeyValuePair<int, int> prefabPair in target) {
+			if (flippable [prefabPair.Key] < prefabPair.Value) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	Dictionary<int, int> GetPrefabIdCount() {
+		Dictionary<int, int> dict = new Dictionary<int, int> ();
+		for (int i = 0; i < ChipCount (); i++) {
+			int prefabId = GetChipMetaAt (i).prefabId;
+			if (!dict.ContainsKey(prefabId)) {
+				dict.Add (prefabId, 0);
+			}
+			dict [prefabId] = dict[prefabId] + 1;
+		}
+		return dict;
+	}
 		
 	public bool Matches(StackMeta other) {
 		if (other.chips.Count != chips.Count) {

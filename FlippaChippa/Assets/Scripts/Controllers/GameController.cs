@@ -127,9 +127,10 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 		else if (fcEvent == FCEvent.END) 
 		{
 			bool outOfFlips = statsMeta.NFlips == statsMeta.MaxFlips;
-			if (outOfFlips || stacks.Count == 1) {	//Makes no sense to compare the target stack with multiple stacks
+			if (outOfFlips || stacks.Count == 1 ) {	//Makes no sense to compare the target stack with multiple stacks
+				bool canMatch = stacks [0].Meta.CanMatch (targetStack.Meta);
 				bool stacksMatch = targetStack.Matches (stacks [0]);
-				bool gameIsOver = stacksMatch || outOfFlips;
+				bool gameIsOver = stacksMatch || outOfFlips || !canMatch;
 				if (gameIsOver) {
 					Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
 					Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
