@@ -29,9 +29,10 @@ namespace AssemblyCSharp
 
 			stackGenerator.SetPrefabsManager (prefabsManager);
 			int[] chipIds = new int[]{0,1,5,3,4,5};
+			int[] crushWeights = new int[] { 0, 0, 5, 4, 0, 0};
 			bool[] initFlips = new bool[]{ false, true, false, false, true };
 			int[] targetFlips = new int[]{1,0,0};
-			GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, initFlips, targetFlips);
+			GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, crushWeights, initFlips, targetFlips);
 			targetStack = gamestacks.Target;
 			targetStack.AddListener (this);
 			targetStack.gameObject.SetActive (false);

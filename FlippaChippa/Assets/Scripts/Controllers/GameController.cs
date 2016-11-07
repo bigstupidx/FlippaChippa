@@ -38,9 +38,10 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 		stackGenerator.SetPrefabsManager (prefabsManager);
 		int[] chipIds = ApplicationModel.courseMeta.ChipIDs;
+		int[] crushWeight = ApplicationModel.courseMeta.CrushWeights;
 		bool[] initFlips = ApplicationModel.courseMeta.InitFlips;
 		int[] startFlips = ApplicationModel.courseMeta.Flips;
-		GameStacks gamestacks = stackGenerator.GenerateStacks(chipIds, initFlips, startFlips);
+		GameStacks gamestacks = stackGenerator.GenerateStacks(chipIds, crushWeight, initFlips, startFlips);
 		statsMeta.MaxFlips = gamestacks.MaxFlips + (int)(Mathf.Max(gamestacks.Target.Meta.ChipCount() * statsMeta.DifficultyFactor, 1));
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);

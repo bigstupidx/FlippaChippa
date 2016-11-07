@@ -11,8 +11,12 @@ public class StackGenerator
 		prefabsManager = manager;
 	}
 
-	public GameStacks GenerateStacks(int[] chipPrefabIds, bool[] initFlips, int[] flips) {
+	public GameStacks GenerateStacks(int[] chipPrefabIds, int[] crushWeights, bool[] initFlips, int[] flips) {
 		Chip[] allChips = GetChips (chipPrefabIds);
+		for (int i = 0; i < allChips.Length; i++) {
+			allChips [i].chipMeta.CrushWeight = crushWeights [i];
+		}
+
 		FlipChips (allChips, initFlips);
 
 		StackMeta allChipsStackMeta = CreateStackMeta(allChips);
@@ -96,6 +100,7 @@ public class StackGenerator
 			int prefabId = stackMeta.GetChipMetaAt (i).prefabId;
 			Chip chip = prefabsManager.GetChip (prefabId);
 			stack.Add (chip);
+			chip.chipMeta.CrushWeight = stackMeta.GetChipMetaAt (i).CrushWeight;
 			if (chip.chipMeta.orientation != stackMeta.GetChipMetaAt (i).orientation) {
 				chip.chipMeta.Flip ();
 				chip.transform.localRotation = Quaternion.Euler (180f, 0f, 0f);

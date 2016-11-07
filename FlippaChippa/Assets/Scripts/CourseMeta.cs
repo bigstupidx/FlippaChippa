@@ -13,8 +13,15 @@ public struct CourseMeta
 	private int[] flips;
 	public int[] Flips { get { return flips; } }
 
-	public CourseMeta(int[] chipIDs, bool[] initFlips, int[] flips) {
+	private int[] crushWeights;
+	public int[] CrushWeights { get { return crushWeights; } }
+
+	public CourseMeta(int[] chipIDs, bool[] initFlips, int[] flips) : this(chipIDs, new int[chipIDs.Length], initFlips, flips) {
+	}
+
+	public CourseMeta(int[] chipIDs, int[] crushWeights, bool[] initFlips, int[] flips) {
 		this.chipIDs = chipIDs;
+		this.crushWeights = crushWeights;
 		this.initFlips = initFlips;
 		this.flips = flips;
 	}
