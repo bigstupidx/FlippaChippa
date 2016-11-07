@@ -41,11 +41,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipPrefabs:
-  - {fileID: 11439446, guid: e590061cd76ca4c4aa73192a1c943de6, type: 2}
-  - {fileID: 11474270, guid: a30afc32c4d8e4aeab4a2314536cb999, type: 2}
-  - {fileID: 11449272, guid: b738d6d70c3c145e0acf8a396b8a9f6d, type: 2}
-  - {fileID: 11496814, guid: 74676f73285564837b133798c612faa3, type: 2}
-  - {fileID: 11408492, guid: f61e39b7b43e04e3dbe0442d2d1d3410, type: 2}
+  - {fileID: 114000011456514704, guid: e590061cd76ca4c4aa73192a1c943de6, type: 2}
+  - {fileID: 114000013294633350, guid: a30afc32c4d8e4aeab4a2314536cb999, type: 2}
+  - {fileID: 114000014165362244, guid: b738d6d70c3c145e0acf8a396b8a9f6d, type: 2}
+  - {fileID: 114000014084482770, guid: 74676f73285564837b133798c612faa3, type: 2}
+  - {fileID: 114000012220525242, guid: f61e39b7b43e04e3dbe0442d2d1d3410, type: 2}
   - {fileID: 11490124, guid: df8d24565582444558c28b404425c60e, type: 2}
   - {fileID: 11443564, guid: da128dd5f332e4f419e37e895d3c529b, type: 2}
   - {fileID: 11410436, guid: f60c4af8ff0da492cadf25d65f8e7412, type: 2}
