@@ -71,7 +71,6 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 
 	void Update() {

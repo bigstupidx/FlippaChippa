@@ -47,6 +47,22 @@ public class StackMeta {
 			chip.stackPos = i;
 		}
 
+		CrushChipsMeta crushingChips = CheckForCrushingChips (position);
+		foreach (ChipMeta meta in crushingChips.crushedChips) {
+			RemoveAt (meta.stackPos);
+		}
+		return crushingChips;
+	}
+
+	public CrushChipsMeta CleanupStackForCrushedChips(int position) {
+		CrushChipsMeta crushChipsMeta = CheckForCrushingChips (position);
+		foreach (ChipMeta chipMeta in crushChipsMeta.crushedChips) {
+			RemoveAt (chipMeta.stackPos);
+		}
+		return crushChipsMeta;
+	}
+
+	public CrushChipsMeta CheckForCrushingChips(int position) {
 		List<ChipMeta> crushing = new List<ChipMeta>();
 		List<ChipMeta> falling = new List<ChipMeta> ();
 		int stackPosOfCrushedChip = -1;
@@ -58,10 +74,7 @@ public class StackMeta {
 				falling.Add (chips [i]);
 			}
 		}
-		foreach (ChipMeta meta in crushing) {
-			RemoveAt (meta.stackPos);
-		}
-		return new CrushChipsMeta(crushing, falling);
+		return new CrushChipsMeta (crushing, falling);
 	}
 
 	public static List<ChipMeta> ReverseOrderAt(int position, List<ChipMeta> list) {

@@ -22,13 +22,13 @@ public class Faller : MonoBehaviour, FCEventListener
 		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager>();
 		observable = new FCObservable ();
 		movers = new List<Mover> ();
+		scaler = GetComponent<Scaler> ();
+		scaler.AddListener (this, FCEvent.END);
 	}
 		
 	// Use this for initialization
 	void Start ()
 	{
-		scaler = GetComponent<Scaler> ();
-		scaler.AddListener (this, FCEvent.END);
 	}
 
 	public void CreateMoverFor(Transform moverParent, Transform tTransform, Vector3 startPosition, Vector3 endPosition) {

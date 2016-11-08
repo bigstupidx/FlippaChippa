@@ -20,12 +20,12 @@ public class Scaler : MonoBehaviour
 	void Awake() {
 		observable = new FCObservable ();
 		maxtime = 2 * Mathf.PI * nTops;
+		initalScale = transform.localScale;
 	}
 
 	// Use this for initialization
 	void Start ()
 	{
-		initalScale = transform.localScale;
 	}
 	
 	// Update is called once per frame

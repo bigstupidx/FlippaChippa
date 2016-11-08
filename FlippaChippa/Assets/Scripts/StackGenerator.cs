@@ -20,6 +20,7 @@ public class StackGenerator
 		FlipChips (allChips, initFlips);
 
 		StackMeta allChipsStackMeta = CreateStackMeta(allChips);
+		allChipsStackMeta.CleanupStackForCrushedChips (0);
 		Stack startStack = CreateStackFrom (allChipsStackMeta);
 		startStack.gameObject.tag = Tags.STACK;
 		startStack.transform.position = Vector3.right * 2f;
