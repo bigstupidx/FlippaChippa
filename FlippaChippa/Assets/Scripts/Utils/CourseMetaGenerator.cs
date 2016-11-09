@@ -13,7 +13,7 @@ public class CourseMetaGenerator
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
 		for (int i = 0; i < size; i++) {
-			crushWeights [i] = GenerateCrushWeight (size, 0.8f);
+			crushWeights [i] = GenerateCrushWeight (size, size - i, 0.8f);
 		}
 		bool[] initFlips = new bool[nInitFlips];
 		for (int i = 0; i < initFlips.Length; i++) {
@@ -67,10 +67,10 @@ public class CourseMetaGenerator
 		return true;
 	}
 
-	private static int GenerateCrushWeight(int stackSize, float crushWeightThreshold) {
+	private static int GenerateCrushWeight(int maxCrushWeight, int minCrushWeight, float crushWeightThreshold) {
 		float randomValue = Random.value;
 		if (randomValue > crushWeightThreshold) {
-			return Random.Range (0, stackSize);
+			return Random.Range (minCrushWeight, maxCrushWeight);
 		}
 		return 0;
 	}
