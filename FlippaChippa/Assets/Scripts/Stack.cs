@@ -11,6 +11,8 @@ public class Stack : MonoBehaviour, FCEventListener
 	public Flipper flipper;
 	public Faller faller;
 	public bool IsTargetStack;
+	public MJParticleExplosion chipParticlesPrefab;
+	List<MJParticleExplosion> explosions;
 
 	private CrushChipsMeta crushChipsMeta;
 	List<Chip> crushedChips = new List<Chip> ();
@@ -18,6 +20,7 @@ public class Stack : MonoBehaviour, FCEventListener
 
 	void Awake() {
 		meta = new StackMeta ();
+		explosions = new List<MJParticleExplosion> ();
 	}
 
 	// Use this for initialization
@@ -131,12 +134,29 @@ public class Stack : MonoBehaviour, FCEventListener
 			chipToCrush.transform.parent = null;
 			//Create and start a particle system
 			crushedChips.RemoveAt (0);
+			Vector3 chipLocation = chipToCrush.transform.position;
+			MJParticleExplosion explosion = GetParticleExplosion ();
+			Color chipColor = chipToCrush.GetMainColor ();
+			explosion.Explode (chipLocation, chipColor, chipColor);
 			DestroyImmediate (chipToCrush.gameObject);
 		}
 		crushChipsMeta = new CrushChipsMeta ();
 		crushedChips.Clear ();
 		fallingChips.Clear ();
 		faller.StartFalling ();
+	}
+
+	private MJParticleExplosion GetParticleExplosion() {
+		foreach (MJParticleExplosion explosion in explosions) {
+			if (!explosion.gameObject.activeSelf) {
+				explosion.gameObject.SetActive (true);
+				return explosion;
+			}
+		}
+
+		MJParticleExplosion expl = Instantiate<MJParticleExplosion>(chipParticlesPrefab);
+		explosions.Add (expl);
+		return expl;
 	}
 
 	private float GetCorrectVerticalPosition(Chip chip) {

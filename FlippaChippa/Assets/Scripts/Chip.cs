@@ -94,5 +94,15 @@ public class Chip : MonoBehaviour {
 		continueFadeOnCompletion = false;
 		StartFade ();
 	}
+
+	public Color GetMainColor() {
+		Material material = gameObject.GetComponent<Renderer> ().material;
+		Color materialColor = material.color;
+		Texture2D albedoTexture = (Texture2D)material.mainTexture;
+		if (albedoTexture != null) {
+			materialColor = albedoTexture.GetPixel (20, 20);
+		}
+		return materialColor;
+	}
 }
 

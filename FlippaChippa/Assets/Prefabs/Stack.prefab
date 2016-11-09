@@ -41,7 +41,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipper: {fileID: 0}
+  faller: {fileID: 0}
   IsTargetStack: 0
+  chipParticlesPrefab: {fileID: 114000013095765960, guid: 317207706a8c35240b5e05a489ab370d,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
