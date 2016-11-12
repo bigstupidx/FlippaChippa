@@ -138,7 +138,8 @@ public class Stack : MonoBehaviour, FCEventListener
 			MJParticleExplosion explosion = GetParticleExplosion ();
 			Color chipColor = chipToCrush.GetMainColor ();
 			explosion.Explode (chipLocation, chipColor, chipColor);
-			DestroyImmediate (chipToCrush.gameObject);
+			chipToCrush.gameObject.SetActive (false);
+			Destroy (chipToCrush.gameObject);
 		}
 		crushChipsMeta = new CrushChipsMeta ();
 		crushedChips.Clear ();
