@@ -50,6 +50,7 @@ public class Faller : MonoBehaviour, FCEventListener
 			mover.gameObject.SetActive (false);
 			mover.transform.parent = prefabsManager.transform;
 		}
+		movers.Clear ();
 	}
 
 	public void StartFalling() {
