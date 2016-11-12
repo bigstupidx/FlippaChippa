@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	private CameraController cameraController;
 	private StackGenerator stackGenerator;
 	private PrefabsManager prefabsManager;
-	private Blur blur;
+	private BlurOptimized blur;
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
@@ -33,7 +33,8 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 		stackGenerator = new StackGenerator ();
 		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
-		blur = cameraController.GetComponent<Blur> ();
+
+		blur = cameraController.GetComponent<BlurOptimized> ();
 		blur.enabled = false;
 
 		stackGenerator.SetPrefabsManager (prefabsManager);
