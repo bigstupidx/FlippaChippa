@@ -47,7 +47,7 @@ public class Stack : MonoBehaviour, FCEventListener
 	}
 
 	public void FlipAt(int position) {
-		if (flipper.IsFlipping) {	//Extra insurance that the meta stack won't be flipped when the flipper isn't finished
+		if (flipper.IsFlipping || faller.IsFalling) {	//Extra insurance that the meta stack won't be flipped when the flipper isn't finished
 			return;
 		}
 

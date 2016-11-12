@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void ShowNextStack() {
-		if (IsFlippingStack ()) {
+		if (IsAnimatingStack ()) {
 			return;
 		}
 		int intendedNextStack = indexOfVisibleStack + 1;
@@ -180,7 +180,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void ShowPreviousStack() {
-		if (IsFlippingStack ()) {
+		if (IsAnimatingStack ()) {
 			return;
 		}
 
@@ -208,9 +208,9 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 		}
 	}
 
-	private bool IsFlippingStack () {
+	private bool IsAnimatingStack () {
 		foreach (Stack stack in stacks) {
-			if (stack.flipper.IsFlipping) {
+			if (stack.flipper.IsFlipping || stack.faller.IsFalling) {
 				return true;
 			}
 		}
