@@ -29,7 +29,7 @@ public class MenuController : MonoBehaviour {
 			StreamReader reader = File.OpenText (filePath);
 			string json = reader.ReadToEnd ();
 			ApplicationModel.statistics = JsonUtility.FromJson<Statistics> (json);
-			Debug.Log("statistics: " + ApplicationModel.statistics.ToString());
+			Debug.LogFormat("statistics: {0}", ApplicationModel.statistics.ToString());
 		} else {
 			ApplicationModel.statistics = new Statistics ();
 		}
@@ -43,7 +43,6 @@ public class MenuController : MonoBehaviour {
 				ApplicationModel.achievements = achievements;
 			});
 		} catch (NullReferenceException e) {
-			Debug.Log (e);
 		}
 		#else
 		ApplicationModel.achievements = new IAchievement[0];

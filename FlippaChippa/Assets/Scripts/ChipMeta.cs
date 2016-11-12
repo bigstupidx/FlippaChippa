@@ -35,7 +35,14 @@ public class ChipMeta {
 	}
 
 	public string ToStringShort() {
-		return "{prefabId: " + prefabId + ", chipOrientation: " + orientation.ToString() + ", stackPos: " + stackPos + "}";
+		return string.Format ("{{id: {0}, orientation: {1}, important: {2}, crushWeight: {3}, weight: {4}, stackPos: {5}}}"
+			, prefabId
+			, orientation
+			, isOrientationImportant
+			, CrushWeight
+			, Weight
+			,stackPos
+		);
 	}
 
 	public bool IsCrushable { get { return 0 < CrushWeight; } }

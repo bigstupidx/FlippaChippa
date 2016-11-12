@@ -31,7 +31,7 @@ public class AchievementRules
 
 	public static void HandleAchievements(SingleGameStatsMeta statsMeta, StackMeta stackMeta) {
 		if (ApplicationModel.achievements == null) {
-			Debug.Log ("The achievements hasn't been retrieved. This indicated that the player hasn't signed in using google play games services");
+			Debug.Log ("<color=blue>The achievements hasn't been retrieved. This indicated that the player hasn't signed in using google play games services</color>");
 			return;
 		}
 		#if UNITY_ANDROID || UNITY_IOS

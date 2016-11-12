@@ -66,8 +66,6 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 		foreach (Stack stack in stacks) {
 			stack.AddListener (this);
 		}
-		Debug.Log ("stacks: " + stacks);
-		Debug.Log ("Target stack: " + targetStack);
 	}
 
 	// Use this for initialization
@@ -79,7 +77,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void PauseGame() {
-		Debug.Log ("Pausing game");
+		Debug.Log ("<color=purple>Pausing game</color>");
 		Time.timeScale = 0;
 		pauseMenu.SetNTargetChecks (statsMeta.NTargetChecks);
 		pauseMenu.SetTime (statsMeta.Time);
@@ -90,7 +88,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void ResumeGame() {
-		Debug.Log ("Resuming game");
+		Debug.Log ("<color=purple>Resuming game</color>");
 		Time.timeScale = 1;
 		hud.gameObject.SetActive (true);
 		pauseMenu.gameObject.SetActive (false);
@@ -99,6 +97,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void RestartGame() {
+		Debug.Log ("<color=purple>Restarting game</color>");
 		Time.timeScale = 1;
 		ApplicationModel.statistics.AbortStreak ();
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
@@ -134,8 +133,6 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 				bool stacksMatch = targetStack.Matches (stacks [0]);
 				bool gameIsOver = stacksMatch || outOfFlips || !canMatch;
 				if (gameIsOver) {
-					Debug.Log ("targetStack: " + targetStack.Meta.ToStringShort ());
-					Debug.Log ("clickable stack: " + stacks [0].Meta.ToStringShort ());
 					blur.enabled = true;
 					gameInputController.enabled = false;
 					hud.gameObject.SetActive (false);

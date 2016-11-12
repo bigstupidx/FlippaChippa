@@ -39,7 +39,7 @@ public class Stack : MonoBehaviour, FCEventListener
 	public void FlipAt(GameObject gameObject) {
 		Chip chipSelected = gameObject.GetComponent<Chip> ();
 		if (chipSelected == null) {
-			Debug.Log ("The selected gameobject isn't a chip. Will therefore not flip anything it.");
+			Debug.Log ("<color=red>The selected gameobject isn't a chip. Will therefore not flip anything it.</color>");
 			return;
 		}
 
@@ -59,8 +59,7 @@ public class Stack : MonoBehaviour, FCEventListener
 		crushChipsMeta = meta.FlipStackAt (position);
 		flipper.Flip (chipsToFlip, transform);
 
-		Debug.Log ("Flipping at: " + position);
-		Debug.Log (meta.ToStringShort ());
+		Debug.LogFormat ("<color=yellow>Flipping at {0}.</color> Updated stack: {1})", position, meta.ToStringShort ());
 	}
 
 	public void AddListener(FCEventListener listener) {
@@ -82,9 +81,6 @@ public class Stack : MonoBehaviour, FCEventListener
 		chip.transform.SetParent (transform);
 		float yPos = GetCurrentMaxHeight () + chip.chipMeta.Height / 2f;
 		chip.transform.localPosition = new Vector3 (0f, yPos, 0f);
-		Debug.Log ("currentMaxHeight: " + GetCurrentMaxHeight());
-		Debug.Log ("chip.ChipMeta.Height / 2: " + chip.chipMeta.Height / 2f);
-		Debug.Log ("Meta.count: " + Meta.ChipCount ());	
 	}
 
 	private float GetCurrentMaxHeight() {

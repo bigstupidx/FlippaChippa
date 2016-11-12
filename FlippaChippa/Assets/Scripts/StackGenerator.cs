@@ -41,6 +41,10 @@ public class StackGenerator
 			GameObject.Destroy (chip.gameObject);
 		}
 
+		Debug.Log ("<color=green>--- Stack Generation Start ---</color>");
+		Debug.LogFormat ("start stack: {0}", startStack.Meta.ToStringShort ());
+		Debug.LogFormat ("target stack: {0}", targetStack.Meta.ToStringShort ());
+		Debug.Log ("<color=green>--- Stack Generation end ---</color>");
 		return new GameStacks (targetStack, startStack, nFlips);
 	}
 
@@ -73,7 +77,7 @@ public class StackGenerator
 
 	private void FlipChips(Chip[] chips, bool[] flips) {
 		if (flips.Length != chips.Length) {
-			Debug.Log ("The flips-array has a different length than the chips-array");
+			Debug.Log ("<color=red>The flips-array has a different length than the chips-array</color>");
 		}
 		int end = Math.Min (chips.Length, flips.Length);
 		for (int i = 0; i < end; i++) {

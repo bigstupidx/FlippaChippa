@@ -147,10 +147,10 @@ public class StackMeta {
 	}
 
 	public string ToStringShort() {
-		string output = "[";
+		string output = "size: " + ChipCount() + ", isTarget: " + isTargetStack + ", chips: [";
 		for (int i = 0; i < chips.Count; i++) {
 			ChipMeta chip = chips [i];
-			output += chip.ToStringShort ();
+			output += "\n" + chip.ToStringShort ();
 			if (i != chips.Count - 1) {
 				output += ", ";
 			}

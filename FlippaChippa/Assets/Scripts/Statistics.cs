@@ -20,22 +20,29 @@ public class Statistics
 	}
 		
 	public override string ToString() {
-		return "Total games: " + TotalGames() + ", Total flips: " + totalFlips + ", Total Target Checks: " + totalTargetChecks + ", Total Time: " + totalTime + ", Best streak: " + bestStreakCount;
+		//return "Total games: " + TotalGames() + ", Total flips: " + totalFlips + ", Total Target Checks: " + totalTargetChecks + ", Total Time: " + totalTime + ", Best streak: " + bestStreakCount;
+		return string.Format("Total games: {0}, Total flips: {1}, Total Target Checks: {2}, Total Time: {3}, Best Streak: {4}"
+			, TotalGames()
+			, totalFlips
+			, totalTargetChecks
+			, totalTime
+			, bestStreakCount
+		);
 	}
 
 	public int CurrentStreakCount { get { return currentStreakCount; } }
 
 	public void AbortStreak() {
-		Debug.Log ("Aborting the streak that was " + currentStreakCount);
+		Debug.LogFormat ("<color=green>Aborting the streak that was {0}</color>", currentStreakCount);
 		currentStreakCount = 0;
 	}
 
 	public int IncreaseStreakCount() {
 		currentStreakCount++;
-		Debug.Log ("Current streak is " + currentStreakCount);
+		Debug.LogFormat ("<color=green>Current streak is {0}</color>", currentStreakCount);
 		if (currentStreakCount > bestStreakCount) {
 			bestStreakCount = currentStreakCount;
-			Debug.Log ("New best streak count record is " + bestStreakCount);
+			Debug.LogFormat ("<color=yellow>New best streak count record is {0}</color>", bestStreakCount);
 		}
 		return currentStreakCount;
 	}
