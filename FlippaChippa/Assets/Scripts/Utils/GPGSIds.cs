@@ -24,13 +24,15 @@
 
 public static class GPGSIds
 {
-        public const string achievement_speedster = "CgkI6Yqw0OMXEAIQBA"; // <GPGSID>
-        public const string achievement_mega_fan = "CgkI6Yqw0OMXEAIQAw"; // <GPGSID>
-        public const string achievement_eidetic_memory = "CgkI6Yqw0OMXEAIQBg"; // <GPGSID>
-        public const string achievement_brainiac = "CgkI6Yqw0OMXEAIQBQ"; // <GPGSID>
-        public const string achievement_newbie = "CgkI6Yqw0OMXEAIQAQ"; // <GPGSID>
         public const string achievement_lucky_duck = "CgkI6Yqw0OMXEAIQBw"; // <GPGSID>
+        public const string achievement_speedster = "CgkI6Yqw0OMXEAIQBA"; // <GPGSID>
+        public const string achievement_eidetic_memory = "CgkI6Yqw0OMXEAIQBg"; // <GPGSID>
+        public const string achievement_completion_streak = "CgkI6Yqw0OMXEAIQCQ"; // <GPGSID>
+        public const string achievement_mega_fan = "CgkI6Yqw0OMXEAIQAw"; // <GPGSID>
+        public const string achievement_newbie = "CgkI6Yqw0OMXEAIQAQ"; // <GPGSID>
         public const string achievement_fanish = "CgkI6Yqw0OMXEAIQAg"; // <GPGSID>
+        public const string achievement_close_call = "CgkI6Yqw0OMXEAIQCA"; // <GPGSID>
+        public const string achievement_brainiac = "CgkI6Yqw0OMXEAIQBQ"; // <GPGSID>
 
 }
 

@@ -99,11 +99,13 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	public void RestartGame() {
 		Time.timeScale = 1;
+		ApplicationModel.statistics.AbortStreak ();
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}
 
 	public void GoToMenu() {
 		Time.timeScale = 1;
+		ApplicationModel.statistics.AbortStreak ();
 		SceneManager.LoadScene (Scenes.MAIN_MENU);
 	}
 
@@ -144,9 +146,11 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 					if (targetStack.Matches (stacks [0])) {
 						gameOverMenu.SetTitle ("Success!");
 						statsMeta.SuccessfullGame = true;
+						ApplicationModel.statistics.IncreaseStreakCount ();
 					} else {
 						gameOverMenu.SetTitle ("Oh...");
 						statsMeta.SuccessfullGame = false;
+						ApplicationModel.statistics.AbortStreak ();
 					}
 					ApplicationModel.statistics.RegisterCompletedGame (statsMeta);
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;

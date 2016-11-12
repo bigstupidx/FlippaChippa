@@ -21,6 +21,14 @@ public class AchievementRules
 		return successfull && checks == 1 && stackSize >= 8;
 	}
 
+	public static bool IsCloseCallAccomplished(bool successfull, int flipsLeft) {
+		return successfull && flipsLeft == 0;
+	}
+
+	public static bool IsCompletionStreakAccomplished(int streak) {
+		return 5 <= streak;
+	}
+
 	public static void HandleAchievements(SingleGameStatsMeta statsMeta, StackMeta stackMeta) {
 		if (ApplicationModel.achievements == null) {
 			Debug.Log ("The achievements hasn't been retrieved. This indicated that the player hasn't signed in using google play games services");
@@ -100,6 +108,24 @@ public class AchievementRules
 					Debug.Log("Successfully sett the eidetic memory achievement"); 
 				} else {
 					//Store locally
+				}
+			});
+		}
+
+		IAchievement closeCall = ApplicationModel.GetAchievement(GPGSIds.achievement_close_call);
+		if (!closeCall.completed && IsCloseCallAccomplished(statsMeta.SuccessfullGame, statsMeta.MaxFlips -  statsMeta.NFlips)) {
+			Social.ReportProgress (GPGSIds.achievement_close_call, 100f, (bool success) => {
+				if (success) {
+					Debug.Log("Successfully set the close call achievement");
+				}
+			});
+		}
+
+		IAchievement completionStreak = ApplicationModel.GetAchievement(GPGSIds.achievement_completion_streak);
+		if (!completionStreak.completed && IsCompletionStreakAccomplished(ApplicationModel.statistics.CurrentStreakCount)) {
+			Social.ReportProgress(GPGSIds.achievement_completion_streak, 100f, (bool success) => {
+				if (success) {
+					Debug.Log("Successfully set the completion streak achievement");
 				}
 			});
 		}

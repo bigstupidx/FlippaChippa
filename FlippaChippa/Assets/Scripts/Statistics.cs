@@ -4,19 +4,42 @@ using UnityEngine;
 [Serializable]
 public class Statistics
 {
+	//To be stored between app-session
 	public int totalFlips;
 	public int totalTargetChecks;
 	public float totalTime;
 	public int totalSuccessfullGames;
 	public int totalFailedGames;
+	public int bestStreakCount;
+
+	//Per app-session
+	private int currentStreakCount;
 
 	public Statistics ()
 	{
 	}
 		
-	public string ToString() {
-		return "Total games: " + TotalGames() + ", Total flips: " + totalFlips + ", Total Target Checks: " + totalTargetChecks + ", Total Time: " + totalTime;
+	public override string ToString() {
+		return "Total games: " + TotalGames() + ", Total flips: " + totalFlips + ", Total Target Checks: " + totalTargetChecks + ", Total Time: " + totalTime + ", Best streak: " + bestStreakCount;
 	}
+
+	public int CurrentStreakCount { get { return currentStreakCount; } }
+
+	public void AbortStreak() {
+		Debug.Log ("Aborting the streak that was " + currentStreakCount);
+		currentStreakCount = 0;
+	}
+
+	public int IncreaseStreakCount() {
+		currentStreakCount++;
+		Debug.Log ("Current streak is " + currentStreakCount);
+		if (currentStreakCount > bestStreakCount) {
+			bestStreakCount = currentStreakCount;
+			Debug.Log ("New best streak count record is " + bestStreakCount);
+		}
+		return currentStreakCount;
+	}
+
 
 	public void RegisterCompletedGame(SingleGameStatsMeta stats) {
 		totalFlips += stats.NFlips;
@@ -27,6 +50,10 @@ public class Statistics
 		} else {
 			totalFailedGames++;
 		}
+	}
+
+	public int BestStreakCount() { 
+		return bestStreakCount; 
 	}
 
 	public int TotalGames() { return totalSuccessfullGames + totalFailedGames; }
