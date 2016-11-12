@@ -138,6 +138,9 @@ public class StackMeta {
 			if (thisChip.isOrientationImportant && thisChip.orientation != otherChip.orientation) {
 				return false;
 			}
+			if (thisChip.CrushWeight != otherChip.CrushWeight) {
+				return false;
+			}
 		}
 
 		return true;
