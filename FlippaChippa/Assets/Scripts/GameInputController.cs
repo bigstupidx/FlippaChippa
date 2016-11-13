@@ -29,6 +29,15 @@ public class GameInputController : MonoBehaviour {
 				dragPhase = true;
 			}
 			inputPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
+		} else {
+			if (Input.GetMouseButtonDown(0)) {
+				downPhase = true;
+			} else if (Input.GetMouseButtonUp(0)) {
+				upPhase = true;
+			} else if (Input.GetMouseButton(0)){
+				dragPhase = true;
+			}
+			inputPosition = Input.mousePosition;
 		}
 		#else
 		if (Input.GetMouseButtonDown(0)) {

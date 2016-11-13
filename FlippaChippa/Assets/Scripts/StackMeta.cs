@@ -95,21 +95,58 @@ public class StackMeta {
 	}
 
 	public bool CanMatch(StackMeta other) {
-		if (isTargetStack && ChipCount () > other.ChipCount () ||
-		    other.isTargetStack && other.ChipCount () > ChipCount ()) {
+		StackMeta targetStack = isTargetStack ? this : other;
+		StackMeta flippableStack = isTargetStack ? other : this;
+		
+		if (targetStack.ChipCount () > flippableStack.ChipCount ()) {
 			return false;
 		}
 
-		Dictionary<int, int> target = isTargetStack ? GetPrefabIdCount () : other.GetPrefabIdCount ();
-		Dictionary<int, int> flippable = isTargetStack ? other.GetPrefabIdCount () : GetPrefabIdCount ();
-
-		foreach (KeyValuePair<int, int> prefabPair in target) {
-			if (flippable [prefabPair.Key] < prefabPair.Value) {
+		Dictionary<string, int> target = targetStack.MapByIdAndCrushWeight();
+		Dictionary<string, int> flippable = flippableStack.MapByIdAndCrushWeight();
+		foreach (KeyValuePair<string, int> prefabPair in target) {
+			if (flippable[prefabPair.Key] < prefabPair.Value) {
 				return false;
 			}
 		}
 
+		if (flippableStack.ChipCount() > targetStack.ChipCount()) {
+			for (int i = 0; i < flippableStack.ChipCount(); i++) {
+				ChipMeta chipMeta = flippableStack.GetChipMetaAt(i);
+				if (chipMeta.IsCrushable && flippableStack.ChipCount() <= chipMeta.CrushWeight 
+						&& !target.ContainsKey(StringifyChipMeta(chipMeta))) {
+					return false;
+				}
+			}
+		}
+
 		return true;
+	}
+
+	int CountChipsWithCrushWeight(int crushWeight, List<ChipMeta> chips) {
+		int sum = 0; 
+		foreach (ChipMeta meta in chips) {
+			if (meta.CrushWeight == crushWeight) {
+				sum++;
+			}
+		}
+		return sum;
+	}
+
+	Dictionary<string, int> MapByIdAndCrushWeight() {
+		Dictionary<string, int> dict = new Dictionary<string, int>();
+		for (int i = 0; i < ChipCount(); i++) {
+			string key = StringifyChipMeta(GetChipMetaAt(i));
+			if (!dict.ContainsKey(key)) {
+				dict.Add(key, 0);
+			}
+			dict[key]++;
+		}
+		return dict;
+	}
+
+	string StringifyChipMeta(ChipMeta meta) {
+		return string.Format("{0}#{1}", meta.prefabId, meta.CrushWeight);
 	}
 
 	Dictionary<int, int> GetPrefabIdCount() {
