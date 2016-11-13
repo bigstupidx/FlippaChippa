@@ -7,7 +7,7 @@ public class Chip : MonoBehaviour {
 	public ChipMeta chipMeta;
 
 	private bool doFade;	//any kind of fading is in progress
-	private bool continueFadeOnCompletion;
+	private bool continueFadeOnCompletion, singleHighlight;
 	private Color fromColor, toColor;
 	private float duration, elapsedTime;	//current fade duration and elapsed time
 
@@ -48,6 +48,9 @@ public class Chip : MonoBehaviour {
 			if (elapsedTime > duration) {
 				if (continueFadeOnCompletion) {
 					StartNextFade ();
+				} else if (singleHighlight) {
+					elapsedTime = 0f;
+					UnHighlight(duration);
 				} else {
 					doFade = false;
 					material.SetColor ("_EmissionColor", standardColor);
@@ -72,6 +75,15 @@ public class Chip : MonoBehaviour {
 		doFade = true;
 	}
 
+	public void HighlightOnce(float totalDuration) {
+		duration = totalDuration / 2;
+		fromColor = standardColor;
+		toColor = highlightColor;
+		continueFadeOnCompletion = false;
+		singleHighlight = true;
+		StartFade();
+	}
+
 	public void Highlight(float fadeDuration) {
 		duration = fadeDuration;
 		fromColor = standardColor;
@@ -92,6 +104,7 @@ public class Chip : MonoBehaviour {
 		toColor = standardColor;
 
 		continueFadeOnCompletion = false;
+		singleHighlight = false;
 		StartFade ();
 	}
 

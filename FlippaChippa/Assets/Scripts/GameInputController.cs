@@ -55,6 +55,13 @@ public class GameInputController : MonoBehaviour {
 				if (chip != null) {
 					chip.Highlight (highlightDuration);
 					downChip = chip;
+					Stack parentStack = downChip.transform.parent.GetComponent<Stack>();
+					if (parentStack != null) {
+						ChipListHighligter highlighter = parentStack.GetComponent<ChipListHighligter>();
+						if (highlighter != null) {
+							highlighter.Stop();
+						}
+					}
 				}
 			}
 		} else if (upPhase) {

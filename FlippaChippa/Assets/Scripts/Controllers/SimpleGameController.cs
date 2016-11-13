@@ -29,6 +29,7 @@ namespace AssemblyCSharp
 			demoStack = gamestacks.Player;
 			demoStack.AddListener(this);
 			demoStack.transform.position = new Vector3(0, 0.4f, 0);
+			demoStack.gameObject.AddComponent(typeof(ChipListHighligter));
 		}
 
 		// Use this for initialization
@@ -46,6 +47,9 @@ namespace AssemblyCSharp
 
 		public void OnEvent (FCEvent fcEvent, GameObject gameObject)
 		{
+			if (fcEvent == FCEvent.BEGIN) {
+				demoStack.GetComponent<ChipListHighligter>().Stop();
+			}
 		}
 
 		#endregion
