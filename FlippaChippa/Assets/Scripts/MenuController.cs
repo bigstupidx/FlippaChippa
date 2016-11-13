@@ -50,6 +50,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	void Update() {
+		#if UNITY_ANDROID || UNITY_IOS
 		if (!Social.localUser.authenticated) {
 			achievementsButton.interactable = false;
 			achievementIcon.color = new Color (achievementIcon.color.r, achievementIcon.color.g, achievementIcon.color.b, 0.5f);
@@ -57,6 +58,10 @@ public class MenuController : MonoBehaviour {
 			achievementsButton.interactable = true;
 			achievementIcon.color = new Color (achievementIcon.color.r, achievementIcon.color.g, achievementIcon.color.b, 1f);
 		}
+		#else
+		achievementsButton.interactable = false;
+		achievementIcon.color = new Color (achievementIcon.color.r, achievementIcon.color.g, achievementIcon.color.b, 0.5f);
+		#endif
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct
