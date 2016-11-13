@@ -180,6 +180,9 @@ public class Stack : MonoBehaviour, FCEventListener
 
 	}
 
+	public bool IsAnimating() {
+		return flipper.IsFlipping || faller.IsFalling;
+	}
 
 }
 

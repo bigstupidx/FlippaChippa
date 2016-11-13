@@ -1,20 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityStandardAssets.ImageEffects;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine.SocialPlatforms;
-using GooglePlayGames;
 
 namespace AssemblyCSharp
 {
 	public class SimpleGameController : MonoBehaviour, FCEventListener, LandingListener
 	{
-		private Stack targetStack;
-		private List<Stack> stacks;
-
+		private Stack demoStack;
+		private GameStacks gamestacks;
 		private int indexOfVisibleStack = 0;
 
 		public GameInputController gameInputController;
@@ -32,22 +23,18 @@ namespace AssemblyCSharp
 			int[] crushWeights = new int[] { 0, 0, 5, 4, 0, 0};
 			bool[] initFlips = new bool[]{ false, true, false, false, true };
 			int[] targetFlips = new int[]{1,0,0};
-			GameStacks gamestacks = stackGenerator.GenerateStacks (chipIds, crushWeights, initFlips, targetFlips);
-			targetStack = gamestacks.Target;
-			targetStack.AddListener (this);
-			targetStack.gameObject.SetActive (false);
+			gamestacks = stackGenerator.GenerateStacks (chipIds, crushWeights, initFlips, targetFlips);
+			gamestacks.Target.gameObject.SetActive(false);
 
-			stacks = new List<Stack> ();
-			stacks.Add (gamestacks.Player);
-			foreach (Stack stack in stacks) {
-				stack.AddListener (this);
-			}
+			demoStack = gamestacks.Player;
+			demoStack.AddListener(this);
+			demoStack.transform.position = new Vector3(0, 0.4f, 0);
 		}
 
 		// Use this for initialization
 		void Start () {
 			ResumeGame ();
-			stacks [0].transform.position = new Vector3(0, 0.4f, 0);
+			Destroy(gamestacks.Target.gameObject);
 		}
 
 		public void ResumeGame() {
@@ -59,33 +46,15 @@ namespace AssemblyCSharp
 
 		public void OnEvent (FCEvent fcEvent, GameObject gameObject)
 		{
-			if (fcEvent == FCEvent.END) 
-			{
-			}
 		}
 
 		#endregion
-
-		private int TotalNumberOfStacks() {
-			return stacks.Count + 1;
-		}
-
-		private bool IsFlippingStack () {
-			foreach (Stack stack in stacks) {
-				if (stack.flipper.IsFlipping) {
-					return true;
-				}
-			}
-			return false;
-		}
 
 		#region LandingListener implementation
 
 		public void AddLandingListener (FCEventListener listener, FCEvent fcEvent)
 		{
-			foreach (Stack stack in stacks) {
-				stack.AddLandingListener (listener, fcEvent);
-			}
+			demoStack.AddLandingListener (listener, fcEvent);
 		}
 
 		#endregion
