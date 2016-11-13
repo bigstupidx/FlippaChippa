@@ -18,7 +18,7 @@ public class GameInputController : MonoBehaviour {
 		bool upPhase = false, downPhase = false, dragPhase = false;
 		Vector3 inputPosition = Vector3.zero;
 
-		#if UNITY_ANDROID
+		#if UNITY_ANDROID || UNITY_IOS
 		if (Input.touches.Length > 0) {
 			TouchPhase phase = Input.GetTouch(0).phase;
 			if (phase == TouchPhase.Began) {
@@ -30,10 +30,7 @@ public class GameInputController : MonoBehaviour {
 			}
 			inputPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
 		}
-		#endif
-
-
-		#if UNITY_EDITOR
+		#else
 		if (Input.GetMouseButtonDown(0)) {
 			downPhase = true;
 		} else if (Input.GetMouseButtonUp(0)) {
