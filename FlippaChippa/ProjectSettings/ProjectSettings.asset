@@ -170,7 +170,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Dev/flipsort.keystore
+  AndroidKeystoreName: /Users/magnus/Dev/FlippaDaChippa_entire_project/Resources/Other/flipsort.keystore
   AndroidKeyaliasName: gamesalajerre
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
