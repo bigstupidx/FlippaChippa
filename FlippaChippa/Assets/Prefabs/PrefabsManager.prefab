@@ -41,19 +41,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipPrefabs:
-  - {fileID: 114000011456514704, guid: e590061cd76ca4c4aa73192a1c943de6, type: 2}
-  - {fileID: 114000013294633350, guid: a30afc32c4d8e4aeab4a2314536cb999, type: 2}
-  - {fileID: 114000014165362244, guid: b738d6d70c3c145e0acf8a396b8a9f6d, type: 2}
-  - {fileID: 114000014084482770, guid: 74676f73285564837b133798c612faa3, type: 2}
-  - {fileID: 114000012220525242, guid: f61e39b7b43e04e3dbe0442d2d1d3410, type: 2}
-  - {fileID: 11490124, guid: df8d24565582444558c28b404425c60e, type: 2}
-  - {fileID: 11443564, guid: da128dd5f332e4f419e37e895d3c529b, type: 2}
-  - {fileID: 11410436, guid: f60c4af8ff0da492cadf25d65f8e7412, type: 2}
-  - {fileID: 11415952, guid: 616ad1fd8942e414d885849a2d63c650, type: 2}
-  - {fileID: 11431100, guid: d355ce621c279462a9f8996855dc4ef7, type: 2}
-  - {fileID: 11478000, guid: 13c4939ac889b40a2b9bdcd1e07e58ea, type: 2}
-  - {fileID: 11456758, guid: e8056881987df4bc69bae6887e6a5042, type: 2}
-  - {fileID: 11460670, guid: d12619a94b0614c3194b5b5254667a25, type: 2}
+  - {fileID: 114000011185447294, guid: 03647293df8c549c1aeefe03e494b6dd, type: 2}
+  - {fileID: 114000013348410402, guid: 2b849733322e84dad9a4f0a3f83088be, type: 2}
+  - {fileID: 114000012509683866, guid: 83063e9ba5cb04d18866d689134aebdc, type: 2}
+  - {fileID: 114000014109973922, guid: 78ed1a5f99a5b4b17920c19965725ef0, type: 2}
+  - {fileID: 114000013763292332, guid: 1ece60e8dc14941dfb29afe571e43d5d, type: 2}
+  - {fileID: 114000013150903448, guid: ac06e17b0bc8642f9ae93cbf23267ec7, type: 2}
+  - {fileID: 114000010091520770, guid: 98554f823ab0542378f2e1e84d50c2f8, type: 2}
+  - {fileID: 114000013519010800, guid: 50163da45788f49dea529fd0c24964ed, type: 2}
+  - {fileID: 114000012067229686, guid: ae2fc4c67d266459e9e03707975c031f, type: 2}
+  - {fileID: 114000012950076452, guid: f3535b8cedee84905b8b5025338aec79, type: 2}
+  - {fileID: 114000011392567874, guid: 09b76c6fc86214d9e8037fb7e3f9b4cc, type: 2}
+  - {fileID: 114000010009527596, guid: 39e682037b431457c804e2857751f820, type: 2}
   stackPrefab: {fileID: 11470452, guid: f11bf231fbaed4e59a211853fe6711f2, type: 2}
   targetStackIndicator: {fileID: 112768, guid: 0606731ba7e3a4ad18847d26e5f8b865, type: 2}
   flipper: {fileID: 11400016, guid: fa4c79c64d7ff40c28246f86c162de76, type: 2}
