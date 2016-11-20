@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipMeta:
-    prefabId: 0
+    prefabId: 3
     orientation: 0
     isOrientationImportant: 1
     stackPos: 0
@@ -318,6 +318,7 @@ MonoBehaviour:
     CrushWeight: 0
     Weight: 1
   highlightColor: {r: 1, g: 1, b: 1, a: 0}
+  crushTextColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!222 &222000010392285468
 CanvasRenderer:
   m_ObjectHideFlags: 1

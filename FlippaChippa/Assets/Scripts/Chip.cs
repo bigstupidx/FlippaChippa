@@ -14,6 +14,8 @@ public class Chip : MonoBehaviour {
 	public Color highlightColor;	//Input in editor
 	private Color standardColor;
 
+	public Color crushTextColor;
+
 	private Material material;
 
 	private Transform initialTransform;
@@ -24,18 +26,19 @@ public class Chip : MonoBehaviour {
 
 	void Start() {
 		crushIndicator = transform.GetChild (0).gameObject;
-		SetCrushIndicatorVisibiltyAndValue ();
+		SetCrushIndicatorVisibilityAndValue ();
 		initialTransform = transform;
 		material = GetComponent<Renderer> ().material;
 		material.EnableKeyword ("_EMISSION");
 		standardColor = material.GetColor ("_EmissionColor");
 	}
 
-	void SetCrushIndicatorVisibiltyAndValue () {
+	void SetCrushIndicatorVisibilityAndValue () {
 		if (chipMeta.IsCrushable) {
 			for (int i = 0; i < crushIndicator.transform.childCount; i++) {
 				Text crushText = crushIndicator.transform.GetChild (i).GetComponentInChildren<Text> ();
 				crushText.text = "" + chipMeta.CrushWeight;
+				crushText.color = crushTextColor;
 			}
 		} else {
 			crushIndicator.SetActive (false);

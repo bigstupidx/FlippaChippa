@@ -264,6 +264,7 @@ MonoBehaviour:
     CrushWeight: 0
     Weight: 1
   highlightColor: {r: 1, g: 1, b: 1, a: 0}
+  crushTextColor: {r: 0.38431373, g: 0.87058824, b: 0.99215686, a: 1}
 --- !u!114 &114000013935075974
 MonoBehaviour:
   m_ObjectHideFlags: 1
