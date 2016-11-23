@@ -19,7 +19,7 @@ namespace AssemblyCSharp
 			prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
 
 			stackGenerator.SetPrefabsManager (prefabsManager);
-			int[] chipIds = new int[]{0,1,5,3,4,5};
+			int[] chipIds = new int[]{0,4,6,3,9,6};
 			int[] crushWeights = new int[] { 0, 0, 5, 4, 0, 0};
 			bool[] initFlips = new bool[]{ false, true, false, false, true };
 			int[] targetFlips = new int[]{1,0,0};
