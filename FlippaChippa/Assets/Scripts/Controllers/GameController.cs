@@ -142,11 +142,11 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 					gameOverMenu.SetTime (statsMeta.Time);
 					gameOverMenu.SetNFlipsLeft (statsMeta.MaxFlips - statsMeta.NFlips);
 					if (targetStack.Matches (stacks [0])) {
-						gameOverMenu.SetTitle ("Success!");
+						gameOverMenu.SetTitle ("Yay!!!");
 						statsMeta.SuccessfullGame = true;
 						ApplicationModel.statistics.IncreaseStreakCount ();
 					} else {
-						gameOverMenu.SetTitle ("Oh...");
+						gameOverMenu.SetTitle ("Nay...");
 						statsMeta.SuccessfullGame = false;
 						ApplicationModel.statistics.AbortStreak ();
 					}
