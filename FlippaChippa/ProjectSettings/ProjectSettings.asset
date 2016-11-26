@@ -10,7 +10,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: BloomBloom Games
+  companyName: Jerre the Indie
   productName: Flippa Chippa
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -96,7 +96,7 @@ PlayerSettings:
     16:10: 0
     16:9: 0
     Others: 1
-  bundleIdentifier: com.gamesalajerre.flippachippa
+  bundleIdentifier: com.jerretheindie.flippachippa
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -170,8 +170,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Users/magnus/Dev/FlippaDaChippa_entire_project/Resources/Other/flipsort.keystore
-  AndroidKeyaliasName: gamesalajerre
+  AndroidKeystoreName: /Users/magnus/Documents/keystores/flippachippa.keystore
+  AndroidKeyaliasName: flippachippa
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   androidEnableBanner: 1
