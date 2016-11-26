@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: JerreGames
-  productName: FlippaChippa
+  companyName: BloomBloom Games
+  productName: Flippa Chippa
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
@@ -96,7 +96,7 @@ PlayerSettings:
     16:10: 0
     16:9: 0
     Others: 1
-  bundleIdentifier: com.gamesalajerre.flipsort
+  bundleIdentifier: com.gamesalajerre.flippachippa
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
