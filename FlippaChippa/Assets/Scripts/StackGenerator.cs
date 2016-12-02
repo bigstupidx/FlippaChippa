@@ -40,11 +40,17 @@ public class StackGenerator
 		foreach (Chip chip in allChips) {
 			GameObject.Destroy (chip.gameObject);
 		}
-
+			
 		Debug.Log ("<color=green>--- Stack Generation Start ---</color>");
 		Debug.LogFormat ("start stack: {0}", startStack.Meta.ToStringShort ());
 		Debug.LogFormat ("target stack: {0}", targetStack.Meta.ToStringShort ());
 		Debug.Log ("<color=green>--- Stack Generation end ---</color>");
+
+		int nFlipsAlternative = FlipsCalulator.CalculateMinFlips (startStack.Meta, targetStack.Meta, 100, nFlips);
+		Debug.Log (string.Format("Calculated flips ({0}). Generator flips ({1})", nFlipsAlternative, nFlips));
+		if (nFlipsAlternative < nFlips) {
+			nFlips = nFlipsAlternative;
+		}
 		return new GameStacks (targetStack, startStack, nFlips);
 	}
 

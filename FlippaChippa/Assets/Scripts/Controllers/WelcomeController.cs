@@ -13,6 +13,7 @@ public class WelcomeController : MonoBehaviour {
 	public Text loadingText;
 
 	void Awake() {
+		Random.InitState (10);
 		menuButton.gameObject.SetActive (false);
 
 		#if UNITY_ANDROID || UNITY_IOS

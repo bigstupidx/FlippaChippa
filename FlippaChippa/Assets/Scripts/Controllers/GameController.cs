@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	void Awake() {
 		statsMeta = new SingleGameStatsMeta ();
-		statsMeta.DifficultyFactor = 0.4f;
+		statsMeta.DifficultyFactor = 0.3f;
 		statsMeta.NTargetChecks = 1;
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
 		stackGenerator = new StackGenerator ();
