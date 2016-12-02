@@ -14,7 +14,7 @@ public class ChipMeta {
 	public int Weight = 1;	//Shouldn't be changeable now	
 
 	public ChipMeta(int prefabId, ChipOrientation orientation, bool isOrientationImportant, int stackPos, float height) : 
-		this(prefabId, orientation, isOrientationImportant, stackPos, height, int.MaxValue){
+		this(prefabId, orientation, isOrientationImportant, stackPos, height, 0){
 	}
 
 	public ChipMeta(int prefabId, ChipOrientation orientation, bool isOrientationImportant, int stackPos, float height, int crushWeight) {
@@ -50,7 +50,7 @@ public class ChipMeta {
 	//Creates a deep copy
 	public ChipMeta Copy ()
 	{
-		ChipMeta copy = new ChipMeta (prefabId, orientation, isOrientationImportant, stackPos, Height);
+		ChipMeta copy = new ChipMeta (prefabId, orientation, isOrientationImportant, stackPos, Height, CrushWeight);
 		copy.Height = Height;
 		return copy;
 	}
