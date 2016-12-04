@@ -168,7 +168,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void ShowNextStack() {
-		if (IsAnimatingStack ()) {
+		if (IsAnimatingStack () || cameraController.IsMoving) {
 			return;
 		}
 		int intendedNextStack = indexOfVisibleStack + 1;
@@ -182,7 +182,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 	}
 
 	public void ShowPreviousStack() {
-		if (IsAnimatingStack ()) {
+		if (IsAnimatingStack () || cameraController.IsMoving) {
 			return;
 		}
 

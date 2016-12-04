@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
 	private Mover1DMeta moverMeta;
 	public float moveTime = 1f;
 	public float deltaMove = 1.5f;
+	public bool IsMoving { get {return !moverMeta.IsFinished; } }
 
 	void Start () {
 		moverMeta = new Mover1DMeta (transform.position.x, transform.position.x, 0f);
