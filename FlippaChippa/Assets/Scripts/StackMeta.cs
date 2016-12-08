@@ -104,10 +104,8 @@ public class StackMeta {
 
 		Dictionary<string, int> target = targetStack.MapByIdAndCrushWeight();
 		Dictionary<string, int> flippable = flippableStack.MapByIdAndCrushWeight();
-		foreach (KeyValuePair<string, int> prefabPair in target) {
-			if (flippable[prefabPair.Key] < prefabPair.Value) {
-				return false;
-			}
+		if (AnyTargetChipsMissingInFlippable(target, flippable)) {
+			return false;
 		}
 
 		if (flippableStack.ChipCount() > targetStack.ChipCount()) {
@@ -121,6 +119,36 @@ public class StackMeta {
 		}
 
 		return true;
+	}
+
+	private bool AnyTargetChipsMissingInFlippable(Dictionary<string, int> target, Dictionary<string, int> flippable) {
+		foreach (KeyValuePair<string, int> prefabPair in target) {
+			if (!flippable.ContainsKey(prefabPair.Key)) {
+				return true;
+			} else if (flippable[prefabPair.Key] < prefabPair.Value) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private bool CanChipsThatShouldBeCrushedBeCrushedWithTheRemainingStack(StackMeta flippableStack, StackMeta targetStack, Dictionary<string, int> target) {
+		for (int i = 0; i < flippableStack.ChipCount(); i++) {
+			ChipMeta chipMeta = flippableStack.GetChipMetaAt(i);
+			if (chipMeta.IsCrushable 
+					&& !CanBeCrushed(chipMeta, flippableStack.ChipCount()) 
+					&& !target.ContainsKey(StringifyChipMeta(chipMeta))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private bool CanBeCrushed(ChipMeta chipMeta, int totalStackWeight) {
+		if (chipMeta.IsCrushable) {
+			return chipMeta.CrushWeight <= (totalStackWeight - chipMeta.Weight);
+		}
+		return false;
 	}
 
 	int CountChipsWithCrushWeight(int crushWeight, List<ChipMeta> chips) {
@@ -222,7 +250,7 @@ public class StackMeta {
 			sumWeightAbove += chips[i].Weight;
 		}
 
-		return sumWeightAbove >= chips[position].CrushWeight;
+		return chips[position].CrushWeight <= sumWeightAbove;
 	}
 
 }

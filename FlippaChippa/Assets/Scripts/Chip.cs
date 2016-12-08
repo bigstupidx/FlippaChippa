@@ -37,7 +37,7 @@ public class Chip : MonoBehaviour {
 		if (chipMeta.IsCrushable) {
 			for (int i = 0; i < crushIndicator.transform.childCount; i++) {
 				Text crushText = crushIndicator.transform.GetChild (i).GetComponentInChildren<Text> ();
-				crushText.text = "" + chipMeta.CrushWeight;
+				crushText.text = "" + (chipMeta.CrushWeight - 1);
 				crushText.color = crushTextColor;
 			}
 		} else {
