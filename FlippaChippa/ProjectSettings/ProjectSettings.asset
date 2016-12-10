@@ -97,13 +97,13 @@ PlayerSettings:
     16:9: 0
     Others: 1
   bundleIdentifier: com.jerretheindie.flippachippa
-  bundleVersion: 0.9.2
+  bundleVersion: 0.9.3
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   xboxOneDisableKinectGpuReservation: 0
   singlePassStereoRendering: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 6
+  AndroidBundleVersionCode: 7
   AndroidMinSdkVersion: 18
   AndroidPreferredInstallLocation: 1
   aotOptions: 
