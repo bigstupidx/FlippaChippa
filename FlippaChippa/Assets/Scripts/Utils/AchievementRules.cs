@@ -5,16 +5,16 @@ using GooglePlayGames;
 
 public class AchievementRules
 {
-	public static bool IsLuckyDuckAccomplished(int flips) {
-		return flips == 1;
+	public static bool IsLuckyDuckAccomplished(bool isSuccessfull, int flips) {
+		return isSuccessfull && flips == 1;
 	}
 
-	public static bool IsSpeedsterAccomplished(float time) {
-		return time < 10.0f;
+	public static bool IsSpeedsterAccomplished(bool isSuccessfull, float time) {
+		return isSuccessfull && time < 10.0f;
 	}
 
-	public static bool IsBrainiacAccomplished(int stackSize) {
-		return stackSize >= 13;
+	public static bool IsBrainiacAccomplished(bool isSuccessfull, int stackSize) {
+		return isSuccessfull && stackSize >= 13;
 	}
 
 	public static bool IsEideticMemoryAccomplished(bool successfull, int checks, int stackSize) {
@@ -69,7 +69,7 @@ public class AchievementRules
 		}
 
 		IAchievement luckyDuck = ApplicationModel.GetAchievement (GPGSIds.achievement_lucky_duck);
-		if (!luckyDuck.completed && AchievementRules.IsLuckyDuckAccomplished (statsMeta.NFlips)) {
+		if (!luckyDuck.completed && AchievementRules.IsLuckyDuckAccomplished (statsMeta.SuccessfullGame, statsMeta.NFlips)) {
 			Social.ReportProgress (GPGSIds.achievement_lucky_duck, 100.0f, (bool success) => {
 				if (success) {
 					Debug.Log ("Successfully set the lucky duck achievement");
@@ -80,7 +80,7 @@ public class AchievementRules
 		}
 
 		IAchievement speedster = ApplicationModel.GetAchievement (GPGSIds.achievement_speedster);
-		if (!speedster.completed && AchievementRules.IsSpeedsterAccomplished (statsMeta.Time)) {
+		if (!speedster.completed && AchievementRules.IsSpeedsterAccomplished (statsMeta.SuccessfullGame, statsMeta.Time)) {
 			Social.ReportProgress (GPGSIds.achievement_speedster, 100.0f, (bool success) => {
 				if (success) {
 					Debug.Log("Successfully set the lucky duck achievement");
@@ -91,7 +91,7 @@ public class AchievementRules
 		}
 
 		IAchievement brainiac = ApplicationModel.GetAchievement (GPGSIds.achievement_brainiac);
-		if (!brainiac.completed && AchievementRules.IsBrainiacAccomplished(stackMeta.ChipCount())) {
+		if (!brainiac.completed && AchievementRules.IsBrainiacAccomplished(statsMeta.SuccessfullGame, stackMeta.ChipCount())) {
 			Social.ReportProgress (GPGSIds.achievement_brainiac, 100.0f, (bool success) => {
 				if (success) {
 					Debug.Log("Successfully set the brainiac achievement");
