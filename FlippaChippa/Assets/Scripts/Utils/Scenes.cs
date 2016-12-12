@@ -7,5 +7,6 @@ public class Scenes
 	public const string WELCOME = "WelcomeScene";
 	public const string STATISTICS = "StatisticsScene";
 	public const string HELP = "HelpScene";
+	public const string SETTINGS = "SettingsScene";
 }
 

@@ -83,6 +83,10 @@ public class MenuController : MonoBehaviour {
 		SceneManager.LoadScene (Scenes.HELP, LoadSceneMode.Single);
 	}
 
+	public void Settings() {
+		SceneManager.LoadScene (Scenes.SETTINGS, LoadSceneMode.Single);
+	}
+
 	public void ShowAchievements() {
 		#if UNITY_ANDROID || UNITY_IOS
 		PlayGamesPlatform.Instance.ShowAchievementsUI ();

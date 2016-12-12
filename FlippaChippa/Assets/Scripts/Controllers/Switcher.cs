@@ -15,6 +15,8 @@ public class Switcher : MonoBehaviour {
 	public float animationTime = 0.5f;
 	private bool doMove = false;
 
+	public int StartIndex { get; set; }
+
 	// Use this for initialization
 	void Start () {
 		lastVisible = screens.Length - 1;
@@ -23,6 +25,8 @@ public class Switcher : MonoBehaviour {
 			RectTransform rect = screens [i];
 			rect.anchoredPosition = new Vector2 (i * canvasRect.rect.width, rect.anchoredPosition.y);
 		}
+		currentVisible = StartIndex;
+		allContent.anchoredPosition = new Vector2 (-CurrentlyVisibleIndex * canvasRect.rect.width, allContent.anchoredPosition.y);
 
 		NextButton.onClick.AddListener(NextScreen);
 		PreviousButton.onClick.AddListener (PreviousScreen);
@@ -48,7 +52,7 @@ public class Switcher : MonoBehaviour {
 
 
 	public void NextScreen() {
-		if (currentVisible == lastVisible) {	//Showing the last screen
+		if (currentVisible == lastVisible || doMove) {	//Showing the last screen
 			return;
 		}
 		startPos = -currentVisible * canvasRect.rect.width;
@@ -60,7 +64,7 @@ public class Switcher : MonoBehaviour {
 	}
 
 	public void PreviousScreen() {
-		if (currentVisible == 0) {	//Showing the first screen
+		if (currentVisible == 0 || doMove) {	//Showing the first screen
 			return;
 		}
 
