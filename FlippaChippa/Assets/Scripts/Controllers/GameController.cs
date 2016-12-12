@@ -154,9 +154,29 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 					string filePath = Application.persistentDataPath + "/" + Tags.STATISTICS_NAME;
 					string json = JsonUtility.ToJson (ApplicationModel.statistics);
 					File.WriteAllText (filePath, json);
+					HandleDifficultyModifierProgression (statsMeta.SuccessfullGame);
 					
 					AchievementRules.HandleAchievements (statsMeta, targetStack.Meta);
 				}
+			}
+		}
+	}
+
+	void HandleDifficultyModifierProgression(bool successfullGame) {
+		if (!ApplicationModel.settings.hasSetManually && successfullGame) {
+			bool updatedDifficulty = false;
+			int successfullGames = ApplicationModel.statistics.TotalSuccessfullGames ();
+			if (successfullGames == 10) {
+				ApplicationModel.settings.difficulty = Difficulty.HARD;
+				updatedDifficulty = true;
+			} else if (successfullGames == 4) {
+				ApplicationModel.settings.difficulty = Difficulty.NORMAL;
+				updatedDifficulty = true;
+			}
+			if (updatedDifficulty) {
+				string settingsFilePath = Application.persistentDataPath + "/" + Tags.SETTINGS_DATA;
+				string settingsJson = JsonUtility.ToJson (ApplicationModel.settings);
+				File.WriteAllText (settingsFilePath, settingsJson);
 			}
 		}
 	}
