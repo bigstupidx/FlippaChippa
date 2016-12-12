@@ -11,4 +11,5 @@ public class Tags
 	public const string PREFABS_MANAGER = "PrefabsManager";
 	public const string STATISTICS_NAME = "Statistics";
 	public const string GAME_CONTROLLER = "GameController";
+	public const string SETTINGS_DATA = "Settings";
 }

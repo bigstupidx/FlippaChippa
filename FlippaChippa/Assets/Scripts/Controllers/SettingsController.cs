@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class SettingsController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class SettingsController : MonoBehaviour
 	void Awake() {
 		difficulties = new Difficulty[]{ Difficulty.EASY, Difficulty.NORMAL, Difficulty.HARD };
 		switcher = GetComponent<Switcher> ();
-		switcher.StartIndex = IndexFromDifficulty (ApplicationModel.difficulty);
+		switcher.StartIndex = IndexFromDifficulty (ApplicationModel.settings.difficulty);
 	}
 
 	int IndexFromDifficulty(Difficulty difficulty) {
@@ -29,7 +30,7 @@ public class SettingsController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		SetCorrectSelected (ApplicationModel.difficulty);
+		SetCorrectSelected (ApplicationModel.settings.difficulty);
 	}
 	
 	// Update is called once per frame
@@ -56,7 +57,12 @@ public class SettingsController : MonoBehaviour
 	}
 
 	public void Yay() {
-		ApplicationModel.difficulty = difficulties [switcher.CurrentlyVisibleIndex];
+		ApplicationModel.settings.difficulty = difficulties [switcher.CurrentlyVisibleIndex];
+		ApplicationModel.settings.hasSetManually = true;
+		string filePath = Application.persistentDataPath + "/" + Tags.SETTINGS_DATA;
+		string json = JsonUtility.ToJson (ApplicationModel.settings);
+		File.WriteAllText (filePath, json);
+
 		SceneManager.LoadScene (Scenes.MAIN_MENU, LoadSceneMode.Single);
 	}
 }

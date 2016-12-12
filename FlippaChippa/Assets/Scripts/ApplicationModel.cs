@@ -9,7 +9,7 @@ public class ApplicationModel {
 	public static CourseMeta courseMeta = CourseMeta.Default();
 	public static Statistics statistics;
 	public static IAchievement[] achievements = null;
-	public static Difficulty difficulty;
+	public static Settings settings;
 
 	public static IAchievement GetAchievement(string id) {
 		for (int i = 0; i < achievements.Length; i++) {

@@ -33,6 +33,16 @@ public class MenuController : MonoBehaviour {
 		} else {
 			ApplicationModel.statistics = new Statistics ();
 		}
+		string settingsFilePath = Application.persistentDataPath + "/" + Tags.SETTINGS_DATA ;
+		Debug.LogFormat ("settings path: {0}", settingsFilePath);
+		if (File.Exists (settingsFilePath)) {
+			StreamReader reader = File.OpenText (settingsFilePath);
+			string json = reader.ReadToEnd ();
+			ApplicationModel.settings = JsonUtility.FromJson<Settings> (json);
+			Debug.LogFormat ("settings: {0}", ApplicationModel.settings.ToString ());
+		} else {
+			ApplicationModel.settings = new Settings();
+		}
 
 		Transform childTransform = achievementsButton.transform.GetChild (0);
 		achievementIcon = childTransform.GetComponent<Image> ();
@@ -65,7 +75,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct
-		CourseMeta meta = CourseMetaGenerator.Generate (manager, ApplicationModel.difficulty);
+		CourseMeta meta = CourseMetaGenerator.Generate (manager, ApplicationModel.settings.difficulty);
 		ApplicationModel.courseMeta = meta;
 
 		SceneManager.LoadScene (Scenes.GAME, LoadSceneMode.Single);
