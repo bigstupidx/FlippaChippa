@@ -9,6 +9,7 @@ public class Switcher : MonoBehaviour {
 	public RectTransform canvasRect, allContent;
 
 	private int currentVisible = 0, lastVisible = 0;	//0 == FlipsContent
+	public int CurrentlyVisibleIndex { get { return currentVisible; } }
 	private float startPos = 0f, endPos = 0f;
 	private float elapsedTime = 0f;
 	public float animationTime = 0.5f;
@@ -22,6 +23,9 @@ public class Switcher : MonoBehaviour {
 			RectTransform rect = screens [i];
 			rect.anchoredPosition = new Vector2 (i * canvasRect.rect.width, rect.anchoredPosition.y);
 		}
+
+		NextButton.onClick.AddListener(NextScreen);
+		PreviousButton.onClick.AddListener (PreviousScreen);
 
 		SetSwipeButtonsEnable ();
 	}

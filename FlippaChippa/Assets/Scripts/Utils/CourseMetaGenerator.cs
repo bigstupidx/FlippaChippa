@@ -2,18 +2,27 @@
 
 public class CourseMetaGenerator
 {
-	public static CourseMeta Generate(PrefabsManager manager) {
-		int size = Random.Range (4, 14);
-		int flips = Random.Range (size, (int) (size * 1.5f));
-		int flips2 = Random.Range (size, (int) (size * 1.5f));
-		return Generate (size, flips, flips2, manager);
+	
+//	public static CourseMeta Generate(PrefabsManager manager) {
+//		return Generate (manager, Difficulty.HARD);
+//	}
+
+	public static CourseMeta Generate(PrefabsManager manager, Difficulty difficulty) {
+		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
+		StackDifficulty diff = StackDifficulty.Get (difficulty);
+		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
+		int initFlips = Random.Range (size, (int)(size * 1.5f));
+		int flips = Random.Range (size, (int)(size * 1.5f));
+		return Generate (size, initFlips, flips, diff.AllowCrushable, manager);
 	}
 
-	public static CourseMeta Generate(int size, int nInitFlips, int nFlips, PrefabsManager manager) {
+	public static CourseMeta Generate(int size, int nInitFlips, int nFlips, bool isCrushable, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
-		for (int i = 0; i < size; i++) {
-			crushWeights [i] = GenerateCrushWeight (size, size - i, 0.8f);
+		if (isCrushable) {
+			for (int i = 0; i < size; i++) {
+				crushWeights [i] = GenerateCrushWeight (size, size - i, 0.8f);
+			}
 		}
 		bool[] initFlips = new bool[nInitFlips];
 		for (int i = 0; i < initFlips.Length; i++) {
