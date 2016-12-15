@@ -5,14 +5,14 @@ public class GameGenerator
 {
 	public static GameStacksMeta Generate(PrefabsManager manager, Difficulty difficulty) {
 		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
-		StackDifficulty diff = StackDifficulty.Get (difficulty);
-		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
+		StackDifficulty stackDifficulty = StackDifficulty.Get (difficulty);
+		int size = Random.Range (stackDifficulty.MinCips, stackDifficulty.MaxChips + 1);
 		int flips = Random.Range (size, (int)(size * 1.5f));
-		GameGeneratorMeta meta =  GenerateGameGeneratorMeta (size, flips, diff.AllowCrushable, manager);
+		GameGeneratorMeta meta =  GenerateGameGeneratorMeta (size, flips, stackDifficulty.AllowCrushable, manager);
 		GameStacksMeta pair = CreateFromGameGeneratorMeta (meta, manager);
 		while (pair.start.Matches(pair.target)) {
 			Debug.Log ("<color=red>Need to generate another stack since the target matches the start.</color>");
-			meta = GenerateGameGeneratorMeta (size, flips, diff.AllowCrushable, manager);
+			meta = GenerateGameGeneratorMeta (size, flips, stackDifficulty.AllowCrushable, manager);
 			pair = CreateFromGameGeneratorMeta (meta, manager);
 		}
 
