@@ -8,13 +8,12 @@ public class CourseMetaGenerator
 		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
 		StackDifficulty diff = StackDifficulty.Get (difficulty);
 		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
-		int initFlips = Random.Range (size, (int)(size * 1.5f));
 		int flips = Random.Range (size, (int)(size * 1.5f));
-		CourseMeta meta =  GenerateCourseMeta (size, initFlips, flips, diff.AllowCrushable, manager);
+		CourseMeta meta =  GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
 		StackMetaPair pair = GenerateStackMetaPair (meta, manager);
 		while (pair.start.Matches(pair.target)) {
 			Debug.Log ("<color=red>Need to generate another stack since the target matches the start.</color>");
-			meta = GenerateCourseMeta (size, initFlips, flips, diff.AllowCrushable, manager);
+			meta = GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
 			pair = GenerateStackMetaPair (meta, manager);
 		}
 
@@ -31,7 +30,7 @@ public class CourseMetaGenerator
 		return GenerateStackMetaPair(courseMeta, prefabsManager);
 	}
 
-	public static CourseMeta GenerateCourseMeta(int size, int nInitFlips, int nFlips, bool isCrushable, PrefabsManager manager) {
+	public static CourseMeta GenerateCourseMeta(int size, int nFlips, bool isCrushable, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
 		if (isCrushable) {
@@ -39,7 +38,7 @@ public class CourseMetaGenerator
 				crushWeights [i] = GenerateCrushWeight (size, size - i, 0.8f);
 			}
 		}
-		bool[] initFlips = new bool[nInitFlips];
+		bool[] initFlips = new bool[size];
 		for (int i = 0; i < initFlips.Length; i++) {
 			initFlips [i] = Random.value < 0.5f ? true : false;
 		}
