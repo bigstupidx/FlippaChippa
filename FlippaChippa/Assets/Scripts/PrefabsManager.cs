@@ -39,6 +39,15 @@ public class PrefabsManager : MonoBehaviour {
 		return null;
 	}
 
+	public ChipMeta GetChipMeta(int id) {
+		foreach (Chip chip in chipPrefabs) {
+			if (chip.chipMeta.prefabId == id) {
+				return chip.chipMeta.Copy();
+			}
+		}
+		return null;
+	}
+
 	public Chip GetRandomChip() {
 		Chip chip = GetChip (GetRandomChipId ());
 		if (chip == null) {

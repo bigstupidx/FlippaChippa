@@ -10,6 +10,7 @@ public class ApplicationModel {
 	public static Statistics statistics;
 	public static IAchievement[] achievements = null;
 	public static Settings settings;
+	public static StackMetaPair stackMetaPair;
 
 	public static IAchievement GetAchievement(string id) {
 		for (int i = 0; i < achievements.Length; i++) {

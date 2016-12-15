@@ -75,8 +75,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void StartGame(string game) {	//game will can an identifier for the gametype or specific course. Most likely a json obejct
-		CourseMeta meta = CourseMetaGenerator.Generate (manager, ApplicationModel.settings.difficulty);
-		ApplicationModel.courseMeta = meta;
+		ApplicationModel.stackMetaPair = CourseMetaGenerator.GenerateStackMetaPair (manager, ApplicationModel.settings.difficulty);
 
 		SceneManager.LoadScene (Scenes.GAME, LoadSceneMode.Single);
 	}

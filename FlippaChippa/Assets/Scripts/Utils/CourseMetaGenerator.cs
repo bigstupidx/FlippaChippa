@@ -1,22 +1,37 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class CourseMetaGenerator
 {
-	
-//	public static CourseMeta Generate(PrefabsManager manager) {
-//		return Generate (manager, Difficulty.HARD);
-//	}
 
-	public static CourseMeta Generate(PrefabsManager manager, Difficulty difficulty) {
+	public static StackMetaPair GenerateStackMetaPair(PrefabsManager manager, Difficulty difficulty) {
 		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
 		StackDifficulty diff = StackDifficulty.Get (difficulty);
 		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
 		int initFlips = Random.Range (size, (int)(size * 1.5f));
 		int flips = Random.Range (size, (int)(size * 1.5f));
-		return Generate (size, initFlips, flips, diff.AllowCrushable, manager);
+		CourseMeta meta =  GenerateCourseMeta (size, initFlips, flips, diff.AllowCrushable, manager);
+		StackMetaPair pair = GenerateStackMetaPair (meta, manager);
+		while (pair.start.Matches(pair.target)) {
+			Debug.Log ("<color=red>Need to generate another stack since the target matches the start.</color>");
+			meta = GenerateCourseMeta (size, initFlips, flips, diff.AllowCrushable, manager);
+			pair = GenerateStackMetaPair (meta, manager);
+		}
+
+		int nFlipsAlternative = FlipsCalulator.CalculateMinFlips (pair.start, pair.target, 100, pair.nFlips);
+		Debug.Log (string.Format("Calculated flips ({0}). Generator flips ({1})", nFlipsAlternative, pair.nFlips));
+		if (nFlipsAlternative < pair.nFlips) {
+			pair.nFlips = nFlipsAlternative;
+		}
+
+		return pair;
 	}
 
-	public static CourseMeta Generate(int size, int nInitFlips, int nFlips, bool isCrushable, PrefabsManager manager) {
+	public static StackMetaPair CreateFromCourseMeta(CourseMeta courseMeta, PrefabsManager prefabsManager) {
+		return GenerateStackMetaPair(courseMeta, prefabsManager);
+	}
+
+	public static CourseMeta GenerateCourseMeta(int size, int nInitFlips, int nFlips, bool isCrushable, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
 		if (isCrushable) {
@@ -46,7 +61,7 @@ public class CourseMetaGenerator
 
 		int[] chipIDs = GenerateChipIDs (size, manager);
 		while (AllValuesAreTheSame (chipIDs)) {
-			chipIDs = GenerateChipIDs (size, manager);
+			chipIDs [0] = manager.GetRandomChipId ();
 		}
 		return chipIDs;
 	}
@@ -83,4 +98,50 @@ public class CourseMetaGenerator
 		}
 		return 0;
 	}
+
+	private static StackMetaPair GenerateStackMetaPair(CourseMeta meta, PrefabsManager manager) {
+		StackMeta startStack = new StackMeta ();
+		for (int i = 0; i < meta.ChipIDs.Length; i++) {
+			ChipMeta chipMeta = manager.GetChipMeta (meta.ChipIDs [i]);
+			chipMeta.CrushWeight = meta.CrushWeights [i];
+			if (meta.InitFlips [i]) {
+				chipMeta.Flip ();
+			}
+			startStack.Add (chipMeta);
+		}
+		startStack.CleanupStackForCrushedChips (0);
+
+		StackMeta targetStack = startStack.Copy ();
+		int flips = Permute (targetStack, meta.Flips);
+
+		return new StackMetaPair (meta, startStack, targetStack, flips);
+	}
+
+	private static int Permute(StackMeta stackMeta, int[] flips) {
+		int nFlips = 0;
+		List<StackMeta> flipHistory = new List<StackMeta> ();
+		for (int i = 0; i < flips.Length; i++) {
+			stackMeta.FlipStackAt (flips [i]);
+			if (PermutationExists(stackMeta, flipHistory)) {
+				//Undo flip since we've been here before
+				stackMeta.FlipStackAt (flips [i]);
+			} else {
+				flipHistory.Add (stackMeta.Copy ());
+				nFlips++;
+			}
+		}
+
+		return nFlips;
+	}
+
+	private static bool PermutationExists(StackMeta newPermutation, List<StackMeta> existingPermutations) {
+		foreach (StackMeta permutation in existingPermutations) {
+			if (newPermutation.Matches(permutation)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 }

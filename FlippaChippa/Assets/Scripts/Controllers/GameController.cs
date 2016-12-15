@@ -38,11 +38,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 		blur.enabled = false;
 
 		stackGenerator.SetPrefabsManager (prefabsManager);
-		int[] chipIds = ApplicationModel.courseMeta.ChipIDs;
-		int[] crushWeight = ApplicationModel.courseMeta.CrushWeights;
-		bool[] initFlips = ApplicationModel.courseMeta.InitFlips;
-		int[] startFlips = ApplicationModel.courseMeta.Flips;
-		GameStacks gamestacks = stackGenerator.GenerateStacks(chipIds, crushWeight, initFlips, startFlips);
+		GameStacks gamestacks = stackGenerator.CreateStacks (ApplicationModel.stackMetaPair);
 		statsMeta.MaxFlips = gamestacks.MaxFlips + (int)(Mathf.Max(gamestacks.Target.Meta.ChipCount() * statsMeta.DifficultyFactor, 1));
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
@@ -111,7 +107,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	public void NextGame() {
 		Time.timeScale = 1;
-		ApplicationModel.courseMeta = CourseMetaGenerator.Generate (prefabsManager, ApplicationModel.settings.difficulty);
+		ApplicationModel.stackMetaPair = CourseMetaGenerator.GenerateStackMetaPair (prefabsManager, ApplicationModel.settings.difficulty);
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}
 

@@ -21,9 +21,11 @@ namespace AssemblyCSharp
 			stackGenerator.SetPrefabsManager (prefabsManager);
 			int[] chipIds = new int[]{0,4,6,3,9,6};
 			int[] crushWeights = new int[] { 0, 0, 5, 4, 0, 0};
-			bool[] initFlips = new bool[]{ false, true, false, false, true };
+			bool[] initFlips = new bool[]{ false, true, false, false, true, false };
 			int[] targetFlips = new int[]{1,0,0};
-			gamestacks = stackGenerator.GenerateStacks (chipIds, crushWeights, initFlips, targetFlips);
+			CourseMeta courseMeta = new CourseMeta (chipIds, crushWeights, initFlips, targetFlips);
+			ApplicationModel.stackMetaPair = CourseMetaGenerator.CreateFromCourseMeta (courseMeta, prefabsManager);
+			gamestacks = stackGenerator.CreateStacks (ApplicationModel.stackMetaPair);
 			gamestacks.Target.gameObject.SetActive(false);
 
 			demoStack = gamestacks.Player;
