@@ -1,9 +1,7 @@
 ﻿using System;
 
-public struct CourseMeta
+public struct GameGeneratorMeta
 {
-	private static CourseMeta courseMeta = new CourseMeta (new int[]{ 0, 0, 0 }, new bool[]{ false, false, false }, new int[]{ 0, 0, 0 });
-
 	private int[] chipIDs;
 	public int[] ChipIDs { get { return chipIDs; } }
 
@@ -16,10 +14,7 @@ public struct CourseMeta
 	private int[] crushWeights;
 	public int[] CrushWeights { get { return crushWeights; } }
 
-	public CourseMeta(int[] chipIDs, bool[] initFlips, int[] flips) : this(chipIDs, new int[chipIDs.Length], initFlips, flips) {
-	}
-
-	public CourseMeta(int[] chipIDs, int[] crushWeights, bool[] initFlips, int[] flips) {
+	public GameGeneratorMeta(int[] chipIDs, int[] crushWeights, bool[] initFlips, int[] flips) {
 		if (chipIDs == null || crushWeights == null || initFlips == null || flips == null) {
 			throw new Exception ("None of the input fields for CourseMeta can be null");
 		}
@@ -36,7 +31,4 @@ public struct CourseMeta
 		this.flips = flips;
 	}
 
-	public static CourseMeta Default() {
-		return courseMeta;
-	}
 }

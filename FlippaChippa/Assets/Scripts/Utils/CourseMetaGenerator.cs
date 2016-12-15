@@ -9,7 +9,7 @@ public class CourseMetaGenerator
 		StackDifficulty diff = StackDifficulty.Get (difficulty);
 		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
 		int flips = Random.Range (size, (int)(size * 1.5f));
-		CourseMeta meta =  GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
+		GameGeneratorMeta meta =  GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
 		StackMetaPair pair = GenerateStackMetaPair (meta, manager);
 		while (pair.start.Matches(pair.target)) {
 			Debug.Log ("<color=red>Need to generate another stack since the target matches the start.</color>");
@@ -26,11 +26,11 @@ public class CourseMetaGenerator
 		return pair;
 	}
 
-	public static StackMetaPair CreateFromCourseMeta(CourseMeta courseMeta, PrefabsManager prefabsManager) {
+	public static StackMetaPair CreateFromCourseMeta(GameGeneratorMeta courseMeta, PrefabsManager prefabsManager) {
 		return GenerateStackMetaPair(courseMeta, prefabsManager);
 	}
 
-	public static CourseMeta GenerateCourseMeta(int size, int nFlips, bool isCrushable, PrefabsManager manager) {
+	public static GameGeneratorMeta GenerateCourseMeta(int size, int nFlips, bool isCrushable, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
 		if (isCrushable) {
@@ -46,7 +46,7 @@ public class CourseMetaGenerator
 		for (int i = 0; i < size; i++) {
 			flips [i] = Random.Range (0, size);
 		}
-		return new CourseMeta (chipIds, crushWeights, initFlips, flips);
+		return new GameGeneratorMeta (chipIds, crushWeights, initFlips, flips);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class CourseMetaGenerator
 		return 0;
 	}
 
-	private static StackMetaPair GenerateStackMetaPair(CourseMeta meta, PrefabsManager manager) {
+	private static StackMetaPair GenerateStackMetaPair(GameGeneratorMeta meta, PrefabsManager manager) {
 		StackMeta startStack = new StackMeta ();
 		for (int i = 0; i < meta.ChipIDs.Length; i++) {
 			ChipMeta chipMeta = manager.GetChipMeta (meta.ChipIDs [i]);
@@ -113,7 +113,7 @@ public class CourseMetaGenerator
 		StackMeta targetStack = startStack.Copy ();
 		int flips = Permute (targetStack, meta.Flips);
 
-		return new StackMetaPair (meta, startStack, targetStack, flips);
+		return new StackMetaPair (startStack, targetStack, flips);
 	}
 
 	private static int Permute(StackMeta stackMeta, int[] flips) {

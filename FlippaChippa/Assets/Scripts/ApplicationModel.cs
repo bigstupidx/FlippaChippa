@@ -6,7 +6,6 @@ public class ApplicationModel {
 
 	public static int courseLoadedId = 0;
 	public static bool completedCourse = false;
-	public static CourseMeta courseMeta = CourseMeta.Default();
 	public static Statistics statistics;
 	public static IAchievement[] achievements = null;
 	public static Settings settings;
