@@ -23,7 +23,7 @@ namespace AssemblyCSharp
 			bool[] initFlips = new bool[]{ false, true, false, false, true, false };
 			int[] targetFlips = new int[]{1,0,0};
 			GameGeneratorMeta courseMeta = new GameGeneratorMeta (chipIds, crushWeights, initFlips, targetFlips);
-			ApplicationModel.stackMetaPair = CourseMetaGenerator.CreateFromCourseMeta (courseMeta, prefabsManager);
+			ApplicationModel.stackMetaPair = GameGenerator.CreateFromCourseMeta (courseMeta, prefabsManager);
 			gamestacks = stackGenerator.BuildGameStacks (ApplicationModel.stackMetaPair, prefabsManager);
 			gamestacks.Target.gameObject.SetActive(false);
 

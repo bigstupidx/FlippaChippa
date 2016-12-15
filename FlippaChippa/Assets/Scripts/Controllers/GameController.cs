@@ -106,7 +106,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	public void NextGame() {
 		Time.timeScale = 1;
-		ApplicationModel.stackMetaPair = CourseMetaGenerator.GenerateStackMetaPair (prefabsManager, ApplicationModel.settings.difficulty);
+		ApplicationModel.stackMetaPair = GameGenerator.GenerateStackMetaPair (prefabsManager, ApplicationModel.settings.difficulty);
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}
 

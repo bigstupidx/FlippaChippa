@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class CourseMetaGenerator
+public class GameGenerator
 {
 
 	public static StackMetaPair GenerateStackMetaPair(PrefabsManager manager, Difficulty difficulty) {
