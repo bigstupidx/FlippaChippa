@@ -38,9 +38,9 @@ public class GameGenerator
 		startStack.CleanupStackForCrushedChips (0);
 
 		StackMeta targetStack = startStack.Copy ();
-		int flips = Permute (targetStack, meta.Flips);
+		targetStack.Permute (meta.Flips);
 
-		return new GameStacksMeta (startStack, targetStack, flips);
+		return new GameStacksMeta (startStack, targetStack, meta.Flips.Length);
 	}
 
 	private static GameGeneratorMeta GenerateGameGeneratorMeta(int size, int nFlips, bool isCrushable, PrefabsManager manager) {
@@ -110,32 +110,5 @@ public class GameGenerator
 		}
 		return 0;
 	}
-
-	private static int Permute(StackMeta stackMeta, int[] flips) {
-		int nFlips = 0;
-		List<StackMeta> flipHistory = new List<StackMeta> ();
-		for (int i = 0; i < flips.Length; i++) {
-			stackMeta.FlipStackAt (flips [i]);
-			if (PermutationExists(stackMeta, flipHistory)) {
-				//Undo flip since we've been here before
-				stackMeta.FlipStackAt (flips [i]);
-			} else {
-				flipHistory.Add (stackMeta.Copy ());
-				nFlips++;
-			}
-		}
-
-		return nFlips;
-	}
-
-	private static bool PermutationExists(StackMeta newPermutation, List<StackMeta> existingPermutations) {
-		foreach (StackMeta permutation in existingPermutations) {
-			if (newPermutation.Matches(permutation)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 
 }
