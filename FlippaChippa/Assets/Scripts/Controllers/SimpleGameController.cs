@@ -11,21 +11,20 @@ namespace AssemblyCSharp
 		public GameInputController gameInputController;
 		public LandingEmission landingEmission;
 
-		private StackGenerator stackGenerator;
+		private GameStacksBuilder stackGenerator;
 		private PrefabsManager prefabsManager;
 
 		void Awake() {
-			stackGenerator = new StackGenerator ();
+			stackGenerator = new GameStacksBuilder ();
 			prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
 
-			stackGenerator.SetPrefabsManager (prefabsManager);
 			int[] chipIds = new int[]{0,4,6,3,9,6};
 			int[] crushWeights = new int[] { 0, 0, 5, 4, 0, 0};
 			bool[] initFlips = new bool[]{ false, true, false, false, true, false };
 			int[] targetFlips = new int[]{1,0,0};
 			CourseMeta courseMeta = new CourseMeta (chipIds, crushWeights, initFlips, targetFlips);
 			ApplicationModel.stackMetaPair = CourseMetaGenerator.CreateFromCourseMeta (courseMeta, prefabsManager);
-			gamestacks = stackGenerator.CreateStacks (ApplicationModel.stackMetaPair);
+			gamestacks = stackGenerator.BuildGameStacks (ApplicationModel.stackMetaPair, prefabsManager);
 			gamestacks.Target.gameObject.SetActive(false);
 
 			demoStack = gamestacks.Player;

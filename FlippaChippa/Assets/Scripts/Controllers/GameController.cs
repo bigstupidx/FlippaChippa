@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 
 	private SingleGameStatsMeta statsMeta;
 	private CameraController cameraController;
-	private StackGenerator stackGenerator;
+	private GameStacksBuilder stackGenerator;
 	private PrefabsManager prefabsManager;
 	private BlurOptimized blur;
 
@@ -31,14 +31,13 @@ public class GameController : MonoBehaviour, FCEventListener, LandingListener {
 		statsMeta.DifficultyFactor = 0.3f;
 		statsMeta.NTargetChecks = 1;
 		cameraController = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA).GetComponent<CameraController> ();
-		stackGenerator = new StackGenerator ();
+		stackGenerator = new GameStacksBuilder ();
 		prefabsManager = GameObject.FindGameObjectWithTag (Tags.PREFABS_MANAGER).GetComponent<PrefabsManager> ();
 
 		blur = cameraController.GetComponent<BlurOptimized> ();
 		blur.enabled = false;
 
-		stackGenerator.SetPrefabsManager (prefabsManager);
-		GameStacks gamestacks = stackGenerator.CreateStacks (ApplicationModel.stackMetaPair);
+		GameStacks gamestacks = stackGenerator.BuildGameStacks (ApplicationModel.stackMetaPair, prefabsManager);
 		statsMeta.MaxFlips = gamestacks.MaxFlips + (int)(Mathf.Max(gamestacks.Target.Meta.ChipCount() * statsMeta.DifficultyFactor, 1));
 		targetStack = gamestacks.Target;
 		targetStack.AddListener (this);
