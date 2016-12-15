@@ -5,7 +5,7 @@ using System;
 
 public class GameStacksBuilder
 {
-	public GameStacks BuildGameStacks(StackMetaPair metaPair, PrefabsManager prefabsManager) {
+	public GameStacks BuildGameStacks(GameStacksMeta metaPair, PrefabsManager prefabsManager) {
 		Stack startStack = BuildStackFromStackMeta (metaPair.start, prefabsManager);
 		startStack.gameObject.tag = Tags.STACK;
 		startStack.transform.position = Vector3.right * 2f;

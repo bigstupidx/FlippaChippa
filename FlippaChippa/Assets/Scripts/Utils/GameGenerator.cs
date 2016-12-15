@@ -4,13 +4,13 @@ using System.Collections.Generic;
 public class GameGenerator
 {
 
-	public static StackMetaPair GenerateStackMetaPair(PrefabsManager manager, Difficulty difficulty) {
+	public static GameStacksMeta GenerateStackMetaPair(PrefabsManager manager, Difficulty difficulty) {
 		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
 		StackDifficulty diff = StackDifficulty.Get (difficulty);
 		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
 		int flips = Random.Range (size, (int)(size * 1.5f));
 		GameGeneratorMeta meta =  GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
-		StackMetaPair pair = GenerateStackMetaPair (meta, manager);
+		GameStacksMeta pair = GenerateStackMetaPair (meta, manager);
 		while (pair.start.Matches(pair.target)) {
 			Debug.Log ("<color=red>Need to generate another stack since the target matches the start.</color>");
 			meta = GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
@@ -26,7 +26,7 @@ public class GameGenerator
 		return pair;
 	}
 
-	public static StackMetaPair CreateFromCourseMeta(GameGeneratorMeta courseMeta, PrefabsManager prefabsManager) {
+	public static GameStacksMeta CreateFromCourseMeta(GameGeneratorMeta courseMeta, PrefabsManager prefabsManager) {
 		return GenerateStackMetaPair(courseMeta, prefabsManager);
 	}
 
@@ -98,7 +98,7 @@ public class GameGenerator
 		return 0;
 	}
 
-	private static StackMetaPair GenerateStackMetaPair(GameGeneratorMeta meta, PrefabsManager manager) {
+	private static GameStacksMeta GenerateStackMetaPair(GameGeneratorMeta meta, PrefabsManager manager) {
 		StackMeta startStack = new StackMeta ();
 		for (int i = 0; i < meta.ChipIDs.Length; i++) {
 			ChipMeta chipMeta = manager.GetChipMeta (meta.ChipIDs [i]);
@@ -113,7 +113,7 @@ public class GameGenerator
 		StackMeta targetStack = startStack.Copy ();
 		int flips = Permute (targetStack, meta.Flips);
 
-		return new StackMetaPair (startStack, targetStack, flips);
+		return new GameStacksMeta (startStack, targetStack, flips);
 	}
 
 	private static int Permute(StackMeta stackMeta, int[] flips) {
