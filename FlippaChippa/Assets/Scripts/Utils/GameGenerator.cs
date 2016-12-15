@@ -3,18 +3,17 @@ using System.Collections.Generic;
 
 public class GameGenerator
 {
-
-	public static GameStacksMeta GenerateStackMetaPair(PrefabsManager manager, Difficulty difficulty) {
+	public static GameStacksMeta Generate(PrefabsManager manager, Difficulty difficulty) {
 		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
 		StackDifficulty diff = StackDifficulty.Get (difficulty);
 		int size = Random.Range (diff.MinCips, diff.MaxChips + 1);
 		int flips = Random.Range (size, (int)(size * 1.5f));
-		GameGeneratorMeta meta =  GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
-		GameStacksMeta pair = GenerateStackMetaPair (meta, manager);
+		GameGeneratorMeta meta =  GenerateGameGeneratorMeta (size, flips, diff.AllowCrushable, manager);
+		GameStacksMeta pair = CreateFromGameGeneratorMeta (meta, manager);
 		while (pair.start.Matches(pair.target)) {
 			Debug.Log ("<color=red>Need to generate another stack since the target matches the start.</color>");
-			meta = GenerateCourseMeta (size, flips, diff.AllowCrushable, manager);
-			pair = GenerateStackMetaPair (meta, manager);
+			meta = GenerateGameGeneratorMeta (size, flips, diff.AllowCrushable, manager);
+			pair = CreateFromGameGeneratorMeta (meta, manager);
 		}
 
 		int nFlipsAlternative = FlipsCalulator.CalculateMinFlips (pair.start, pair.target, 100, pair.nFlips);
@@ -26,11 +25,25 @@ public class GameGenerator
 		return pair;
 	}
 
-	public static GameStacksMeta CreateFromCourseMeta(GameGeneratorMeta courseMeta, PrefabsManager prefabsManager) {
-		return GenerateStackMetaPair(courseMeta, prefabsManager);
+	public static GameStacksMeta CreateFromGameGeneratorMeta(GameGeneratorMeta meta, PrefabsManager manager) {
+		StackMeta startStack = new StackMeta ();
+		for (int i = 0; i < meta.ChipIDs.Length; i++) {
+			ChipMeta chipMeta = manager.GetChipMeta (meta.ChipIDs [i]);
+			chipMeta.CrushWeight = meta.CrushWeights [i];
+			if (meta.InitFlips [i]) {
+				chipMeta.Flip ();
+			}
+			startStack.Add (chipMeta);
+		}
+		startStack.CleanupStackForCrushedChips (0);
+
+		StackMeta targetStack = startStack.Copy ();
+		int flips = Permute (targetStack, meta.Flips);
+
+		return new GameStacksMeta (startStack, targetStack, flips);
 	}
 
-	public static GameGeneratorMeta GenerateCourseMeta(int size, int nFlips, bool isCrushable, PrefabsManager manager) {
+	private static GameGeneratorMeta GenerateGameGeneratorMeta(int size, int nFlips, bool isCrushable, PrefabsManager manager) {
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
 		if (isCrushable) {
@@ -96,24 +109,6 @@ public class GameGenerator
 			return Random.Range (minCrushWeight, maxCrushWeight);
 		}
 		return 0;
-	}
-
-	private static GameStacksMeta GenerateStackMetaPair(GameGeneratorMeta meta, PrefabsManager manager) {
-		StackMeta startStack = new StackMeta ();
-		for (int i = 0; i < meta.ChipIDs.Length; i++) {
-			ChipMeta chipMeta = manager.GetChipMeta (meta.ChipIDs [i]);
-			chipMeta.CrushWeight = meta.CrushWeights [i];
-			if (meta.InitFlips [i]) {
-				chipMeta.Flip ();
-			}
-			startStack.Add (chipMeta);
-		}
-		startStack.CleanupStackForCrushedChips (0);
-
-		StackMeta targetStack = startStack.Copy ();
-		int flips = Permute (targetStack, meta.Flips);
-
-		return new GameStacksMeta (startStack, targetStack, flips);
 	}
 
 	private static int Permute(StackMeta stackMeta, int[] flips) {
