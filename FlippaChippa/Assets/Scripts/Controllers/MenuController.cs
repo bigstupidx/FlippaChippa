@@ -11,8 +11,6 @@ using System;
 public class MenuController : MonoBehaviour {
 
 	public PrefabsManager manager;
-	Course[] courses;
-	Course highlightedCourse;
 	public Button achievementsButton;
 	private Image achievementIcon;
 
