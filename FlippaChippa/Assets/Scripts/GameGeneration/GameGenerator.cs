@@ -7,7 +7,7 @@ public class GameGenerator
 		Debug.Log(string.Format("<color=green>{0}</color>", difficulty));
 		StackDifficulty stackDifficulty = StackDifficulty.Get (difficulty);
 		int size = Random.Range (stackDifficulty.MinCips, stackDifficulty.MaxChips + 1);
-		int flips = Random.Range (size, (int)(size * 1.5f));
+		int flips = Random.Range ((int)(size / 2), (int)(size * 1.5f));
 		GameGeneratorMeta meta =  GenerateGameGeneratorMeta (size, flips, stackDifficulty.AllowCrushable, manager);
 		GameStacksMeta pair = CreateFromGameGeneratorMeta (meta, manager);
 		while (pair.start.Matches(pair.target)) {
@@ -47,7 +47,7 @@ public class GameGenerator
 		int[] chipIds = GenerateNonIdenticalChipIDs (size, manager);
 		int[] crushWeights = new int[size];
 		if (isCrushable) {
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < crushWeights.Length; i++) {
 				crushWeights [i] = GenerateCrushWeight (size, size - i, 0.8f);
 			}
 		}
@@ -56,7 +56,7 @@ public class GameGenerator
 			initFlips [i] = Random.value < 0.5f ? true : false;
 		}
 		int[] flips = new int[nFlips];
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < flips.Length; i++) {
 			flips [i] = Random.Range (0, size);
 		}
 		return new GameGeneratorMeta (chipIds, crushWeights, initFlips, flips);
